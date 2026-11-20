@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Pay to Play Politics — Sports Business × Public Power</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,800;1,6..72,400&family=Archivo:wght@400;500;600;700;800&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2rem; }
+      * { box-sizing: border-box; }
+      :root{
+        --paper:#f7f5f0; --surface:#fffdf8; --ink:#191a1e; --ink-soft:#45464d; --ink-faint:#6d6e76;
+        --rule:#d9d4c8; --rule-dark:#191a1e;
+        --accent:#a31621; --accent-soft:#f6e3e1;
+        --money:#1d5c38; --money-soft:#e2efe6;
+        --chip:#eceade;
+        --shadow:0 1px 2px rgba(20,18,10,.06),0 8px 28px rgba(20,18,10,.07);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --paper:#131417; --surface:#1b1c20; --ink:#ece9e2; --ink-soft:#b9b7ae; --ink-faint:#8f8d85;
+          --rule:#33343a; --rule-dark:#ece9e2;
+          --accent:#e4574f; --accent-soft:#3a2321;
+          --money:#6fc793; --money-soft:#1e2f26;
+          --chip:#26272c;
+          --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+        }
+      }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0; background:var(--paper); color:var(--ink);
+        font-family:"Archivo",system-ui,sans-serif; font-size:16px; line-height:1.55;
+        -webkit-font-smoothing:antialiased;
+      }
+      .wrap{ max-width:1180px; margin:0 auto; padding:0 20px; }
+
+      /* ---------- Masthead ---------- */
+      .dateline{
+        display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+        padding:10px 0 8px; font-family:"Archivo Narrow",sans-serif; font-size:.78rem;
+        letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint);
+        border-bottom:1px solid var(--rule);
+      }
+      .dateline .mock{
+        color:var(--accent); font-weight:700; border:1px solid var(--accent);
+        padding:1px 8px; border-radius:999px; letter-spacing:.1em;
+      }
+      header.masthead{ text-align:center; padding:26px 0 6px; }
+      .masthead h1{
+        font-family:"Newsreader",serif; font-weight:800; font-size:clamp(2.6rem,7.5vw,4.6rem);
+        line-height:.98; margin:0; letter-spacing:-.01em;
+      }
+      .masthead h1 .accent{ color:var(--accent); }
+      .tagline{
+        font-family:"Newsreader",serif; font-style:italic; font-size:clamp(1rem,2.4vw,1.25rem);
+        color:var(--ink-soft); margin:10px auto 0; max-width:640px;
+      }
+      .mast-rule{ border:none; border-top:3px solid var(--rule-dark); margin:20px 0 0; }
+      .mast-rule.thin{ border-top:1px solid var(--rule-dark); margin-top:3px; }
+
+      /* ---------- Nav ---------- */
+      nav.leagues{
+        position:sticky; top:0; z-index:40; background:var(--paper);
+        border-bottom:2px solid var(--rule-dark);
+        display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; padding:6px 0;
+      }
+      nav.leagues::-webkit-scrollbar{ display:none; }
+      nav.leagues a{
+        font-family:"Archivo Narrow",sans-serif; font-weight:700; letter-spacing:.06em;
+        text-transform:uppercase; font-size:.92rem; color:var(--ink); text-decoration:none;
+        padding:9px 14px; white-space:nowrap; border-radius:4px; min-height:36px;
+        display:inline-flex; align-items:center;
+      }
+      nav.leagues a:hover{ background:var(--chip); }
+      nav.leagues a.first{ color:var(--accent); }
+
+      /* ---------- Sections ---------- */
+      section{ padding:38px 0 8px; }
+      .sec-head{ display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; border-bottom:3px solid var(--rule-dark); padding-bottom:8px; }
+      .sec-head h2{
+        font-family:"Newsreader",serif; font-weight:800; font-size:clamp(1.7rem,4vw,2.3rem);
+        margin:0; line-height:1.05;
+      }
+      .sec-head .kicker{
+        font-family:"Archivo Narrow",sans-serif; text-transform:uppercase; letter-spacing:.14em;
+        font-size:.78rem; color:var(--accent); font-weight:700;
+      }
+      .sec-sub{ color:var(--ink-soft); max-width:760px; margin:12px 0 0; font-size:.98rem; }
+
+      /* ---------- News ---------- */
+      .filters{ display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 6px; }
+      .filters button{
+        font-family:"Archivo Narrow",sans-serif; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+        font-size:.85rem; padding:8px 16px; border-radius:999px; cursor:pointer;
+        border:1.5px solid var(--ink); background:transparent; color:var(--ink); min-height:38px;
+      }
+      .filters button[aria-pressed="true"]{ background:var(--ink); color:var(--paper); }
+      .filters button:hover{ border-color:var(--accent); color:var(--accent); }
+      .filters button[aria-pressed="true"]:hover{ color:var(--paper); }
+      .lead-grid{ display:grid; grid-template-columns:1.55fr 1fr; gap:26px; margin-top:18px; }
+      @media (max-width:820px){ .lead-grid{ grid-template-columns:1fr; } }
+      .story{ border-top:1px solid var(--rule); padding:16px 0 18px; }
+      .story:first-child{ border-top:none; padding-top:2px; }
+      .story .topic{
+        font-family:"Archivo Narrow",sans-serif; font-size:.74rem; font-weight:700; letter-spacing:.13em;
+        text-transform:uppercase; color:var(--accent);
+      }
+      .story h3{ font-family:"Newsreader",serif; font-weight:700; font-size:1.28rem; line-height:1.22; margin:6px 0 8px; }
+      .story.lead h3{ font-size:clamp(1.7rem,3.6vw,2.3rem); line-height:1.12; }
+      .story h3 a{ color:var(--ink); text-decoration:none; }
+      .story h3 a:hover{ text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:2px; }
+      .story p{ margin:0 0 10px; color:var(--ink-soft); font-size:.95rem; }
+      .story .meta{ font-size:.8rem; color:var(--ink-faint); font-family:"Archivo Narrow",sans-serif; letter-spacing:.05em; text-transform:uppercase; }
+      .story .meta b{ color:var(--ink-soft); }
+      .news-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:0 26px; margin-top:8px; }
+      @media (max-width:900px){ .news-grid{ grid-template-columns:repeat(2,1fr); } }
+      @media (max-width:600px){ .news-grid{ grid-template-columns:1fr; } }
+      .story.hide{ display:none; }
+      .wire{
+        margin-top:14px; border:1px solid var(--rule); background:var(--surface); border-radius:6px;
+        padding:14px 18px; font-size:.9rem; color:var(--ink-soft); box-shadow:var(--shadow);
+      }
+      .wire b{ color:var(--ink); font-family:"Archivo Narrow",sans-serif; text-transform:uppercase; letter-spacing:.08em; font-size:.8rem; }
+
+      /* ---------- League tables ---------- */
+      .league-stats{ display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 4px; }
+      .stat{
+        background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:10px 16px;
+        box-shadow:var(--shadow); min-width:150px;
+      }
+      .stat .n{ font-family:"Newsreader",serif; font-weight:800; font-size:1.45rem; line-height:1.1; }
+      .stat .l{ font-family:"Archivo Narrow",sans-serif; font-size:.74rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-faint); }
+      .table-tools{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:14px 0 10px; }
+      .table-tools input[type="search"]{
+        flex:1 1 220px; padding:10px 14px; border:1.5px solid var(--rule); border-radius:6px;
+        background:var(--surface); color:var(--ink); font:inherit; font-size:.95rem; min-height:42px;
+      }
+      .table-tools input[type="search"]:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+      .table-tools .hint{ font-size:.82rem; color:var(--ink-faint); }
+      .tbl-wrap{ border:1px solid var(--rule); border-radius:8px; overflow-x:auto; background:var(--surface); box-shadow:var(--shadow); }
+      table{ width:100%; border-collapse:collapse; font-size:.88rem; }
+      thead th{
+        font-family:"Archivo Narrow",sans-serif; text-transform:uppercase; letter-spacing:.07em; font-size:.74rem;
+        text-align:left; padding:11px 10px; background:var(--chip); color:var(--ink);
+        border-bottom:2px solid var(--rule-dark); cursor:pointer; user-select:none; white-space:nowrap;
+      }
+      thead th.num, tbody td.num{ text-align:right; font-variant-numeric:tabular-nums; }
+      thead th .arrow{ color:var(--accent); }
+      tbody td{ padding:10px 10px; border-bottom:1px solid var(--rule); vertical-align:top; }
+      tbody tr:last-child td{ border-bottom:none; }
+      tbody tr:hover{ background:var(--chip); }
+      td.team{ font-weight:700; font-family:"Newsreader",serif; font-size:.98rem; min-width:118px; }
+      td.gain{ color:var(--money); font-weight:700; }
+      td.gain.neg{ color:var(--accent); }
+      .src-note{ margin:12px 0 0; font-size:.86rem; color:var(--ink-soft); border:1px solid var(--rule); background:var(--surface); border-radius:6px; padding:12px 16px; box-shadow:var(--shadow); }
+      .src-note b{ font-family:"Archivo Narrow",sans-serif; text-transform:uppercase; letter-spacing:.08em; font-size:.76rem; color:var(--ink); }
+      .team-notes{ margin:10px 0 0; font-size:.85rem; color:var(--ink-soft); }
+      .team-notes summary{ cursor:pointer; font-family:"Archivo Narrow",sans-serif; text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; font-weight:700; color:var(--ink); padding:6px 0; }
+      .team-notes li{ margin:4px 0; }
+      .team-notes li b{ color:var(--ink); }
+      td.fin{ color:var(--ink-soft); font-size:.84rem; min-width:150px; }
+      td.venue{ min-width:110px; }
+      .no-results{ padding:22px; text-align:center; color:var(--ink-faint); display:none; }
+
+      /* Mobile: table becomes stacked cards */
+      @media (max-width:760px){
+        .tbl-wrap{ border:none; background:transparent; box-shadow:none; overflow:visible; }
+        table, tbody, tr, td{ display:block; width:100%; }
+        thead{ display:none; }
+        tbody tr{
+          background:var(--surface); border:1px solid var(--rule); border-radius:8px;
+          margin-bottom:12px; padding:8px 14px 12px; box-shadow:var(--shadow);
+        }
+        tbody td{ border-bottom:1px dashed var(--rule); padding:7px 0; display:flex; justify-content:space-between; gap:14px; }
+        tbody td:last-child{ border-bottom:none; }
+        tbody td::before{
+          content:attr(data-label); font-family:"Archivo Narrow",sans-serif; text-transform:uppercase;
+          letter-spacing:.07em; font-size:.7rem; color:var(--ink-faint); padding-top:3px; flex:0 0 38%;
+        }
+        td.team{ font-size:1.15rem; }
+        td.team::before{ display:none; }
+        td.num{ text-align:right; }
+        td.fin, td.venue{ min-width:0; text-align:right; }
+      }
+
+      /* Aggregator extras */
+      .agg-bar{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+      .agg-stat{flex:1 1 140px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;box-shadow:var(--shadow)}
+      .agg-stat .n{font-family:"Newsreader",serif;font-weight:800;font-size:1.6rem;line-height:1}
+      .agg-stat .l{font-family:"Archivo Narrow",sans-serif;font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint);margin-top:4px}
+      .beat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 4px}
+      @media(max-width:900px){.beat-grid{grid-template-columns:repeat(2,1fr)}}
+      @media(max-width:520px){.beat-grid{grid-template-columns:1fr}}
+      .beat-card{text-align:left;background:var(--surface);border:1px solid var(--rule);border-top:3px solid var(--accent);border-radius:8px;padding:12px 14px;cursor:pointer;box-shadow:var(--shadow);color:var(--ink)}
+      .beat-card b{display:block;font-family:"Archivo Narrow",sans-serif;text-transform:uppercase;letter-spacing:.07em;font-size:.85rem}
+      .beat-card span{font-size:.84rem;color:var(--ink-soft)}
+      .beat-card .cnt{font-family:"Newsreader",serif;font-size:1.3rem;font-weight:800}
+      .agg-tools{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 0;align-items:center}
+      .agg-tools input[type="search"]{flex:1 1 240px;padding:11px 14px;border:1.5px solid var(--rule);border-radius:999px;background:var(--surface);color:var(--ink);font:inherit;min-height:44px}
+      .agg-tools input:focus{outline:2px solid var(--accent);outline-offset:1px}
+      .result-count{font-family:"Archivo Narrow",sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;color:var(--ink-faint)}
+      .source-pill{display:inline-block;background:var(--chip);border-radius:999px;padding:2px 8px;font-size:.72rem;font-weight:700;letter-spacing:.04em}
+      .story .dek{font-size:.92rem}
+
+      /* ---------- Page views (one league per page) ---------- */
+      [hidden]{ display:none !important; }
+      nav.leagues a.active{ background:var(--ink); color:var(--paper); }
+      nav.leagues a.active:hover{ background:var(--ink); color:var(--paper); }
+      .page-bar{
+        display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+        margin:-14px 0 18px;
+      }
+      .back-link{
+        font-family:"Archivo Narrow",sans-serif; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+        font-size:.85rem; color:var(--accent); text-decoration:none; display:inline-flex; align-items:center; min-height:36px;
+      }
+      .back-link:hover{ text-decoration:underline; }
+      .page-crumb{
+        font-family:"Archivo Narrow",sans-serif; font-size:.76rem; letter-spacing:.11em;
+        text-transform:uppercase; color:var(--ink-faint);
+      }
+      .league-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:18px; }
+      @media (max-width:900px){ .league-grid{ grid-template-columns:repeat(2,1fr); } }
+      @media (max-width:520px){ .league-grid{ grid-template-columns:1fr; } }
+      .league-card{
+        display:block; background:var(--surface); border:1px solid var(--rule); border-top:3px solid var(--accent);
+        border-radius:8px; padding:16px 16px 14px; text-decoration:none; color:var(--ink); box-shadow:var(--shadow);
+      }
+      .league-card:hover{ border-color:var(--ink-faint); }
+      .league-card .lg-name{ display:block; font-family:"Newsreader",serif; font-weight:800; font-size:1.6rem; line-height:1.05; }
+      .league-card .lg-meta{ display:block; margin-top:6px; font-size:.86rem; color:var(--ink-soft); }
+      .league-card .lg-top{ display:block; margin-top:2px; font-size:.86rem; color:var(--ink-soft); }
+      .league-card .lg-go{
+        display:block; margin-top:10px; font-family:"Archivo Narrow",sans-serif; font-weight:700;
+        letter-spacing:.06em; text-transform:uppercase; font-size:.8rem; color:var(--accent);
+      }
+      .league-pager{
+        display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
+        margin-top:26px; padding-top:14px; border-top:2px solid var(--rule-dark);
+      }
+      .league-pager a{
+        font-family:"Archivo Narrow",sans-serif; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+        font-size:.86rem; color:var(--ink); text-decoration:none; padding:8px 12px; border:1.5px solid var(--ink);
+        border-radius:999px; min-height:38px; display:inline-flex; align-items:center;
+      }
+      .league-pager a:hover{ background:var(--ink); color:var(--paper); }
+      footer{
+        margin-top:56px; border-top:3px solid var(--rule-dark); padding:22px 0 46px;
+        color:var(--ink-soft); font-size:.88rem;
+      }
+      footer h4{ font-family:"Archivo Narrow",sans-serif; text-transform:uppercase; letter-spacing:.1em; font-size:.8rem; color:var(--ink); margin:0 0 8px; }
+      footer p{ max-width:820px; margin:0 0 10px; }
+      @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="dateline">
+        <span>Tuesday, November 17, 2026</span>
+        <span class="mock">Verified Franchise Data</span>
+        <span>Sports Business × Politics</span>
+      </div>
+
+      <header class="masthead">
+        <h1>Pay to Play <span class="accent">Politics</span></h1>
+        <p class="tagline">Where the money in sports meets the power of the state — franchise valuations, stadium deals, public funding, labor fights, betting law, and the media rights that move them all.</p>
+      </header>
+      <hr class="mast-rule" /><hr class="mast-rule thin" />
+
+      <nav class="leagues" aria-label="Sections">
+        <a class="first" href="#news">The Wire</a>
+        <a href="#nba">NBA</a>
+        <a href="#nfl">NFL</a>
+        <a href="#mlb">MLB</a>
+        <a href="#mls">MLS</a>
+        <a href="#nhl">NHL</a>
+        <a href="#wnba">WNBA</a>
+        <a href="#nwsl">NWSL</a>
+      </nav>
+
+      <!-- ================= NEWS ================= -->
+      <section id="news">
+        <div class="sec-head">
+          <span class="kicker">Section A · The Aggregator</span>
+          <h2>The Wire — Sports Business &amp; Politics</h2>
+        </div>
+        <p class="sec-sub">Pay to Play Politics pulls the day's sports-business story into one place — from <strong>Sportico, Front Office Sports, Sports Business Journal, ESPN, Bloomberg, The Athletic</strong> and statehouse reporting — and sorts it by the five beats where money and public power collide. Every headline links to the original publisher. This edition is a curated snapshot pulled <strong>Friday, November 20, 2026</strong>; The Wire refreshes every morning; check the source for live updates.</p>
+
+        <div class="agg-bar" aria-label="Aggregator at a glance">
+          <div class="agg-stat"><div class="n" id="agg-total">28</div><div class="l">Stories in this edition</div></div>
+          <div class="agg-stat"><div class="n">5</div><div class="l">Beats tracked</div></div>
+          <div class="agg-stat"><div class="n">12+</div><div class="l">Outlets aggregated</div></div>
+          <div class="agg-stat"><div class="n">Nov 20, 2026</div><div class="l">Snapshot date</div></div>
+        </div>
+
+        <div class="beat-grid" aria-label="Browse by beat">
+          <button type="button" class="beat-card" data-beat-jump="valuations"><span class="cnt">6 stories</span><b>Franchise Valuations</b><span>What teams are worth, who is buying, and at what multiple.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="stadiums"><span class="cnt">6 stories</span><b>Stadium Deals &amp; Public Funding</b><span>Taxes, bonds and votes behind new buildings.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="labor"><span class="cnt">5 stories</span><b>Labor</b><span>CBAs, caps, unions and the NIL fight.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="betting"><span class="cnt">5 stories</span><b>Betting Regulation</b><span>State law, prop bets and prediction markets.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="media"><span class="cnt">6 stories</span><b>Media Rights</b><span>The TV &amp; streaming deals that fund everything else.</span></button>
+        </div>
+
+        <div class="agg-tools">
+          <input type="search" id="news-search" placeholder="Search The Wire — try “Bears”, “WNBA”, “salary cap”, “Kalshi”…" aria-label="Search news stories" />
+          <span class="result-count" id="news-count">Showing 28 stories</span>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter news by topic">
+          <button type="button" data-filter="all" aria-pressed="true">All topics · 28</button>
+          <button type="button" data-filter="valuations" aria-pressed="false">Franchise Valuations · 6</button>
+          <button type="button" data-filter="stadiums" aria-pressed="false">Stadium Deals &amp; Public Funding · 6</button>
+          <button type="button" data-filter="labor" aria-pressed="false">Labor · 5</button>
+          <button type="button" data-filter="betting" aria-pressed="false">Betting Regulation · 5</button>
+          <button type="button" data-filter="media" aria-pressed="false">Media Rights · 6</button>
+        </div>
+
+                <div class="lead-grid">
+          <article class="story lead" data-topic="betting">
+            <span class="topic">Betting Regulation · Lead Story</span>
+            <h3><a href="https://www.sportico.com/law/analysis/2026/kalshi-maryland-4th-circuit-ruling-decision-1234958963/" target="_blank" rel="noopener">Making Sense of Kalshi’s Latest Appellate Court Loss</a></h3>
+            <p>The unsettled legal status of sports prediction markets became more convoluted this week when a divided three-judge panel on the U.S. Court of Appeals for the 4th Circuit ruled against Kalshi and found its sports event contracts are subject to state gambling laws. The ruling featured two separate…</p>
+            <p class="meta"><span class="source-pill">Sportico</span> · Nov 19, 2026</p>
+          </article>
+          <div>
+            <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxOQURBNHZjdkZTUDZIdFY1QXY3QVlOUVlZUWtOY2hYVFZqdkZGN2VHN0FVYkNDRkh6TEp1MG5yNjRvNEx2dUw1V05STEU3UndKWVZUNF8ta3hzQ3lObnBvLWVVVldXTkRDVnhYdHhyU2J5YlBJd2VFMDVTS1NtWDNrOFRlZHFaSFU2d0xqTDU0Ylh3a1d5WGgzODNFSWtHZw?oc=5" target="_blank" rel="noopener">Kalshi Loses Maryland Sports-Betting Appeal in Split Ruling</a></h3>
+            <p>Read the full story at The Defiant.</p>
+            <p class="meta"><span class="source-pill">The Defiant</span> · Nov 19, 2026</p>
+          </article>
+            <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxNVmZ4Q21mcmRYcjBFbno5SDJrY1ZLQVlLNmw0QVFPLVdwaWhQSWJaN0taYkw5eHpnNnFoMklCOTJQZWRkWU43eDN2bjdNdjhVTm8zV3FDZzl4eF94OEhxcV8zZUZfcXc0M0NZUF9iakh0TEVOc1NYSHlKaWRoMlF6cmlDaXhMMnNqUVRtcA?oc=5" target="_blank" rel="noopener">Stadium Funding Concerns Grow Following PAC</a></h3>
+            <p>Read the full story at Tasmanian Greens MPs.</p>
+            <p class="meta"><span class="source-pill">Tasmanian Greens MPs</span> · Nov 19, 2026</p>
+          </article>
+          </div>
+        </div>
+
+        <div class="news-grid" id="news-grid">
+          <!-- VALUATIONS -->
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://www.sportico.com/business/team-sales/2026/wnba-los-angeles-sparks-sale-feliciano-jones-1234958926/" target="_blank" rel="noopener">WNBA’s LA Sparks Near Record $750 Million Sale to Feliciano, Jones</a></h3>
+            <p>Private equity billionaire José E. Feliciano and his wife, Kwanza Jones, are near a deal to buy the WNBA&#x27;s Los Angeles Sparks for $750 million from Mark Walter.</p>
+            <p class="meta"><span class="source-pill">Sportico</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQSFByYjl2ZjdaQXFQbzljQnA1dkIxYjZoNm9MSUtPb3JtVHhuXy1SZE9FeWpOSHYtbUpaME4tSFpQMGYyUXo1UkEycC1PcXc2dGk1R2V2MF9RaTQyMTVEZFJGYk9MM0hyejNlOGV1SkNpM0pTSXlwWEwybXI3cnNoeVEyUE05NkIyZWdES3p6NGEzNVNVQnlIYllCRXZuaHl1c2phbEdwcE9NYkw5ZHpINHV5M2xaSEZYTW5JWm1HczNaQQ?oc=5" target="_blank" rel="noopener">Shah Rukh Khan&#x27;s KKR May Welcome New Investor As Jay Mehta Plans $400 Million Stake Sale</a></h3>
+            <p>Read the full story at Mashable India.</p>
+            <p class="meta"><span class="source-pill">Mashable India</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOZUhvN1pZNG5xSXIwTVFmWENKckhYeGdtT3Y3dVZ6ak43UlRCUXptQkZEUmVLazdia2dYUTd2dnVtQTBydUpMVld1b3ZFLUltWFJhWURRX19CVmlzZ0FfNVRDY3JCZW91MGJDU3NBUHZWTlZXRklFR3F3TDBxRV9YazRlU2NnMk9BSzloamFkSk94MjdY?oc=5" target="_blank" rel="noopener">In 2009, Ricketts paid $845 million in Tribune&#x27;s Cubs sale; 17 years later, Forbes values the team at $5 billion</a></h3>
+            <p>Read the full story at Athlon Sports.</p>
+            <p class="meta"><span class="source-pill">Athlon Sports</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxOM0VlQnhQSFRIOWRKWGIySm9SWVRDaHlkZjBMTDV4ckE2dnhVVEhZdEczRVFibXptS3EzcnNLVzZ5cEw5cm9mT0VnZUlaSS05X2dOQWI5ck1zd0lGWG1PelI1dXJVTnAzVzZfS3lBUEtxbDlQbV9FUTlmY29TQUlqc1lrY21OTmlWeVVfUnZaWWZBc1VKZ0dCNm9meEZvdHBNNXFOaFA0NF9vSHFFdkt4dThUODNHaUdOa1I4SdIBwgFBVV95cUxQRmhTMzZEV19fRkFKTWxxWDQ5MGhLeXBVbG1rUV9ob2dpQjlaeDRBRXZJUmNNelk1M3JXYlo1N1V6TUJXa0owQVF4N0llNklzN2RteTJPVmRoTEhHWW9NM0NKay1pSVZ3NlNZWGs3R0swajg0UTE2U1BVZnNJNlFmNnpiVXQ2eFYxU04wOVdtOWpBODNRS2FnZFdUc2dWakRvUEc4YS1yWTB0QzJyN0RpNF9PY3NDRkpEZ0dScmthV2txZw?oc=5" target="_blank" rel="noopener">Jay Mehta to sell his ₹3,735.43 crores stake in KKR: 3-time IPL champions valued at ₹16,634 crores; BCCI to...</a></h3>
+            <p>Read the full story at Bhaskar English.</p>
+            <p class="meta"><span class="source-pill">Bhaskar English</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNX2pCYy1McTd5bW15LU9HcTlGcUdyVHdYc0JfcUhWbHNVa05IX2IxVDQ5aG5JQnkxTnBBejNoY05iWlJwLTFIZVVwYmc4MHVTV1A2LUthXzMxenFxTmphNWVhLUxIQkRQWl85cU12VllmYVhuZGU5dHNzRTBvV2xqbnZEcmJOSkU?oc=5" target="_blank" rel="noopener">Leafs, Raptors, Jays empire is worth $25B: Rogers plans to sell pieces to pay down debt. What investors should watch</a></h3>
+            <p>Read the full story at Yahoo! Finance Canada.</p>
+            <p class="meta"><span class="source-pill">Yahoo! Finance Canada</span> · Nov 15, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQMnRPMzRkY3hUNy1KTXNsQV91eGtXdS1mcklZOVdPeTlQYVQzSUlyQ0tNVXdtNWFvc2ZhdU5YeklPUkpkRzlJRnpwZE9xZ1dWMkNEU2JJNlNiQTJoSklMSnZZQ1JNTUhBM3ZGMHpYQ1FqZEE4WHRoemVDVmZQNGFQY0tYbm03b05NeHROUzBzVzNJbXB6RjhYRHl0eDg4a0VFOTNYaXdwTzFvRHd6?oc=5" target="_blank" rel="noopener">MLS’s San Jose Earthquakes sold for $625 million to Heath Freeman</a></h3>
+            <p>Read the full story at The New York Times.</p>
+            <p class="meta"><span class="source-pill">The New York Times</span> · Nov 13, 2026</p>
+          </article>
+          <!-- STADIUMS -->
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQbkYtRkVHS192SVcya2wzNExXbWxSQkp2NkIzeURZaUV6dmVaMXRKU0RTWVhVXzkyQzdQVWtkSUgyeGxGQlB4NGs2TkdZbDBfXzJHdlNnOWFtOU9DOWZIU09Kd29UakhNMTNuS0luTDB5bmx0MThuZ3ViTnFBdXZfa1ZZNTU2em9TTWQwem1DeGFHZmYz0gGaAUFVX3lxTE9tc1h2a3oxNlRUbDJCeC1qUjNyOWpPbkM4ZVRjRUxMMkRjTDNoWnduTEV1bmdqMDU0eTA5UVhTVVlvSEpTeF9YalJscHlLYjQta1kwdmloRWdZMERxeWpRVHhna0hOVjJuWUsyNzhadU5BV2tnQXhaMnd1ODBFc2g5ZWM5QTBUZkpWa2t2a3QxbHV0aXBVLTlXV2c?oc=5" target="_blank" rel="noopener">Illinois Quick Hits: State EPA accelerates residential electrification with $80M from taxpayers</a></h3>
+            <p>Read the full story at The Center Square.</p>
+            <p class="meta"><span class="source-pill">The Center Square</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxOQnZnWDRrdDlQbEtmNVFMYVdzeWpJS2E0OFRnTzdlN21sYkdLSkVfWHFHVWxqamRqRTVzM2F1Nmk4VVNpdE1pS2RFNTdjWmdtc25RZGpjY1pKNjc2aEpnUTI4LWF0dXBLaDZZRnFLLUx6MDA5d1Z2bWxWNTdVRzNvOHZGT2g3T0RtT1MxLUtVX3ZaVjlLSHh6OUQwY1c0LUd1YUJpY2xFbWwxR192RzZ6Tm10X1lOUFExSU5CbjFESVZkOHBvRXl5VE8wRmlOYS0wdEJLcU8tN1Fsb0hxMmhWLVU2dw?oc=5" target="_blank" rel="noopener">Prop. 4 fails, ending latest effort to allow taxpayer funding of California political campaigns</a></h3>
+            <p>Read the full story at Pleasanton Weekly.</p>
+            <p class="meta"><span class="source-pill">Pleasanton Weekly</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOSTBoaHF6ZUt6NWI0VnpCVUhQWlluSzFxYVJ6QU94WW40WU96WDhDcDZTRTVJa0F2aTY5ZVY3cC1TTmhicFNlTG9TcjExbG9uM3JkVkJOWURxdFlYZkFmRW9PeEdQa3RYRzdHNV83YXdTLWRWRnRLeUtRYUtsV2tXdUt6NHBMM2JGcXF5NV9MSWszUVEyeDVneGcyVkJ2Q3pubzBUOA?oc=5" target="_blank" rel="noopener">“Grim Reading” West Ham’s London Stadium Financial Problem Just Got Worse</a></h3>
+            <p>Read the full story at Claret &amp; Hugh.</p>
+            <p class="meta"><span class="source-pill">Claret &amp; Hugh</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMi-gFBVV95cUxNVm9Rb1NWaS11RVlRc0JaMDJRZ3FHem9RUGpHZFgxeFFmV0dEa2RjR1U2VjVIRnJYYk50N2RjNTlmQlZjTU5QZmotT1NQbFhDRGphSUNUd0tBYkE0SEFSY09sc25ZeDRxTVJQU1JpYW5BWHd3bUVwS3dEUmItcXFyV1JqaGV2MFEtTmZMcXhpRzYwdG1seWkzbEIzcFBqbnprbVc1WXhveFMzbE45VEZ4MTg4eTROelV5RWdkcVNGRV9fanl3UTEycFI5T3M1WUJ5SXpKTW1SZ3d2Ymk4NkhsU3dLX2VndHpQWXVhNHFlTzQzREJLcVhjQUFR?oc=5" target="_blank" rel="noopener">Commanders seek exemption to burn natural gas at new RFK stadium as critics say team is falling short on green promises</a></h3>
+            <p>Read the full story at WUSA9.</p>
+            <p class="meta"><span class="source-pill">WUSA9</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://frontofficesports.com/article/illinois-prepping-new-stadium-bill-to-keep-bears-in-state/" target="_blank" rel="noopener">Illinois Prepping New Stadium Bill to Keep Bears in State</a></h3>
+            <p>A critical state legislative veto session begins Tuesday.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 16, 2026</p>
+          </article>
+          <!-- LABOR -->
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxOUzRGOUlPNklCdHJ2VDlnMWZVNjlxNkc4NW9jSzZkMklaTENsVTdkU2NFNTJSU1B1WWtkX3ZTYm0tWGM3X0QxZVlFeU1KRWZWa0dXQ3cwMVQ0UmRhTGkzcGdhMkRaVk10SVg1WU9kLWJCZDFmY2gwejVsSUI2N3d3SEVIekdRbXNBYUE?oc=5" target="_blank" rel="noopener">MLB owners have a hidden incentive to avoid the looming lockout next year</a></h3>
+            <p>Read the full story at Yahoo Sports.</p>
+            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQUEZ4VGtFZEhJRTgxWlFRU1hUQkFRUUlzU0x2MmxFTTFCYkZDTk1xS19Ha2pTTGJWMUpWYmtpMVBHcGFrRElyZWtuTEpSZ3dGX3NCNnBoRDNDakNJMkRuUjFITW84LVpLak82elpKYjFsRzR0WXBobEFWWFlhNVdIaGd3?oc=5" target="_blank" rel="noopener">MLBPA can’t help itself by calling Rob Manfred out as lockout seems inevitable</a></h3>
+            <p>Read the full story at Yahoo Sports.</p>
+            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://www.sportico.com/leagues/baseball/2026/mlb-salary-cap-lockout-fan-poll-1234958805/" target="_blank" rel="noopener">MLB Fans Support Salary Cap, Poll Says</a></h3>
+            <p>MLB owners’ push for a salary cap is one of the major talking points of ongoing labor negotiations, and both the league and players are seeking public support for their stances. The pro-salary cap contingent seems to have the lead. In a new HarrisX poll of 1,087 respondents conducted on Nov. 9 and…</p>
+            <p class="meta"><span class="source-pill">Sportico</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://www.sportico.com/law/analysis/2026/lebron-james-ai-lawsuit-bron-legal-analysis-1234958821/" target="_blank" rel="noopener">LeBron’s AI Suit May Set Precedent in Futuristic NIL Disputes</a></h3>
+            <p>LeBron James is taking a sports app to court over its AI-generated use of his likeness and its unauthorized borrowing of his name in a case that could set important precedent for the uneasy relationship between AI and NIL for athletes and their business partners. Through a complaint authored by…</p>
+            <p class="meta"><span class="source-pill">Sportico</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://frontofficesports.com/article/jon-rothstein-doesnt-blame-nil-college-basketball-empty-seats/" target="_blank" rel="noopener">Jon Rothstein Doesn’t Blame NIL for College Basketball’s Empty Seats</a></h3>
+            <p>The CBS Sports personality also discussed his $15K bar tab in Lincoln.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 18, 2026</p>
+          </article>
+          <!-- BETTING -->
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxPN2dRam0yYzVUN2tSRnlETDhPYWF2VEk2c1dUWE5tNjRZV2s2cVQ3TGlDZExhT0pwSDF5d19QT0lMVE54MnA2STRUXzR6QVNPbFBOdk9seUQxVlgyNk9TcUpIdjN1RjE3OXMwZmtmakdQZnZUZzhOVWxYM3BJSHZZX1k4OGZEUmthVFNBTE12VlFiMXZIbXlCRVo5YTV2ZXN3MXNlQWFGZHJHT1huVktmd0JCbUhVTmN3YmNFbVg2TEV6bW8?oc=5" target="_blank" rel="noopener">44 Attorneys General Urge CFTC To Withdraw Sports Event Swap Definition Rule</a></h3>
+            <p>Read the full story at Sports Betting Dime.</p>
+            <p class="meta"><span class="source-pill">Sports Betting Dime</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://frontofficesports.com/videos/kuzma-on-space-tech-and-investing/" target="_blank" rel="noopener">Kyle Kuzma on Space, Kalshi, Athlete Investing</a></h3>
+            <p>Kyle Kuzma on Kalshi, his podcast Read the Room and the NFL&#x27;s Saquon Barkley ruling.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://frontofficesports.com/article/prediction-markets-post-midterm-reckoning-is-already-taking-shape/" target="_blank" rel="noopener">Prediction Markets’ Post-Midterm Reckoning Is Already Taking Shape</a></h3>
+            <p>“This has really been a bipartisan issue.”</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 16, 2026</p>
+          </article>
+          <!-- MEDIA -->
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://frontofficesports.com/article/mlbs-local-media-rights-emerges-as-focus-in-labor-fight/" target="_blank" rel="noopener">MLB’s Local Media Rights Emerge As Focus in Labor Fight</a></h3>
+            <p>The league is pursuing a complete pooling of local media rights.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxQS1NKRzBoR3ZXbnRFOFZ2QnI3aUFBMy15QnludHNqYlVXVHdVcFFFWXhOWmQtTGJ4QVBRQlhpVjNSemJfaHZJRnM4U0JnR0V0TWc5VkpWUVRHYjE2WG5NR3VMRnJDazU2Qk0wNG9pcTJNbURhRDYwTDRDSURyVUZJM3pPSmVzODRSOHdpUTA2cWlJMGdKQXB6czFTbjZMMF93VU000gGoAUFVX3lxTE02UVJuZkU4c3NYMFNUUGxITHRQUGlLU2plV0dDMFg3WVB6cGRjTDJUdHZOOVN3MTdsLWxIenFKUHlDejZHOG4ya3RERGt3SXpnb0hXUzdNbFBNXzhvZHN4UWt1d3dWcjljdGVvZlZBbXRjWDJaSk1maHhmR0RmVThaSENESC10TTNFUnR6S2FsQkY2bVprOEU3ejlWRTJjSURxa3hyTVA5RA?oc=5" target="_blank" rel="noopener">Netflix, Amazon, Fox to bid for 2030 men&#x27;s World Cup rights; Disney out</a></h3>
+            <p>Read the full story at CNBC.</p>
+            <p class="meta"><span class="source-pill">CNBC</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQOHVZSUxkbnhtN21TdnZaY1lGeGl6Zjh5UE9zRW5sQ0Nwc1lDS3NQZ1RyMEZXTFZZRzFQd3B4MnAtTnFSNzI3ZExOZ3lOWXQ4b3VLWlBnYXl0QVRiYkx0SVFVZ3dnbkU3ZWg2N3lXM19iSEJvdnQwbFUtNC1UMUhaX1JDQ096Mm44eU1UVklaQ1g0Y0ZYREhXZXdWSnNHeElKUFdSdUg0YzV6TTVkU0pJWWd3?oc=5" target="_blank" rel="noopener">YouTube balks at splitting NFL package with Netflix, broadcast TV back in mix, per Ourand</a></h3>
+            <p>Read the full story at Sports Media Watch.</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxQblNuMXlrcU1pbUFqQ1ppcTh2X1NELUUxMkNhMDZPVUNid1J4OWtIMnk4SjR3aDktYVZwMUpoeFpPSi1TVjhEckgxbDJ0ZFE3bmJWNGxMaE9JbWY3WC1fZXF5Y055emhpNnRRWGs4X3VWejFHcUQySWJfVGNXemIxd3M5YlMyN3dlcVRIM2M4cGg5Xzlrdmc?oc=5" target="_blank" rel="noopener">WSJ: Rupert Murdoch spoke to White House about NFL streaming deals</a></h3>
+            <p>Read the full story at Sports Media Watch.</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://frontofficesports.com/article/lpga-working-with-pga-tour-networks-for-better-tv-windows/" target="_blank" rel="noopener">LPGA Working With PGA Tour, Networks for Better TV Windows</a></h3>
+            <p>This year’s U.S. Women’s Open drew an average audience of 1.3 million viewers on NBC.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxORVpubmtpMDluRjQ1S1psRHNwUHR6eXVtd0JqNFAzVmRJOVNXMk9mRUdQQVBkc1hucVRfOWlQT0E4SmVTNWhDeTJFQThyLWF4XzF1aVZGdEhyWUZKM2VWU21ndDluMWhGbW9Vd3dZYTlHZTFwdW9sSEV3VmNkOUdYTElXU1A?oc=5" target="_blank" rel="noopener">Big Ten ahead on field, but catching SEC in TV ratings will be more difficult</a></h3>
+            <p>Read the full story at Sports Media Watch.</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 17, 2026</p>
+          </article>
+        </div>
+
+<p id="news-empty" style="display:none;padding:22px;text-align:center;color:var(--ink-faint)">No stories match that search in this edition — try a beat filter or a different term.</p>
+
+        <div class="wire">
+          <b>Outlets tracked in this aggregator:</b>
+          Sportico · Front Office Sports · Sports Business Journal · ESPN · Bloomberg · The Athletic · Awful Announcing · Legal Sports Report · Action Network · USA Today · plus city-hall and statehouse reporting nationwide. Every story above links to its original publisher — Pay to Play Politics summarises, it does not republish.
+        </div>
+      </section>
+
+      <!-- League directory (home view) — cards are rendered by script below -->
+      <section id="league-directory">
+        <div class="sec-head">
+          <span class="kicker">The Ledgers</span>
+          <h2>Franchise Ledgers by League</h2>
+        </div>
+        <p class="sec-sub">Every league now has its own page: the controlling owner of each franchise, the year purchased and the price paid, today's value and the gain, plus the stadium, what it cost, and how it was financed. Pick a league to open its ledger.</p>
+        <div class="league-grid" id="league-grid"></div>
+      </section>
+
+      <!-- League pages are rendered by script below; one shows at a time -->
+      <div id="league-sections"></div>
+
+      <footer>
+        <h4>About the numbers &amp; sources</h4>
+        <p><b>Pay to Play Politics</b> franchise tables were researched and verified on November 17, 2026. Current values are published estimates, attributed per league: NBA, NFL, MLB and NWSL from Forbes (2026 editions); MLS and WNBA from Sportico (2026); NHL from Forbes (2025, published December 2025 — Sportico published a newer NHL list in September 2026 with higher values). Purchase prices are the reported price of the controlling stake. “Gain” is current estimated value minus purchase price — it excludes debt, operating results, and distributions, so treat it as an appreciation snapshot, not an investment return. Negative gains are real, not errors. Stadium costs are reported original construction costs in nominal dollars at the time of construction; Canadian-dollar costs were converted to USD at approximate historical rates where converted, with originals preserved in the team notes — three Canadian MLS stadium costs are shown as “—” with the CAD figures in the notes. A “—” means no reliable public figure was found; nothing has been filled in or estimated. Pending sales, relocations, and planned stadiums are flagged in each league's team notes.</p>
+        <p>News headlines in The Wire are real stories pulled Nov 20, 2026, from Sportico, Front Office Sports, ESPN, Bloomberg and the other outlets listed in the aggregator, and link to the original publishers. The Wire refreshes every morning.</p>
+      </footer>
+    </div>
+
+    <script>
+      /* ============ Franchise data ============
+         [team, controlling owner, year purchased, purchase price $M (null = not public),
+          current value $M, stadium/arena, stadium cost, how financed] */
+      var LEAGUES = [{"id": "nba", "name": "NBA", "kicker": "Section B · Basketball", "source": "Forbes 2026", "blurb": "Thirty franchises, with values drawn from Forbes' 2026 list. Purchase prices are the reported price of the controlling stake; “—” means no reliable public figure was found.", "leagueNotes": "Valuations are Forbes' 2026 NBA list (published October 2026; enterprise values based on the 2025-26 season). The 30 teams averaged $6.1B, up 14% year over year, and every team is worth at least $4B. Sportico's 2026 list (October 9, 2026) is a close cross-check: $6.64B average with the same top three (Warriors $14.5B, Knicks $12.8B, Lakers $12.5B). The league has seen an unusual wave of control sales since 2023 (Suns, Hornets, Mavericks, Celtics, Lakers, Timberwolves, Trail Blazers), and four teams are building or planning new arenas (Thunder 2028, 76ers 2030, Mavericks ~2031, Spurs 2032). The Lakers' agreed resale to Josh Kushner and Bob Iger ($12.5B) and the Timberwolves' agreed buyout of Marc Lore by Marc Stad ($4.5B for the Wolves and Lynx) were both awaiting NBA Board of Governors approval as of November 2026. Arena construction costs are nominal dollars at the time of construction; financing descriptions summarize the original construction deal, not later renovations.", "rows": [["Atlanta Hawks", "Tony Ressler", 2015, 850.0, 5750.0, "State Farm Arena", 213.5, "Mostly public (91%): $149.5M in revenue bonds repaid from arena revenues, $62M in public infrastructure funded by a 3% car rental tax, $20M from Time Warner", "Ressler group paid $730M plus assumed ~$120M in arena debt. 2017-18 renovation cost $192.5M (city $142.5M, Hawks $50M); lease extended through 2046."], ["Boston Celtics", "Bill Chisholm", 2025, 6100.0, 7000.0, "TD Garden", 160.0, "Privately financed by Delaware North (Jacobs family), owner of the arena, with $120M in bank loans", "Chisholm bought a 51% controlling stake at a $6.1B valuation in 2025; the Grousbeck family retains a minority stake and Sixth Street is a minority investor. The Celtics do not own TD Garden (Delaware North, owners of the Bruins, do)."], ["Brooklyn Nets", "Joe Tsai", 2019, 2350.0, 6500.0, "Barclays Center", 1000.0, "Mixed: privately developed by Forest City Ratner (Bruce Ratner) with substantial public subsidies, including tax-exempt bonds and eminent-domain land assembly; arena owned by New York State's Empire State Development", "Tsai paid $1B for a 49% stake in 2018 and $1.35B for the remaining 51% in 2019 ($2.35B for the team); $3.35B including Barclays Center. The Koch family bought a 15% stake in parent BSE Global in 2024 at a $6B valuation."], ["Charlotte Hornets", "Gabe Plotkin and Rick Schnall", 2023, 3000.0, 4400.0, "Spectrum Center", 265.0, "Publicly financed by the City of Charlotte and Mecklenburg County (hotel/motel taxes); city-owned", "Michael Jordan retains a minority stake. A $275M city-funded arena renovation was approved in 2022, expected to complete around 2027. Note: some sources list the original construction cost as $260M."], ["Chicago Bulls", "Jerry Reinsdorf", 1985, 16.0, 6700.0, "United Center", 175.0, "Privately financed by the Bulls' and Blackhawks' owners (Reinsdorf and Wirtz families) through an international bank syndicate", "Purchase price approximately $16M. The Reinsdorf and Wirtz families own the arena 50/50 through the United Center Joint Venture and are developing the surrounding '1901 Project' district."], ["Cleveland Cavaliers", "Dan Gilbert", 2005, 375.0, 5500.0, "Rocket Arena", 100.0, "Publicly financed as part of the Gateway Sports and Entertainment Complex, funded by a 1990 voter-approved Cuyahoga County 'sin tax' on alcohol and tobacco", "Arena cost per Wikipedia is $100M; it was built alongside Progressive Field as one Gateway project. A ~$185M renovation was completed in 2019. Cleveland's new WNBA team (Sirens) begins play in 2028; Blue Owl bought a minority stake in July 2026 at a combined $5.5B valuation for the Cavs and WNBA team."], ["Dallas Mavericks", "Miriam Adelson and Patrick Dumont (Adelson family)", 2023, 3500.0, 5800.0, "American Airlines Center", 420.0, "Mixed: voter-approved Dallas hotel and rental car taxes covered part of the cost; the Mavericks and Stars paid the remainder including cost overruns", "Adelson family bought a 69% stake at a $3.5B valuation; Mark Cuban retains ~27%. The Mavericks' lease runs through 2031; a new arena in Irving as part of a Las Vegas Sands integrated resort has been proposed."], ["Denver Nuggets", "Ann Walton Kroenke", 2000, 202.0, 5150.0, "Ball Arena", 187.0, "Privately financed by Ascent Entertainment Group (then-owner of the Nuggets and Avalanche); no tax money used", "Stan Kroenke bought the Nuggets in 2000 as part of a ~$450M package including the Avalanche and the arena; $202M is the reported team-only portion. Ownership transferred to his wife Ann Walton Kroenke in 2015. A $135M arena renovation was announced in September 2026."], ["Detroit Pistons", "Tom Gores", 2011, 325.0, 4200.0, "Little Caesars Arena", 862.9, "Mixed public-private: about 58% public funding originally (~$261M via Downtown Development Authority bonds and tax capture); Ilitch Holdings/Olympia Entertainment funded the private remainder", "Gores' $325M purchase included the Palace of Auburn Hills and Palace Sports & Entertainment. The Pistons moved to Little Caesars Arena in 2017; the arena is owned by Detroit's Downtown Development Authority and the Ilitch family controls operations."], ["Golden State Warriors", "Joe Lacob and Peter Guber", 2010, 450.0, 13500.0, "Chase Center", 1400.0, "Privately financed by the Warriors (Lacob and Guber)", "Most valuable NBA franchise on both the Forbes and Sportico 2026 lists. Chase Center opened in 2019 in San Francisco's Mission Bay; the team previously played at Oracle Arena in Oakland."], ["Houston Rockets", "Tilman Fertitta", 2017, 2200.0, 6600.0, "Toyota Center", 235.0, "Mixed: city of Houston paid $182M (bonds); the Rockets paid $43M for additions and enhancements", "Fertitta's $2.2B purchase in 2017 was then an NBA record. The arena deal was approved by 66% of voters in a 2000 referendum after a 1999 referendum failed."], ["Indiana Pacers", "Herb Simon", 1983, 11.0, 4550.0, "Gainbridge Fieldhouse", 183.0, "Publicly financed; owned by the City of Indianapolis Capital Improvement Board", "Melvin and Herbert Simon bought the Pacers for ~$11M in 1983. Steven Rales owns a 20% stake. The arena underwent a major renovation completed in 2022."], ["LA Clippers", "Steve Ballmer", 2014, 2000.0, 7800.0, "Intuit Dome", 2000.0, "Privately financed by owner Steve Ballmer", "Ballmer bought the team after the NBA forced a sale following the Donald Sterling scandal. On September 2, 2026 the NBA suspended Ballmer for one year and fined the club $30M for salary-cap circumvention; John Gibson serves as interim governor. Ownership is unchanged. Intuit Dome opened in August 2024 and will host basketball at the 2028 Olympics."], ["Los Angeles Lakers", "Mark Walter", 2025, 10000.0, 12500.0, "Crypto.com Arena", 375.0, "Privately financed by AEG (Philip Anschutz and Edward Roski)", "Walter's $10B purchase closed in October 2025. In August 2026 he agreed to sell control to Josh Kushner and Bob Iger at a $12.5B valuation; the deal awaits NBA Board of Governors approval. Jeanie Buss remains team governor. The Lakers do not own Crypto.com Arena (AEG does)."], ["Memphis Grizzlies", "Robert Pera", 2012, 377.0, 4000.0, "FedExForum", 250.0, "Publicly financed with $250M in public bonds issued by the Memphis Public Building Authority; owned by the City of Memphis", "Lowest-valued NBA franchise on both the Forbes and Sportico 2026 lists. Some sources cite a $337M purchase price for Pera's 2012 deal; $377M is the widely reported figure."], ["Miami Heat", "Micky Arison", 1995, null, 6100.0, "Kaseya Center", 213.0, "Publicly financed by Miami-Dade County, which owns the arena and provided the $38M land parcel; the county receives 40% of arena profits above $14M", "The Arison family founded the franchise with a $32.5M expansion fee in 1988; Micky Arison took control in 1995, so no purchase price applies to the current controlling owner."], ["Milwaukee Bucks", "Wes Edens and Jimmy and Dee Haslam", 2014, 550.0, 4600.0, "Fiserv Forum", 524.0, "Mixed: $250M public (state, county and city), $100M from former owner Herb Kohl, $100M from the new owners, remainder private; city sold the land for $1", "Edens and Marc Lasry bought the team for $550M in 2014; the Haslams bought Lasry's stake in 2023 at a $3.5B valuation. Arena construction cost was $524M (the $1.2B figure sometimes cited covers the wider district)."], ["Minnesota Timberwolves", "Marc Lore and Alex Rodriguez", 2025, 1500.0, 4180.0, "Target Center", 104.0, "Privately financed by original Timberwolves owners Marv Wolfenson and Harvey Ratner; the City of Minneapolis purchased the arena in 1995", "Lore and Rodriguez agreed to buy the Timberwolves and Lynx in 2021 in a multi-stage deal at a $1.5B enterprise value; the NBA approved the completed sale in 2025 after arbitration with Glen Taylor. In August 2026, limited partner Marc Stad agreed to buy out Lore at a $4.5B valuation for both clubs; the deal awaits NBA approval."], ["New Orleans Pelicans", "Gayle Benson", 2012, 338.0, 4100.0, "Smoothie King Center", 114.0, "Publicly financed; owned by the Louisiana Stadium and Exposition District (State of Louisiana)", "Tom Benson bought the then-New Orleans Hornets from the league for $338M in 2012; his widow Gayle Benson inherited control after his death in 2018."], ["New York Knicks", "James Dolan (Madison Square Garden Sports)", 1997, 300.0, 12600.0, "Madison Square Garden", 123.0, "Privately financed by Graham-Paige (Irving Felt); MSG has held a New York City property tax exemption since the 1980s", "Cablevision/Dolan consolidated control of MSG in 1997; $300M is the commonly cited figure for the Knicks, though the wider MSG transaction was larger and reported figures vary ($300M-$650M). Original construction cost was $123M in 1968; a $1B renovation was completed in 2013. The Knicks won the 2026 NBA championship and MSG is spinning the Knicks off into the publicly traded MSG Knickerbockers Corp."], ["Oklahoma City Thunder", "Clay Bennett", 2006, 350.0, 4900.0, "Paycom Center", 89.2, "Publicly financed through Oklahoma City's MAPS program (temporary 1-cent sales tax)", "Bennett's group bought the Seattle SuperSonics for $350M in 2006 and relocated the team to Oklahoma City in 2008. A new arena (Continental Coliseum) is under construction and set to open in 2028; a 2008 sales-tax extension funded $121M in improvements to the current arena."], ["Orlando Magic", "DeVos family", 1991, 85.0, 4500.0, "Kia Center", 480.0, "Mixed: the Magic contributed at least $50M cash up front plus cost overruns and $1M/year rent; the rest came from bonds repaid by Orange County's 6% Tourist Development Tax (hotel surcharge); the city paid for land and infrastructure", "Rich DeVos bought the Magic for ~$85M in 1991; the family still controls the team (Dan DeVos is governor). Total arena cost was $480M ($380M arena plus $100M land/infrastructure)."], ["Philadelphia 76ers", "Josh Harris and David Blitzer", 2011, 280.0, 6400.0, "Xfinity Mobile Arena", 210.0, "Largely privately financed by Comcast Spectacor, which owns the arena; the city and state helped pay for local infrastructure", "The $280M purchase price did not include the arena. In January 2025 Comcast Spectacor, HBSE and the City of Philadelphia announced a new $1.3B privately financed arena in South Philadelphia to open by 2030, jointly owned by Comcast Spectacor and HBSE."], ["Phoenix Suns", "Mat Ishbia", 2023, 4000.0, 6000.0, "Mortgage Matchup Center", 89.0, "Publicly financed; owned by the City of Phoenix", "Ishbia's $4B purchase (agreed December 2022, closed February 2023) included the WNBA's Phoenix Mercury. A $230M arena renovation was approved in 2019 (city $150M, Suns $80M)."], ["Portland Trail Blazers", "Tom Dundon", 2026, 4250.0, 4300.0, "Moda Center", 262.0, "Mixed: City of Portland funds, Paul Allen's personal fortune, and $155M in bonds issued by a consortium of mutual funds and insurance companies", "Dundon bought the team from the estate of Paul Allen in a two-part deal approved in April 2026 at a blended ~$4.25B valuation. The City of Portland acquired the Moda Center from the Allen estate in 2024 for $7.13M."], ["Sacramento Kings", "Vivek Ranadivé", 2013, 534.0, 4700.0, "Golden 1 Center", 558.2, "Mixed: the Kings contributed ~$284M; the City of Sacramento contributed ~$223M via $212M in bonds plus $11M in parking and economic development funds", "Ranadive's group bought the Kings to keep them in Sacramento; the city partnered on the new arena, which opened in 2016. Final construction cost rose to $558.2M from a $507M estimate."], ["San Antonio Spurs", "Peter J. Holt", 1993, 76.0, 5600.0, "Frost Bank Center", 175.0, "Mostly public: Bexar County bonds backed by a voter-approved increase in hotel-occupancy and car-rental taxes, plus a $28.5M contribution from the Spurs", "Peter Holt's group bought the Spurs for ~$76M in 1993; Sixth Street owns a 20% minority stake. A new downtown arena is planned with public funding approved in November 2025 and a target opening of 2032; the Spurs committed $1B to the surrounding district. Note: some sources list the arena's construction cost as $186M."], ["Toronto Raptors", "Rogers Communications", 2025, null, 5900.0, "Scotiabank Arena", 178.0, "Privately financed by Maple Leaf Sports & Entertainment (team owners)", "No standalone purchase price: Rogers became majority owner of MLSE (which owns the Raptors) by buying Bell's 37.5% MLSE stake in 2024-25 for C$4.7B, taking 75% control; Larry Tanenbaum retains 25% and remains NBA governor. Arena cost was CA$265M (approx. US$178M at the 1999 exchange rate); some sources cite CA$288M."], ["Utah Jazz", "Ryan Smith", 2021, 1660.0, 4750.0, "Delta Center", 93.0, "Privately financed by then-owner Larry H. Miller", "Smith agreed to buy the Jazz in October 2020 for $1.66B; the sale closed in January 2021 and included the arena. A $525M arena renovation began in April 2025 as part of a $900M funding package for the arena and surrounding sports and entertainment district."], ["Washington Wizards", "Ted Leonsis", 2010, 551.0, 5200.0, "Capital One Arena", 260.0, "Mixed: owner Abe Pollin privately funded ~$200M of construction; D.C. paid ~$79M for land, site preparation and Metro station expansion, and leased the land at a below-market $300,000/year", "Leonsis bought the Wizards and the arena from the Pollin estate in 2010 (the $551M covered the team, arena and related holdings). In March 2024 D.C. agreed to a $515M public contribution to a $1B arena renovation, keeping the Wizards and Capitals in the District through at least 2050."]]}, {"id": "nfl", "name": "NFL", "kicker": "Section C · Football", "source": "Forbes 2026", "blurb": "Thirty-two franchises on Forbes' 2026 list — the richest league in the dataset — and the most aggressive stadium-subsidy playbook in sports.", "leagueNotes": "Valuations are Forbes' 2026 NFL list (published September 9, 2026; enterprise values based on 2025 season economics). Average franchise value was $9.5B, up 34% year over year, driven by the record $9.612B Seahawks sale; all 32 teams are worth at least $8B and 10 top $10B. Purchase prices are the price paid by the current ownership family/group when it first acquired control (franchise or expansion fee for founding families); inherited teams show the original family acquisition, explained in each team's notes. Stadium costs are original construction costs in nominal dollars at time of construction, not inflation-adjusted; public-money figures are from League of Fans, Marquette National Sports Law Institute reports, and team/stadium sources. The NFL is in an active stadium cycle: Buffalo opened a new $2.1B stadium in 2026; new stadiums are under construction in Nashville (2027) and Brook Park, Ohio (2029), with more proposed in Washington, D.C. (2030), Chicago, Denver and Kansas City (2031), and a $1.4B renovation underway in Jacksonville.", "rows": [["Arizona Cardinals", "Michael Bidwill", 1933, 0.05, 8060.0, "State Farm Stadium", 455.0, "Mostly public: $302.3M from the Arizona Sports and Tourism Authority (hotel/rental car taxes) plus $9.5M from Glendale; Cardinals paid $143.2M", "Bidwill family has owned the team since Charles Bidwill bought it in 1933; Michael Bidwill inherited it from his father Bill in 2019."], ["Atlanta Falcons", "Arthur Blank", 2002, 545.0, 10100.0, "Mercedes-Benz Stadium", 1600.0, "Mostly private: Arthur Blank/Falcons paid ~$1.4B; $200M public via Atlanta hotel-motel tax bonds", "NFL owners approved Arctos Partners buying a 7.5% limited-partner stake in October 2026."], ["Baltimore Ravens", "Steve Bisciotti", 2004, 600.0, 8200.0, "M&T Bank Stadium", 220.0, "Mostly public: State of Maryland paid ~$200M (general fund, lottery proceeds); Ravens contributed ~$5M from PSLs", "Bisciotti bought 49% in 2000 for $275M and the remaining 51% in 2004 for $325M (total $600M)."], ["Buffalo Bills", "Terry Pegula", 2014, 1400.0, 8150.0, "Highmark Stadium", 2100.0, "Mixed: $850M public ($600M New York State, $250M Erie County); Bills paid ~$1.25B, including ~$700M in cost overruns", "New Highmark Stadium opened in June 2026, replacing the 1973 stadium across the street. The Pegulas sold ~20.6% in limited-partner stakes (including Arctos Partners) in December 2024."], ["Carolina Panthers", "David Tepper", 2018, 2275.0, 8100.0, "Bank of America Stadium", 248.0, "Privately financed through PSL sales and private funds; City of Charlotte donated the land (~$50M) and ~$10M in infrastructure", "An $800M stadium renovation approved in 2024 ($650M from Charlotte hospitality taxes, $150M from Tepper) is underway, with reported costs since rising above $1.3B."], ["Chicago Bears", "George McCaskey", 1920, 0.0001, 9700.0, "Soldier Field", 13.0, "Publicly financed by the Chicago Park District (1924); 2003 renovation ($632M) was ~68% public (hotel tax), Bears paid ~$200M", "Halas/McCaskey family has owned the team since its 1920 founding as the Decatur Staleys ($100 league franchise fee; Staley Starch Co. gave George Halas the team in 1921). George McCaskey became principal owner after his mother Virginia Halas McCaskey died in 2025. A new domed stadium is proposed (site undecided), targeted for 2031."], ["Cincinnati Bengals", "Mike Brown", 1967, 7.5, 8000.0, "Paycor Stadium", 455.0, "Fully publicly financed through a Hamilton County sales tax", "Paul Brown founded the team with a $7.5M AFL expansion fee in 1967; son Mike Brown inherited it in 1991. Lowest-valued NFL franchise on the Forbes 2026 list."], ["Cleveland Browns", "Jimmy Haslam", 2012, 987.0, 9000.0, "Huntington Bank Field", 283.0, "Mostly public: ~$216M from a Cuyahoga County sin tax (alcohol/tobacco); team paid the remainder", "Sale price reported as over $1B at announcement; final price reported as $987M. A new domed stadium is under construction in Brook Park, Ohio, targeted to open in 2029. Arctos bought ~3% at a $9B valuation in May 2026."], ["Dallas Cowboys", "Jerry Jones", 1989, 140.0, 17000.0, "AT&T Stadium", 1300.0, "Mostly private: $325M public from the City of Arlington (sales, hotel and car-rental taxes); Cowboys paid the rest", "Most valuable NFL franchise for a 20th straight year (Forbes) and the most valuable sports franchise in the world."], ["Denver Broncos", "Rob Walton (Walton-Penner Family Ownership Group)", 2022, 4650.0, 9400.0, "Empower Field at Mile High", 400.9, "Mostly public: ~75% from a Denver metro sales tax (Metropolitan Football Stadium District bonds); Broncos paid ~25%", "Walton-Penner group (Rob Walton, Greg Penner, Carrie Walton Penner, Mellody Hobson, Condoleezza Rice, Lewis Hamilton) bought the team in 2022 for a then-record $4.65B. A new stadium in Denver's Burnham Yard is proposed, targeted for 2031."], ["Detroit Lions", "Sheila Ford Hamp", 1964, 4.5, 8040.0, "Ford Field", 430.0, "Mixed: ~36% public (Wayne County hotel/rental car taxes, city/state funds); Lions paid $70M plus $50M in corporate contributions", "Ford family has owned the team since William Clay Ford Sr. bought it in 1964 (agreed late 1963); Sheila Ford Hamp took over from her mother Martha Firestone Ford in 2020."], ["Green Bay Packers", "Green Bay Packers, Inc. (publicly/community owned)", null, null, 8600.0, "Lambeau Field", 0.96, "Publicly financed by the City of Green Bay via voter-approved bonds (1957); 2003 renovation ($295M) was ~57% public via Brown County sales tax", "Only publicly/community-owned team in the NFL: 537,000+ shareholders own 5.2M shares of the non-profit Green Bay Packers, Inc.; no single controlling owner. The team has never been sold, so there is no purchase price."], ["Houston Texans", "Cal McNair", 1999, 700.0, 9650.0, "Reliant Stadium", 352.0, "Mostly public: ~$287M from Harris County hotel/rental car taxes; Texans paid the remainder", "Bob McNair paid a then-record $700M expansion fee in 1999; son Cal McNair became principal owner in 2024. Stadium reverted from NRG Stadium to its original Reliant Stadium name in August 2026."], ["Indianapolis Colts", "Carlie Irsay-Gordon", 1972, 15.0, 8080.0, "Lucas Oil Stadium", 720.0, "Mostly public: ~$620M from Marion County food/beverage, hotel, rental car and ticket taxes; Colts contributed $100M", "Robert Irsay acquired the Colts in a 1972 franchise swap with the Rams (effective price ~$15M; he had bought the Rams for $19M). Jim Irsay died in May 2025; ownership passed to his daughters, with Carlie Irsay-Gordon as principal owner and CEO."], ["Jacksonville Jaguars", "Shahid Khan", 2012, 770.0, 8050.0, "EverBank Stadium", 121.0, "Mostly public: City of Jacksonville funded ~90% (hotel/rental car taxes, general fund)", "EverBank Stadium is undergoing a $1.4B 'Stadium of the Future' renovation (city $775M, Khan $625M plus overruns); capacity reduced in 2026, team plays 2027 home games in Orlando, completion due 2028."], ["Kansas City Chiefs", "Clark Hunt", 1960, 0.025, 8800.0, "Arrowhead Stadium", 43.0, "Fully publicly financed (Jackson County bonds); 2010 renovation ($375M) funded by a county sales tax", "Hunt family has owned the team since Lamar Hunt founded it as the Dallas Texans in 1960 ($25,000 AFL franchise fee); Clark Hunt became principal owner in 2006. A new domed stadium in Kansas City, Kansas, is proposed, targeted for 2031. The GEHA field naming deal ended in 2026 and the venue reverted to Arrowhead Stadium."], ["Las Vegas Raiders", "Mark Davis", 1966, 0.0185, 10300.0, "Allegiant Stadium", 1900.0, "$750M public (Clark County hotel-room tax bonds); Raiders paid ~$1.15B", "Al Davis bought a 10% stake for $18,500 in 1966 and gained control in 1972; Mark Davis inherited the team in 2011. Tom Brady became a limited partner in 2024; minority deals in spring 2026 valued the team at up to $11B."], ["Los Angeles Chargers", "Dean Spanos", 1984, 70.0, 8300.0, "SoFi Stadium", 5500.0, "Privately financed by Rams owner Stan Kroenke; Chargers are tenants", "Alex Spanos bought a majority stake in 1984; son Dean Spanos took control after his father's death in 2018. The Chargers are tenants at SoFi Stadium, which the Rams own."], ["Los Angeles Rams", "Stan Kroenke", 2010, 750.0, 13500.0, "SoFi Stadium", 5500.0, "Privately financed by owner Stan Kroenke (no public construction subsidy)", "Kroenke bought majority control in 2010 for $750M (he had held a 40% stake since 1995) and moved the team back to Los Angeles in 2016."], ["Miami Dolphins", "Stephen Ross", 2009, 1100.0, 10400.0, "Hard Rock Stadium", 115.0, "Privately financed by founder Joe Robbie; 2015-17 renovations (~$550M) privately funded by Stephen Ross", "Ross bought 50% in 2008 and the remaining 45% in 2009 for a total of ~$1.1B. Minority stakes sold to Ares Management (10%) and Joe Tsai (3%) in 2024 at an $8.1B valuation; in October 2026 Ross agreed to sell a further 2.1% at a valuation above $12.5B."], ["Minnesota Vikings", "Zygi Wilf", 2005, 600.0, 8250.0, "U.S. Bank Stadium", 1061.0, "Mixed: $498M public (Minnesota state funds); Vikings paid ~$563M", "Wilf bought the team in 2005 for $600M."], ["New England Patriots", "Robert Kraft", 1994, 172.0, 10600.0, "Gillette Stadium", 325.0, "Privately financed by Robert Kraft; state paid ~$70M for surrounding infrastructure", "Kraft bought the team in 1994 for $172M. An 8% stake was sold in October 2025 (5% to Dean Metropoulos, 3% to Sixth Street) at a $9B valuation."], ["New Orleans Saints", "Gayle Benson", 1985, 70.0, 8020.0, "Caesars Superdome", 134.0, "Fully publicly financed by the State of Louisiana (bonds)", "Tom Benson bought the team in 1985 for ~$70M to keep it in New Orleans; wife Gayle Benson inherited it in 2018. The team is expected to be sold after her death, with proceeds going to charity."], ["New York Giants", "John Mara and Steve Tisch (Mara and Tisch families)", 1925, 0.0005, 12000.0, "MetLife Stadium", 1600.0, "Privately financed by the Giants and Jets (no public funds)", "Mara family has owned the team since Tim Mara founded it in 1925 for $500; the Tisch family bought 50% in 1991. A 10% stake was sold to Julia Koch and family in October 2025 at a ~$10.3B valuation."], ["New York Jets", "Woody Johnson", 2000, 635.0, 10350.0, "MetLife Stadium", 1600.0, "Privately financed by the Giants and Jets (no public funds)", "Woody Johnson bought the team in 2000 for $635M; his brother Christopher Johnson served as principal owner while Woody was U.S. Ambassador to the UK (2017-2021)."], ["Philadelphia Eagles", "Jeffrey Lurie", 1994, 185.0, 10250.0, "Lincoln Financial Field", 512.0, "Mixed: ~$188M public from the City of Philadelphia and Pennsylvania; Eagles paid ~$310M (including stadium builder licenses)", "Lurie bought the team in 1994 for $185M. An 8% stake was sold to two family investment groups in December 2024 at an $8.3B valuation."], ["Pittsburgh Steelers", "Art Rooney II", 1933, 0.0025, 8700.0, "Acrisure Stadium", 281.0, "Mostly public: Allegheny Regional Asset District funds (sales tax) covered most of the cost; Steelers contributed $76.5M", "Rooney family has owned the team since Art Rooney founded it in 1933 for $2,500; Art Rooney II became principal owner in 2017."], ["San Francisco 49ers", "Jed York (DeBartolo/York family)", 1977, 13.0, 10500.0, "Levi's Stadium", 1300.0, "Mostly private: 49ers funded ~$1.2B (NFL loan, PSLs, team funds); City of Santa Clara contributed ~$114M", "DeBartolo/York family has owned the team since Edward DeBartolo Sr. bought it in 1977; Jed York has been principal owner since 2009. Minority stakes (~3.2% to Pete Briger Jr., ~3.1% to Vinod Khosla) were sold in 2025 at an ~$8.6B valuation; Khosla divested upon buying the Seahawks."], ["Seattle Seahawks", "Neeru Khosla (Khosla family)", 2026, 9612.0, 9600.0, "Lumen Field", 430.0, "Mostly public: ~$300M from state/county taxes and lottery proceeds; Paul Allen contributed ~$130M", "Sold by the Paul G. Allen estate to the Khosla family in 2026 for a record $9.612B (agreed July 11, approved unanimously by NFL owners August 26, closed early September); Neeru Khosla is controlling owner and Vinod Khosla is chair. Proceeds go to charity per Allen's will. Forbes' rounded $9.6B value sits just below the sale price, so the value difference is negative. Seahawks won Super Bowl LX in February 2026."], ["Tampa Bay Buccaneers", "Bryan Glazer (Glazer family)", 1995, 192.0, 9100.0, "Raymond James Stadium", 168.5, "Fully publicly financed through Hillsborough County's Community Investment Tax (half-cent sales tax)", "Malcolm Glazer bought the team in 1995 for $192M; sons Bryan, Joel and Edward became co-chairmen after his death in 2014."], ["Tennessee Titans", "Amy Adams Strunk", 1960, 0.025, 8500.0, "Nissan Stadium", 290.0, "Publicly financed by Nashville/Davidson County (hotel/rental car taxes, gate/concession taxes, general fund)", "Bud Adams founded the team as the Houston Oilers in 1960 ($25,000 AFL franchise fee); daughter Amy Adams Strunk became controlling owner in 2015. A new $2.1B domed Nissan Stadium is under construction in Nashville ($1.26B public: $500M state, $760M city), opening in 2027."], ["Washington Commanders", "Josh Harris (Josh Harris Group)", 2023, 6050.0, 9800.0, "Northwest Stadium", 250.5, "Privately financed by owner Jack Kent Cooke; Maryland paid ~$70M for surrounding infrastructure", "Josh Harris group bought the team from Daniel Snyder in 2023 for a then-record $6.05B. A new 65,000-seat roofed stadium at the RFK campus in Washington, D.C., is planned as part of a $3.8B project (team $2.7B, D.C. ~$1.1B), targeted to open in 2030."]]}, {"id": "mlb", "name": "MLB", "kicker": "Section D · Baseball", "source": "Forbes 2026", "blurb": "Thirty clubs on Forbes' 2026 list, with no salary cap and the widest value spread in major U.S. sports. Most ballparks were majority publicly financed.", "leagueNotes": "Valuations are Forbes' 2026 MLB list (published March 2026; enterprise values based on 2025 season economics). Average MLB franchise value was $2.9B, up 12% year over year. Sportico's March 2026 list runs higher (average $3.17B; Yankees $9.4B). The MLB collective bargaining agreement expires in December 2026 and a lockout is widely expected. 2025-26 saw a wave of record transactions: Rays sold for $1.7B (Sept 2025), Padres sold for an MLB-record $3.9B (approved Aug 2026), and the Angels agreed to a reported $4.0B sale to Stan Kroenke (Sept 2026, not yet closed). New ballparks are planned for the Athletics (Las Vegas, targeted 2028), Rays (Tampa, targeted Opening Day 2029), Royals (downtown Kansas City, ~2030) and White Sox (The 78 site, Chicago, TBD). Stadium costs are original construction costs in nominal dollars at time of construction; public-money figures are from USA Today (Aug 2026) unless noted. Most MLB ballparks were majority publicly financed.", "rows": [["Arizona Diamondbacks", "Ken Kendrick", 1995, 130.0, 1960.0, "Chase Field", 354.0, "Majority publicly financed — $240M public (~68%) via Maricopa County sales tax", "The $130M purchase price was the 1995 expansion franchise fee. Chase Field renovations of $400-500M since 2021 are funded under an 80/20 public/private deal with the state."], ["Atlanta Braves", "Atlanta Braves Holdings Inc.", 2007, 450.0, 3350.0, "Truist Park", 622.0, "Public-private partnership; ~$400M public from Cobb County", "The 2007 Liberty Media deal valued the Braves at $450M as part of a stock/cash swap with Time Warner; the team was spun off as publicly traded Atlanta Braves Holdings in 2023. Truist Park total project cost was $672M including infrastructure. One of two MLB teams under corporate/public ownership."], ["Baltimore Orioles", "David Rubenstein", 2024, 1725.0, 2100.0, "Oriole Park at Camden Yards", 110.0, "Fully publicly financed via Maryland state lottery-backed bonds", "Rubenstein bought the team from the Angelos family in 2024. Maryland approved $600M in state funds for Camden Yards renovations."], ["Boston Red Sox", "John W. Henry", 2002, 660.0, 5250.0, "Fenway Park", 0.65, "Privately financed when built in 1912; ~$130M public funds used for renovations since 2000", "Henry leads Fenway Sports Group. More than $400M in renovations to Fenway Park since 2000."], ["Chicago Cubs", "Thomas S. Ricketts", 2009, 845.0, 5000.0, "Wrigley Field", 0.25, "Privately financed when built in 1914; $740M renovation since 2013 privately funded by the Ricketts family", "The 2009 purchase from Tribune Company included Wrigley Field and a stake in the regional sports network."], ["Chicago White Sox", "Jerry Reinsdorf", 1981, 20.0, 1940.0, "Rate Field", 137.0, "Fully publicly financed via Illinois Sports Facilities Authority bonds (hotel tax)", "June 2025 agreement: Justin Ishbia is in line to obtain a controlling interest; Reinsdorf may sell to Ishbia in 2029-2033 and Ishbia gains an option to buy after the 2034 season. No transaction before 2029. Ishbia's group revealed plans in Sept 2026 for a new riverfront stadium at The 78 site; the Rate Field lease ends after the 2029 season. Stadium renamed Rate Field (formerly Guaranteed Rate Field)."], ["Cincinnati Reds", "Phil Castellini", 2006, 270.0, 1600.0, "Great American Ball Park", 290.0, "Mostly publicly financed — $280M public via Hamilton County half-cent sales tax", "Phil Castellini became principal owner in Feb 2026, succeeding his father Bob Castellini, whose group bought the team in 2006. USA Today lists a $337M total project cost for the ballpark."], ["Cleveland Guardians", "Paul Dolan", 1999, 323.0, 1660.0, "Progressive Field", 175.0, "Public-private; $84M public via Cuyahoga County 'sin tax' on alcohol and tobacco", "David Blitzer bought a minority stake in 2022 with a path to majority control. $202M in renovations since 2022 ($135M public); lease runs through 2036."], ["Colorado Rockies", "Charlie Monfort", 1992, 95.0, 1680.0, "Coors Field", 300.0, "Majority publicly financed — $168M via Denver-area sales tax bonds", "The $95M purchase price was the 1992 expansion franchise fee. Coors Field construction bonds were paid off eight years early."], ["Detroit Tigers", "Christopher Ilitch", 1992, 82.0, 1800.0, "Comerica Park", 300.0, "Public-private; $115M public via Wayne County hotel and rental car taxes", "Mike Ilitch bought the team in 1992; his son Christopher succeeded him after Mike's death in 2017. Ballpark name expected to change after Fifth Third's acquisition of Comerica (2026)."], ["Houston Astros", "Jim Crane", 2011, 615.0, 3200.0, "Daikin Park", 250.0, "Mostly publicly financed — $180M via Harris County hotel and rental car taxes", "Renamed Daikin Park in 2025 (formerly Minute Maid Park)."], ["Kansas City Royals", "John Sherman", 2020, 1000.0, 1640.0, "Kauffman Stadium", 70.0, "Publicly financed via Jackson County bonds; $43M public covered original construction of Royals and Arrowhead stadiums", "Sherman is pursuing a new ~$2B downtown Kansas City ballpark (target ~2030) with $500M+ in public funding sought; Jackson County voters rejected a stadium sales tax in 2024."], ["Los Angeles Angels", "Arte Moreno", 2003, 184.0, 2800.0, "Angel Stadium", 24.0, "Publicly financed by the City of Anaheim when built in 1966; $30M public for 1997-98 renovations", "Moreno agreed Sept 1, 2026 to sell a controlling interest to Stan Kroenke's Kroenke Sports & Entertainment at a reported $4.0B valuation; the deal has not closed and MLB approval is expected in Q1 2027, with Moreno retaining an undisclosed minority stake. Moreno previously called off a sale in 2023."], ["Los Angeles Dodgers", "Mark Walter (Guggenheim Baseball Management)", 2012, 2000.0, 7800.0, "Dodger Stadium", 23.0, "Privately financed by owner Walter O'Malley; City of Los Angeles provided 300 acres of land plus infrastructure", "The $2B purchase price was a record for an MLB team at the time. Dodgers won back-to-back World Series in 2024 and 2025; $300M+ in private renovations to Dodger Stadium since 2013."], ["Miami Marlins", "Bruce Sherman", 2018, 1200.0, 1500.0, "loanDepot park", 634.0, "Mostly publicly financed — $515M public via Miami-Dade County bonds; total taxpayer cost projected over $2.5B including debt service", "Sherman/Jeter group purchase widely reported at $1.2B (Wikipedia lists $1.3B). Lowest-valued MLB franchise in Forbes 2026."], ["Milwaukee Brewers", "Mark Attanasio", 2005, 223.0, 1900.0, "American Family Field", 400.0, "Mostly publicly financed — $300M via five-county 0.1% sales tax", "A 2023 Wisconsin law commits $522M+ in public funds for future renovations, keeping the Brewers in Milwaukee through 2050."], ["Minnesota Twins", "Tom Pohlad", 1984, 44.0, 1710.0, "Target Field", 555.0, "Majority publicly financed — $350M via Hennepin County sales tax", "Pohlad family has owned the team since Carl Pohlad bought it in 1984. The family listed the team for sale in Oct 2024, pulled it off the market in Aug 2025, and sold minority stakes in Dec 2025 at a $1.75B implied valuation; Tom Pohlad became controlling owner in Dec 2025, succeeding his brother Joe."], ["New York Mets", "Steve Cohen", 2020, 2475.0, 3500.0, "Citi Field", 900.0, "Primarily privately financed by the Mets via bonds; public contribution estimated at $614M by USA Today (including tax-exempt bonds and infrastructure)", "Cohen's purchase (reported ~$2.4B) was the MLB record until the Padres' $3.9B sale in 2026. USA Today lists an $830M construction cost for Citi Field."], ["New York Yankees", "Hal Steinbrenner", 1973, 8.7, 8500.0, "Yankee Stadium", 2300.0, "Public-private; ~$1.2B public via tax-exempt bonds, tax breaks and infrastructure", "George Steinbrenner bought the team in 1973; his son Hal took control in 2010. Most valuable MLB franchise in every Forbes ranking since 1998."], ["Athletics", "John J. Fisher", 2005, 180.0, 2000.0, "Sutter Health Park", 46.5, "Built without public tax funding; bonds issued by a joint-powers financing authority are repaid from stadium revenues, not taxes", "Formerly the Oakland Athletics. Playing temporarily at Sutter Health Park in West Sacramento (2025-2027) after leaving Oakland; new Las Vegas ballpark under construction (groundbreaking June 23, 2025), budgeted ~$1.75-2B with $350-380M in Nevada/Clark County public funding, targeted to open in 2028."], ["Philadelphia Phillies", "John Middleton", 1981, 30.0, 3400.0, "Citizens Bank Park", 458.0, "Public-private; $221M public", "The $30M/1981 figures reflect the Bill Giles group's purchase; the Middleton family bought in later and John Middleton became controlling owner in 2016. Phillies announced a $600M renovation of Citizens Bank Park in 2026."], ["Pittsburgh Pirates", "Robert Nutting", 1996, 92.0, 1620.0, "PNC Park", 216.0, "Mostly publicly financed — $155M public", "The $92M/1996 figures reflect the McClatchy-led group's purchase; Nutting became principal owner in 2007. PNC Park lease expires in 2030."], ["San Diego Padres", "José E. Feliciano and Kwanza Jones", 2026, 3900.0, 3100.0, "Petco Park", 450.0, "Mostly publicly financed — $300M public via hotel taxes and redevelopment funds (Proposition C, 1998)", "Sold by the Seidler family to Feliciano and Jones at $3.9B, approved by MLB owners Aug 17, 2026 — an MLB-record sale price, above Forbes' $3.1B valuation (hence the negative difference). The Seidler-led group paid ~$800M in 2012."], ["San Francisco Giants", "Charlie Johnson", 1992, 100.0, 4050.0, "Oracle Park", 357.0, "Privately financed by the Giants; $80M public for infrastructure", "Greg Johnson (son of Charles B. Johnson) is chairman and is listed as owner by Forbes 2026. Oracle Park was the first privately financed MLB ballpark since Dodger Stadium."], ["Seattle Mariners", "John W. Stanton", 1992, 106.0, 2350.0, "T-Mobile Park", 517.0, "Mostly publicly financed — $372M via King County sales and food/beverage taxes", "The $106M/1992 figures reflect the original Nintendo-led purchase; Stanton became majority owner in 2016 after Nintendo sold down its stake. Mariners' lease runs into the 2040s."], ["St. Louis Cardinals", "William DeWitt Jr.", 1995, 150.0, 2750.0, "Busch Stadium", 365.0, "Mostly privately financed by the Cardinals; $80M public", "The $150M purchase price included the previous Busch Stadium. USA Today lists a $400M construction cost for the current park."], ["Tampa Bay Rays", "Patrick Zalupski", 2025, 1700.0, 1700.0, "Tropicana Field", 138.0, "Fully publicly financed by the City of St. Petersburg", "Zalupski bought the team from Stuart Sternberg in Sept 2025 for a reported $1.7B. Rays returned to Tropicana Field in April 2026 after Hurricane Milton roof damage forced the 2025 season at Steinbrenner Field in Tampa. A new fixed-roof ballpark in Tampa (Hillsborough College Dale Mabry site) was approved Aug 2026 — a ~$2.36B stadium-and-district project targeted to open Opening Day 2029; the Rays leave Tropicana Field after 2028."], ["Texas Rangers", "Ray Davis", 2010, 593.0, 2700.0, "Globe Life Field", 1200.0, "Public-private partnership; $500M public from the City of Arlington (sales, hotel and car rental taxes)", "Davis co-owns with Bob Simpson. Globe Life Field opened in 2020, replacing a 26-year-old predecessor; the City of Arlington's contribution was capped at $500M."], ["Toronto Blue Jays", "Rogers Communications", 2000, 140.0, 2500.0, "Rogers Centre", 570.0, "Built by an Ontario government-led public-private consortium; ~$300M public (est.). Construction cost C$570 million", "Rogers bought 80% in 2000 and the remainder in 2004. A $300M privately funded Rogers Centre renovation was completed in 2022-24. MLB's only Canadian team and one of two under corporate ownership. Stadium cost is C$570 million."], ["Washington Nationals", "Mark Lerner (Lerner Enterprises)", 2006, 450.0, 2150.0, "Nationals Park", 693.0, "Almost entirely publicly financed — $670M via District of Columbia bonds", "The Lerner family explored a sale in 2022-24 but announced in Feb 2024 they would not sell. Mark Lerner is managing principal owner."]]}, {"id": "mls", "name": "MLS", "kicker": "Section E · Soccer", "source": "Sportico 2026", "blurb": "Thirty clubs valued by Sportico in 2026 under the league's single-entity structure. Most MLS stadiums are privately built, though public land and infrastructure deals are common.", "leagueNotes": "MLS operates as a single entity: MLS LLC owns all teams and player contracts, and clubs are run by investor-operators who hold a share in the league. 'Owner' here means the club's controlling investor-operator. Expansion fees are paid to the league and distributed among existing owners. Valuations are Sportico estimates (franchise value plus team-related businesses and real estate holdings, published February 10, 2026; league total $23 billion, average $767 million) and are not transaction prices. Stadium costs are as-built nominal figures, not inflation-adjusted. The three Canadian clubs' stadium costs were reported in Canadian dollars and are given in the notes rather than converted to USD.", "rows": [["Atlanta United FC", "Arthur Blank", 2014, 70.0, 1140.0, "Mercedes-Benz Stadium", 1600.0, "$200M public (bonds backed by Atlanta hotel-motel tax) + ~$1.4B private (Falcons/Blank, NFL loan, PSLs)", "Purchase price is the expansion fee. Stadium shared with the NFL's Atlanta Falcons; owned by the Georgia World Congress Center Authority."], ["Austin FC", "Anthony Precourt (Two Oak Ventures LLC)", 2018, 150.0, 910.0, "Q2 Stadium", 260.0, "100% privately financed by Precourt Sports Ventures; built on city-owned land under a 20-year lease", "Purchase price is the expansion fee (announced January 2019). Precourt moved the Columbus Crew's operating rights to Austin; a new group bought the Crew and kept it in Columbus."], ["Charlotte FC", "David Tepper", 2019, 325.0, 755.0, "Bank of America Stadium", 248.0, "Privately financed via PSL sales (~$147M) and owner funds; city donated land and funded infrastructure (~20% public)", "Purchase price is the reported expansion fee. Stadium shared with the NFL's Carolina Panthers, also owned by Tepper."], ["Chicago Fire FC", "Joe Mansueto", 2019, 322.0, 690.0, "Soldier Field", 632.0, "2003 renovation: ~$200M from the Bears/NFL + ~$432M in public bonds backed by Chicago hotel tax; stadium owned by the Chicago Park District", "Purchase price is Mansueto's total cost across two transactions (49% stake in 2018, remaining 51% in 2019 for $204M); the club was valued at $400M in the 2019 deal. Original 1998 expansion fee was $5M. New privately funded $750M stadium in The 78 development under construction, slated to open for the 2028 season."], ["FC Cincinnati", "Carl Lindner III (ownership group)", 2018, 150.0, 790.0, "TQL Stadium", 250.0, "Privately funded by FC Cincinnati ownership; city invested ~$34M in surrounding infrastructure", "Purchase price is the expansion fee."], ["Colorado Rapids", "Kroenke Sports & Entertainment (Stan Kroenke)", 2003, null, 480.0, "Dick's Sporting Goods Park", 131.0, "Public-private partnership: cost split equally between Commerce City and Kroenke Sports Enterprises", "Kroenke bought the club from AEG in 2003; purchase price was not disclosed. Stadium figure is the total complex cost (stadium structure itself $64.5M; complex includes 24 training fields and a civic center)."], ["Columbus Crew", "Jimmy Haslam, Dee Haslam and Pete Edwards (Haslam Sports Group / Columbus Partnership)", 2018, 150.0, 800.0, "ScottsMiracle-Gro Field", 314.0, "$217.5M private + $20M state grant + $25M state loan + $51.3M Franklin County bonds", "Haslam/Edwards bought the operating rights from Anthony Precourt in 2018, keeping the club in Columbus. Stadium renamed from Lower.com Field in November 2025. In May 2026 the Haslams sold a 37% stake to Nationwide at a reported $900M valuation."], ["D.C. United", "Jason Levien and Steven Kaplan", 2018, null, 750.0, "Audi Field", 300.0, "Public-private: D.C. paid $150M for land acquisition and infrastructure; D.C. United privately funded stadium construction; total project cost ~$400M", "Levien bought out Erick Thohir's majority stake in August 2018; price was not disclosed, though the deal reportedly valued the club at $500M. A $620M roof/expansion redevelopment was proposed in 2026 (D.C. Council Bill 26-0769: $300M public + $320M private)."], ["FC Dallas", "Clark Hunt (Hunt Sports Group)", 2006, null, 555.0, "Toyota Stadium", 80.0, "$55M public (City of Frisco, Collin County, Frisco ISD) + $25M Hunt Sports Group; city-owned", "Original investor-operator family: Lamar Hunt took over operating rights in 2001; son Clark Hunt succeeded him in 2006. No purchase price applies. A $182M renovation (later raised to $191M) is underway, due for completion before the 2028 season; club lease extended through 2057."], ["Houston Dynamo FC", "Ted Segal", 2021, 400.0, 600.0, "Shell Energy Stadium", 95.0, "$35.5M City of Houston + $60M Dynamo; Harris County paid half the land cost", "Purchase price covers the Dynamo, the NWSL's Houston Dash and stadium lease rights (deal reportedly worth ~$400M). In October 2025 Segal was reported in advanced talks to sell the Dash separately for ~$120M."], ["Sporting Kansas City", "Peter Mallouk", 2026, null, 685.0, "Sporting Park", 200.0, "$150M in Kansas STAR bonds (sales-tax revenue bonds) plus private funds; bonds approved by Wyandotte County", "In January 2026 Mallouk bought a 71% stake from the Illig family at a $700M valuation (an MLS record for a majority-stake sale), taking his holding to ~80%; the cash price for the stake was not separately reported. The Illig family retains day-to-day control and the MLS board seat. Stadium reverted to the name Sporting Park in 2026 after the Children's Mercy naming rights deal expired."], ["LA Galaxy", "Anschutz Entertainment Group (AEG)", 1998, null, 1170.0, "Dignity Health Sports Park", 150.0, "Privately financed by AEG; built on California State University, Dominguez Hills campus land", "AEG is an original MLS investor-operator and has operated the Galaxy since 1998; no purchase price applies."], ["LAFC", "LAFC ownership group (managing owners Larry Berg, Brandon Beck, Bennett Rosenthal)", 2014, 110.0, 1400.0, "BMO Stadium", 350.0, "Privately financed by the LAFC ownership group", "Purchase price is the expansion fee. Ownership group includes Peter Guber, Henry Nguyen, Magic Johnson, Mia Hamm and others."], ["Inter Miami CF", "David Beckham, Jorge Mas and José Mas", 2018, 25.0, 1450.0, "Nu Stadium", 350.0, "Privately financed by ownership ($450M construction loan from JPMorganChase); part of the $1B+ Miami Freedom Park on a 99-year lease of city-owned land; $8M in public funds for a surrounding road", "Purchase price is the discounted $25M expansion fee from Beckham's 2007 LA Galaxy playing contract option. In 2021 the Mas brothers bought out early partners Marcelo Claure and Masayoshi Son for a reported $300-400M. Nu Stadium opened April 4, 2026, replacing temporary Chase Stadium in Fort Lauderdale."], ["Minnesota United FC", "Bill McGuire (ownership group incl. Pohlad family, Glen Taylor)", 2015, 100.0, 655.0, "Allianz Field", 250.0, "100% privately funded by Minnesota United ownership; ~$20M in public spending on surrounding infrastructure plus state tax exemptions", "Purchase price is the expansion fee."], ["CF Montréal", "Joey Saputo", 2010, 40.0, 430.0, "Saputo Stadium", null, "Original build privately financed by the Saputo family; 2012 expansion funded by the Government of Quebec", "Purchase price is the expansion fee. Stadium cost is C$47M total (C$17M original build in 2008, of which the Saputo family donated C$7.5M, plus a C$30M expansion in 2012 funded with C$23M from the Government of Quebec); reported in Canadian dollars, so no USD figure is given. Sale speculation reported in November 2026, with Saputo reportedly valuing the club at $700M+."], ["Nashville SC", "John Ingram", 2017, 150.0, 670.0, "Geodis Park", 335.0, "Privately funded by ownership under a revised 2020 deal: team funds 100% of construction via lease payments, cash and event revenue (Metro Nashville issued bonds repaid by the team)", "Purchase price is the expansion fee. Largest soccer-specific stadium in the U.S. and Canada (30,000 seats)."], ["New England Revolution", "Robert Kraft (Kraft Sports Group)", 1995, null, 560.0, "Gillette Stadium", 325.0, "100% privately financed by Robert Kraft/Kraft Group (incl. a $150M NFL loan); state contributed ~$70M for infrastructure", "Kraft is an original MLS investor-operator (1995); no purchase price applies. Stadium shared with the NFL's New England Patriots. The Revolution have long pursued a soccer-specific stadium in Everett, Massachusetts."], ["New York City FC", "City Football Group (majority) and Yankee Global Enterprises (minority)", 2013, 100.0, 1120.0, "Yankee Stadium", 2300.0, "~$1.2B in public subsidies (tax-exempt bonds plus city and state infrastructure spending); Yankees privately financed the balance", "Purchase price is the expansion fee. NYCFC is a tenant at Yankee Stadium (owned by Yankee Global Enterprises) and plays select matches at Citi Field. New soccer-specific home Etihad Park (25,000 seats, $780M, 100% privately funded) is under construction in Willets Point, Queens, with opening planned for 2027."], ["New York Red Bulls", "Red Bull GmbH", 2006, null, 660.0, "Sports Illustrated Stadium", 200.0, "Privately financed by Red Bull GmbH (which bought out AEG's $100M stadium share); Harrison and Hudson County funded land and infrastructure (~$100M)", "Red Bull bought the MetroStars' operating rights from AEG in 2006 for a reported $100M+; exact price was not disclosed. Stadium renamed from Red Bull Arena in December 2024."], ["Orlando City SC", "Zygi, Leonard and Mark Wilf", 2021, 400.0, 565.0, "Inter.co Stadium", 155.0, "Privately funded by Orlando City SC (incl. ~$15M via EB-5 investors); city had purchased land and the county approved $20M in tourist development tax funds before the club took over funding in 2015", "Purchase price is the reported value of the 2021 deal (estimated $400-450M), which included the NWSL's Orlando Pride and the stadium; completed July 21, 2021. Original 2015 expansion fee was $70M. Stadium formerly known as Orlando City Stadium, Exploria Stadium and Inter&Co Stadium."], ["Philadelphia Union", "Jay Sugarman (Keystone Sports & Entertainment)", 2008, 30.0, 740.0, "Subaru Park", 120.0, "$30M Delaware County + $47M Commonwealth of Pennsylvania + ~$43-49M private (Keystone Sports & Entertainment)", "Purchase price is the expansion fee."], ["Portland Timbers", "Merritt Paulson (Peregrine Sports)", 2009, 35.0, 745.0, "Providence Park", 121.0, "City-owned stadium (built 1926 for $502,000); MLS-era renovations: $36M in 2011 (public-private; city approved $31M, Paulson covered overruns) + $85M in 2019 (privately funded by Paulson)", "Purchase price is the expansion fee. Stadium cost is the combined $36M (2011) + $85M (2019) MLS-era renovation cost; the original 1926 construction cost was $502,000."], ["Real Salt Lake", "Miller Sports + Entertainment (Gail Miller; David Blitzer minority)", 2025, 600.0, 580.0, "America First Field", 110.0, "Public-private partnership: Utah approved $35M in public funds (incl. a hotel-tax diversion); balance private", "Miller Sports + Entertainment acquired the club, America First Field and the NWSL's Utah Royals in April 2025 for a reported $600M. Original 2005 expansion fee was $7.5M."], ["San Diego FC", "Mohamed Mansour and Sycuan Band of the Kumeyaay Nation", 2023, 500.0, 765.0, "Snapdragon Stadium", 310.0, "Owned by San Diego State University: $225M in CSU system revenue bonds (repaid from stadium revenue) + ~$85M philanthropy; no city contribution; San Diego FC is a tenant", "Purchase price is the reported $500M expansion fee, the highest in MLS history. Club began play in 2025 as the league's 30th team."], ["San Jose Earthquakes", "Heath Freeman", 2026, 625.0, 585.0, "PayPal Park", 100.0, "Privately financed by Earthquakes ownership (John Fisher); no public money from the city of San Jose", "Freeman agreed to buy the club and PayPal Park from John Fisher for $625M; MLS Board of Governors approved the deal in November 2026, with closing expected in the following weeks. Fisher had revived the franchise in 2007 with a $20M re-entry fee."], ["Seattle Sounders FC", "Adrian Hanauer (majority owner; ownership group incl. Jody Allen, Drew Carey and others)", 2007, 30.0, 915.0, "Lumen Field", 430.0, "$300M public (state lottery, King County sales and hotel-motel taxes, admissions/parking taxes) + $130M private (Paul Allen/First & Goal)", "Purchase price is the expansion fee. Hanauer was a minority owner in the original 2007 group and became majority owner in 2015. Stadium cost covers the entire complex (stadium itself $360M); shared with the NFL's Seattle Seahawks."], ["St. Louis City SC", "Carolyn Kindle Betz, Jo Ann Taylor Kindle and Jim Kavanaugh (Taylor family / Enterprise Holdings)", 2019, 200.0, 675.0, "Energizer Park", 457.8, "Privately funded and owned by the club; no direct public funding, but the group received $60M+ in city tax incentives (amusement and real-estate tax breaks)", "Purchase price is the expansion fee. Stadium formerly known as CITYPARK (renamed Energizer Park in 2025); cost covers the 32-acre stadium district."], ["Toronto FC", "Maple Leaf Sports & Entertainment", 2006, 10.0, 730.0, "BMO Field", null, "Public-private partnership between three levels of government and MLSE; city owns the stadium, MLSE manages it", "Purchase price is the expansion fee. Stadium cost is C$62.9M for the original 2007 build (federal C$27M + Ontario C$8M + Toronto C$9.8M and land + MLSE C$8M), plus a C$120M expansion in 2014-16 and a C$157.9M renovation for the 2026 FIFA World Cup (City of Toronto C$132.9M + MLSE C$25M); reported in Canadian dollars, so no USD figure is given."], ["Vancouver Whitecaps FC", "Greg Kerfoot (majority), Steve Luczo, Jeff Mallett and Steve Nash", 2009, 35.0, 450.0, "BC Place", null, "2009-11 renovation fully taxpayer-funded by the Province of British Columbia (grant and loan to PavCo); owned by provincial Crown corporation BC Pavilion Corporation; Whitecaps are tenants", "Purchase price is the expansion fee. Stadium costs are Canadian dollars: C$126.1M original build (1983) and C$514M for the 2009-11 renovation, so no USD figure is given. Club has been for sale since December 2024 (Goldman Sachs retained); as of September 2026 no deal had been reached. BC Place lease expired end of 2025 with a one-year bridge for 2026 and no deal for 2027; a December 2025 MOU with the City of Vancouver explores a new stadium at Hastings Park, and relocation has not been ruled out by the league."]]}, {"id": "nhl", "name": "NHL", "kicker": "Section F · Hockey", "source": "Forbes 2025", "blurb": "Thirty-two clubs on Forbes' 2025 list (published December 2025). Sportico published a newer NHL list in September 2026 with higher values — see the league note below.", "leagueNotes": "Valuations are Forbes' NHL team values published December 11, 2025 (based on the 2024-25 season); league average $2.2 billion, with Toronto the most valuable at $4.4 billion and Columbus the least at $1.3 billion. Sportico published a newer list in September 2026 with higher values (e.g. Toronto $4.8B), but Forbes 2025 is used here as the single consistent source. Stadium costs are as-built figures; Canadian arena costs were originally reported in CAD and are converted to USD at approximate historical exchange rates, with the original CAD figure noted per team. The NHL began exploring a 33rd franchise in Texas (Houston or Austin) in June 2026; no decision as of September 2026.", "rows": [["Anaheim Ducks", "Henry and Susan Samueli", 2005, 75.0, 1400.0, "Honda Center", 123.0, "Publicly financed through bonds issued by the City of Anaheim", "Founded by the Walt Disney Company in 1993 ($50M expansion fee). Samueli family is building the $4B privately funded OCVibe entertainment district around Honda Center, opening in phases from 2026."], ["Boston Bruins", "Jeremy Jacobs (Delaware North)", 1975, 10.0, 2900.0, "TD Garden", 160.0, "Privately financed by Delaware North (Jacobs family)", "One of the best investments in sports history: ~$10M purchase in 1975, now worth $2.9B. Jacobs family still owns the team."], ["Buffalo Sabres", "Terry Pegula (Pegula Sports & Entertainment)", 2011, 165.0, 1325.0, "KeyBank Center", 127.5, "Mixed: ~56% private bank loans; ~44% public (New York State loan, Erie County bonds, City of Buffalo bonds)", ""], ["Calgary Flames", "Calgary Sports and Entertainment Corporation (Murray Edwards, chairman)", null, null, 1900.0, "Scotiabank Saddledome", 80.0, "Publicly financed: City of Calgary, Province of Alberta and Government of Canada each paid about C$30M, plus C$5M from the Olympic Organizing Committee", "Stadium cost is C$97.7M converted to USD at the approximate 1983 exchange rate. Purchase price unknown: the franchise was bought and relocated from Atlanta in 1980 for $16M by a group led by Harley Hotchkiss; the current ownership group formed in 1994. Replacement arena Scotia Place (approx. C$926M arena within a C$1.23B district, ~61% public funding) opens in 2027; 2026-27 is the Flames' last season in the Saddledome."], ["Carolina Hurricanes", "Tom Dundon", 2018, 420.0, 2000.0, "Lenovo Center", 158.0, "Mostly public (~75%): NC State $18M, Wake County/City of Raleigh $44M, State of North Carolina $22M, bonds $50M; team contributed $20M", "Dundon bought a majority stake in 2018. Fastest-growing NHL franchise in the Forbes 2025 list, up 60% year-over-year. Formerly the Hartford Whalers; moved to North Carolina in 1997."], ["Chicago Blackhawks", "Wirtz family (Danny Wirtz, chairman)", 1954, null, 2800.0, "United Center", 175.0, "Privately financed by the United Center Joint Venture (Wirtz and Reinsdorf families)", "Longest family ownership in the NHL: the Wirtz family has owned the team since Arthur Wirtz bought it in 1954 (72 years). The 1954 purchase price could not be verified."], ["Colorado Avalanche", "Kroenke Sports & Entertainment (Stan Kroenke)", 2000, null, 1950.0, "Ball Arena", 164.5, "Privately financed by Ascent Entertainment Group, with minor public sales-tax rebates", "Kroenke acquired the team in 2000 from Ascent Entertainment; the purchase price could not be verified. Formerly the Quebec Nordiques; moved to Denver in 1995."], ["Columbus Blue Jackets", "McConnell family (John P. McConnell)", 2000, 80.0, 1300.0, "Nationwide Arena", 150.0, "Privately financed by Nationwide Insurance (90%) and Dispatch Printing (10%)", "Purchase price was the $80M expansion fee paid by founder John H. McConnell. In 2012 Nationwide sold the arena to the Franklin County Convention Facilities Authority and took a 30% minority stake in the team. A $400M arena rebuild is planned (completion targeted 2031) but funding is incomplete."], ["Dallas Stars", "Tom Gaglardi", 2011, 240.0, 2300.0, "American Airlines Center", 420.0, "Mixed: $125M public plus $30M for infrastructure; remainder from the Stars and Mavericks owners", "In June 2026 the Stars signed a nonbinding letter of intent for a new arena (The Bend Arena) in Plano, Texas, about 20 miles north of downtown Dallas, targeting a 2031 opening; still in design selection, not an approved build."], ["Detroit Red Wings", "Ilitch Holdings (Christopher Ilitch)", 1982, 8.0, 2500.0, "Little Caesars Arena", 862.9, "Mixed: ~$324M public (state and local, incl. Downtown Development Authority bonds); ~$539M private from Ilitch Holdings", "Mike Ilitch bought the team for $8M in 1982; son Christopher took over after Mike's death in 2017."], ["Edmonton Oilers", "Daryl Katz (Katz Group / OEG Inc.)", 2008, 200.0, 3200.0, "Rogers Place", 367.0, "Mixed: City of Edmonton C$226M (incl. Community Revitalization Levy), Katz Group C$132.5M, C$125M from ticket surcharge", "Stadium cost is C$483.5M converted to USD at the approximate 2016 exchange rate; total project cost including infrastructure was C$613.7M."], ["Florida Panthers", "Vincent Viola", 2013, 250.0, 1700.0, "Amerant Bank Arena", 212.0, "Mostly public: $184.7M from Broward County, funded by a 2% hotel tax plus a state sports rebate; remainder from original owner Wayne Huizenga", "Won back-to-back Stanley Cups in 2024 and 2025. Purchase price is approximate (~$250M)."], ["Los Angeles Kings", "Anschutz Entertainment Group (Philip Anschutz)", 1995, null, 3100.0, "Crypto.com Arena", 375.0, "Privately financed by Anschutz Entertainment Group (AEG)", "Philip Anschutz and Edward Roski Jr. bought the team in 1995; the purchase price could not be verified."], ["Minnesota Wild", "Craig Leipold", 2008, 260.0, 1800.0, "Grand Casino Arena", 130.0, "Publicly financed: $65M interest-free loan from the State of Minnesota (later largely forgiven) and $65M in City of St. Paul bonds", "Arena renamed from Xcel Energy Center to Grand Casino Arena in 2025. Stadium cost is the $130M project cost; some sources list US$170M including overruns. Arctos Partners owns a ~10% minority stake (bought 2022)."], ["Montreal Canadiens", "Geoff Molson (Molson family)", 2009, 575.0, 3400.0, "Bell Centre", 197.0, "Privately financed by Molson", "Stadium cost is C$270M converted to USD at the approximate 1996 exchange rate. The 2009 purchase price of $575M covered the team, the Bell Centre and Gillett Entertainment Group. The Molson family has owned the Canadiens across three generations since 1957."], ["Nashville Predators", "Bill Haslam", 2025, null, 1600.0, "Bridgestone Arena", 144.0, "Publicly financed through general obligation bonds issued by Nashville/Davidson County", "Haslam became majority owner in 2025 at a $775M valuation; the price paid for the stake was not disclosed. A $650-750M team-funded arena renovation ('Broadway 2030') is underway, targeted for completion by the 2029-30 season."], ["New Jersey Devils", "Harris Blitzer Sports & Entertainment (Josh Harris and David Blitzer)", 2013, 320.0, 2400.0, "Prudential Center", 375.0, "Mixed: City of Newark pledged $210M (from Newark airport lease revenues); Devils ownership paid the remainder", ""], ["New York Islanders", "Jon Ledecky and Scott Malkin", 2016, 485.0, 2100.0, "UBS Arena", 1100.0, "Privately financed by Islanders ownership and Oak View Group", "Ledecky and Malkin bought control at a $485M valuation (deal agreed 2014, closed 2016). In September 2026 the team agreed to sell a ~15% minority stake at a $3B valuation, well above the Forbes mark."], ["New York Rangers", "Madison Square Garden Sports Corp. (James Dolan)", 1999, null, 4000.0, "Madison Square Garden", 123.0, "Privately financed", "No team-only purchase price: Cablevision bought ITT's half of the MSG properties (Knicks, Rangers, arena) for $650M in 1997, and James Dolan took control in 1999. MSG underwent a ~$1B privately funded renovation in 2011-13, excluded from the 1968 construction cost."], ["Ottawa Senators", "Michael Andlauer", 2023, 950.0, 1375.0, "Canadian Tire Centre", 145.0, "Mostly privately financed: $6M federal grant plus private bank loans taken on by owner Rod Bryden", "Andlauer bought a 90% stake for ~$950M in 2023 (Melnyk estate retained 10%). Stadium cost is C$170M construction cost (US$145M per Carleton University research note; total project cost was C$188M). New downtown arena planned at LeBreton Flats; the land deal had not formally closed as of late 2026, with a design reveal targeted for early 2027."], ["Philadelphia Flyers", "Comcast Spectacor", 1996, null, 2700.0, "Xfinity Mobile Arena", 210.0, "Largely privately financed by Spectacor (Comcast Spectacor); city and state helped pay for local infrastructure", "Comcast acquired the Flyers in 1996 as part of its purchase of Spectacor; a team-only purchase price could not be verified. Arena renamed from Wells Fargo Center to Xfinity Mobile Arena in September 2025. A new ~$1.3-1.5B privately financed arena at Broad and Pattison, shared with the 76ers and a new WNBA team, is targeted for 2030; the current arena would be demolished afterward."], ["Pittsburgh Penguins", "Hoffmann Family of Companies", 2026, 1750.0, 1750.0, "PPG Paints Arena", 321.0, "Funded primarily by Pennsylvania casino gaming (slots) revenue: Rivers Casino pays $7.5M/yr for 30 years; the Penguins pay ~$3.8M/yr plus $15.5M toward cost overruns; the state and Sports & Exhibition Authority covered the rest", "Fenway Sports Group bought the Penguins for $900M in 2021 and sold control to the Hoffmann family in 2026 for about $1.75B; NHL governors approved the sale June 23, 2026. FSG retained a minority stake."], ["San Jose Sharks", "San Jose Sports & Entertainment Enterprises (Hasso Plattner)", 2002, null, 1500.0, "SAP Center", 162.5, "Mixed: City of San Jose contributed ~$35.5M; remainder from the private sector and arena management company", "Hasso Plattner (SAP co-founder) led the purchase in 2002; the price could not be verified. A $425M arena renovation was approved in 2025 (Sharks contributing $100M) and the lease was extended through 2051."], ["Seattle Kraken", "Seattle Hockey Partners (David Bonderman and Jerry Bruckheimer)", 2018, 650.0, 1850.0, "Climate Pledge Arena", 1150.0, "Privately financed by Oak View Group", "Purchase price was the $650M expansion fee (awarded 2018; play began 2021). Stadium cost is the ~$1.15B 2018-21 rebuild inside the original 1962 Seattle Center Coliseum roof."], ["St. Louis Blues", "Tom Stillman", 2012, 130.0, 1550.0, "Enterprise Center", 170.0, "Mixed: City of St. Louis contributed $34.5M (demolition, site preparation, parking); remainder from the private sector", "Stadium cost of $170M includes land costs; the building itself cost $135M."], ["Tampa Bay Lightning", "Doug Ostrover and Marc Lipschultz (majority owners; Jeff Vinik retains control until 2027)", 2024, null, 2050.0, "Benchmark International Arena", 139.0, "Mixed: ~62% public, remainder private", "Ostrover and Lipschultz (Blue Owl Capital co-CEOs, investing personally) bought a majority stake in October 2024 at a $1.8B valuation; the price paid for the stake was not disclosed, so purchasePrice is null. Jeff Vinik, who bought the team for $170M in 2010, retains control for three years from the October 2024 closing. Arena renamed from Amalie Arena to Benchmark International Arena in 2025."], ["Toronto Maple Leafs", "Rogers Communications (75% of Maple Leaf Sports & Entertainment)", 2025, null, 4400.0, "Scotiabank Arena", 178.0, "Privately financed by Maple Leaf Sports & Entertainment; no public funds", "Stadium cost is C$265M converted to USD at the approximate 1999 exchange rate. No team-only purchase price: Rogers completed a C$4.7B purchase of Bell's 37.5% MLSE stake in July 2025, raising its stake to 75%; MLSE also owns the Raptors, Toronto FC and the arena. Larry Tanenbaum holds the remaining ~25%."], ["Utah Mammoth", "Smith Entertainment Group (Ryan and Ashley Smith)", 2024, 1200.0, 1450.0, "Delta Center", 93.0, "Privately financed by Utah Jazz owner Larry H. Miller", "Name verified: the franchise played as the Utah Hockey Club in 2024-25 and was renamed the Utah Mammoth in May 2025. The Smiths bought the Arizona Coyotes' hockey assets and relocated them to Utah in 2024 for $1.2B (the Coyotes franchise itself is inactive). A $525M Delta Center renovation (2025-27), funded by a 0.5% city sales tax, is adapting the arena for NHL hockey, plus a $375M surrounding sports and entertainment district."], ["Vancouver Canucks", "Aquilini Investment Group (Francesco Aquilini)", 2006, null, 2150.0, "Rogers Arena", 117.0, "Privately financed by then-owner Arthur Griffiths", "Stadium cost is C$160M converted to USD at the approximate 1995 exchange rate. Francesco Aquilini began acquiring a stake in 2004 and gained full control in 2006; the purchase price could not be verified."], ["Vegas Golden Knights", "Bill Foley", 2016, 500.0, 2200.0, "T-Mobile Arena", 375.0, "Privately financed by AEG and MGM Resorts International", "Purchase price was the $500M expansion fee (awarded 2016; play began 2017). Won the Stanley Cup in 2023, in year six."], ["Washington Capitals", "Ted Leonsis (Monumental Sports & Entertainment)", 1999, 85.0, 2550.0, "Capital One Arena", 260.0, "Mostly privately financed by owner Abe Pollin; ~$60M public for infrastructure improvements", "Arctos Partners invested in Monumental Sports & Entertainment in December 2025. A Capital One Arena renovation is completing in 2027."], ["Winnipeg Jets", "True North Sports & Entertainment (David Thomson and Mark Chipman)", 2011, 170.0, 1350.0, "Canada Life Centre", 103.0, "Mixed: C$40.5M public (federal C$12M, provincial C$14M, city C$14.5M); C$93M private from True North", "Stadium cost is C$133.5M converted to USD at the approximate 2004 exchange rate. True North bought the Atlanta Thrashers and moved them to Winnipeg in 2011."]]}, {"id": "wnba", "name": "WNBA", "kicker": "Section G · Women's Basketball", "source": "Sportico 2026", "blurb": "Thirteen clubs valued by Sportico in 2026 — the fastest repricing in the dataset, with expansion fees and media money resetting team economics.", "leagueNotes": "Toronto Tempo and Portland Fire join as expansion teams in 2026.", "rows": [["Atlanta Dream", "Larry Gottesdiener", 2021, 10.0, 280.0, "Gateway Center Arena", 45.0, "Publicly financed by the City of College Park, Georgia, largely through rental car taxes, plus $9 million from the city's general fund", "Purchase price reported as $7M-$10M; $10M used here. Ownership group also includes Renee Montgomery and Suzanne Abair. Dream moving home games to State Farm Arena beginning in 2027; owner has said he wants to build a dedicated WNBA arena."], ["Chicago Sky", "Michael Alter", 2005, 10.0, 320.0, "Wintrust Arena", 173.0, "Mixed public-private: $70M from DePaul University, $70M from McPier bond fund, $33M from public taxes ($103M public funds)", "Founding owner; $10M expansion fee paid in 2005, team began play in 2006. Minority owner Steven Rogers sued Alter in 2026 alleging self-dealing. New 'SkyTown' practice facility in Bedford Park (reported $60M, largely publicly funded) delayed and subject to a taxpayer lawsuit in 2026."], ["Connecticut Sun", "Mohegan Tribe", 2003, 10.0, 300.0, "Mohegan Sun Arena", 40.0, "Privately financed by the Mohegan Tribe as part of the Mohegan Sun resort expansion", "Mohegan Tribe bought the Orlando Miracle in January 2003 and moved it to Connecticut; first non-NBA owner in WNBA history. In March 2026 the Tribe agreed to sell the team to the Fertitta family (Houston Rockets owners) for $300M; the franchise played its final season in Connecticut in 2026 and relocates to Houston as the revived Houston Comets for 2027. The WNBA had blocked a $325M sale to Boston Celtics minority owner Steve Pagliuca in August 2025."], ["Dallas Wings", "Bill Cameron", 2009, null, 325.0, "College Park Center", 78.0, "Publicly financed by the University of Texas at Arlington, funded by a student fee approved in 2005 plus university funds and a $5M private gift", "Cameron bought the Detroit Shock at the end of the 2009 season and moved the team to Tulsa (2010-2015), then Dallas in 2016; purchase price not publicly reported. Wings moving to a renovated downtown Dallas arena (Dallas Memorial Auditorium) for 2027; new $81M practice facility in Oak Cliff under construction with city funding capped at $57M."], ["Golden State Valkyries", "Joe Lacob and Peter Guber", 2023, 50.0, 850.0, "Chase Center", 1400.0, "Privately financed by the Golden State Warriors ownership group", "Expansion team awarded October 2023 for a then-record $50M expansion fee; inaugural season 2025. Most valuable WNBA franchise in Sportico's 2026 ranking; won the 2026 WNBA championship in just its second season."], ["Indiana Fever", "Herb Simon", 2000, null, 560.0, "Gainbridge Fieldhouse", 183.0, "Mixed public-private; publicly owned by the City of Indianapolis Capital Improvement Board", "Founding owner (Pacers Sports & Entertainment); expansion fee not publicly reported. $360M arena renovation completed in 2022. New $78M Fever Sports Performance Center broke ground in 2025, slated to open before the 2027 season."], ["Las Vegas Aces", "Mark Davis", 2021, 2.0, 410.0, "Michelob Ultra Arena", null, "Privately financed by MGM Resorts as part of the Mandalay Bay resort (arena construction cost not reported separately)", "Davis bought the team from MGM Resorts in January 2021 for a reported $2M. Tom Brady joined as a minority owner in 2023. Aces opened the WNBA's first dedicated practice facility ($40M, Henderson, NV) in 2023; arena completed a $100M remodel in 2024."], ["Los Angeles Sparks", "Mark Walter and Magic Johnson", 2014, 10.0, 400.0, "Crypto.com Arena", 375.0, "Privately financed by Anschutz Entertainment Group (AEG)", "Walter- and Johnson-led group (Sparks LA Sports) bought the team in February 2014 after the previous owners said they could no longer afford to operate it. In October-November 2026, Walter reportedly sought a buyer for the Sparks and their new $150M El Segundo practice facility (opening before 2027) at an asking price above $700M."], ["Minnesota Lynx", "Marc Lore and Alex Rodriguez", 2025, null, 355.0, "Target Center", 104.0, "Publicly financed by the City of Minneapolis (opened 1990 at a cost of $104M, plus $23M in public subsidies)", "Lore and Rodriguez completed their purchase of the Timberwolves and Lynx from Glen Taylor in June 2025 for a combined $1.5B; no Lynx-only price was reported, so purchasePrice is null. In August 2026, Lore agreed to sell his controlling stake to Marc Stad at a $4.5B valuation for the two teams, pending NBA approval (Rodriguez remains Lynx governor). Target Center underwent a $140M renovation in 2017 (city $74M, Taylor $58M, AEG $6M); new arena plans have been discussed."], ["New York Liberty", "Joe Tsai and Clara Wu Tsai", 2019, 10.0, 600.0, "Barclays Center", 1000.0, "Mixed public-private: publicly owned by New York State's Empire State Development via the Brooklyn Arena Local Development Corporation; $511M in tax-exempt bonds issued in 2009; leased and operated by Tsai-controlled entities", "Purchase price reported as $10M-$14M; $10M used here. Tsais bought the Liberty from Madison Square Garden Company in January 2019 and moved the team to Barclays Center. In 2025 the Tsais sold a minority stake at a $450M valuation. An $80M dedicated practice facility is under construction, expected to open in 2027."], ["Phoenix Mercury", "Mat Ishbia", 2023, null, 420.0, "Mortgage Matchup Center", 89.0, "Mixed public-private: City of Phoenix contributed $35M and the Suns $55M (city bonds, city loan and private debt)", "Ishbia (with brother Justin) bought the Suns and Mercury from Robert Sarver in February 2023 for a combined $4B valuation; no Mercury-only price was reported, so purchasePrice is null. Arena opened in 1992 as America West Arena; known as Footprint Center (2021-2025) and PHX Arena before being renamed Mortgage Matchup Center in October 2025 for Ishbia's mortgage company. $230M renovation completed in 2021."], ["Seattle Storm", "Force 10 Hoops LLC (Lisa Brummel, Ginny Gilder, Dawn Trudeau)", 2008, 10.0, 425.0, "Climate Pledge Arena", 1150.0, "Entirely privately financed by Oak View Group (2018-2021 redevelopment); city-owned building leased to OVG, which bears all construction and operating cost risk", "Force 10 Hoops bought the Storm for $10M in January 2008, keeping the team in Seattle when the SuperSonics left for Oklahoma City. Sue Bird joined the ownership group in 2024; Bobby Wagner joined in 2026. Team opened its $64M dedicated practice facility, the Seattle Storm Center for Basketball Performance, in 2024."], ["Washington Mystics", "Ted Leonsis (Monumental Sports & Entertainment)", 2005, 10.0, 310.0, "CareFirst Arena", 69.0, "Publicly financed by the District of Columbia; approximately 90% taxpayer-funded, with Monumental Sports & Entertainment contributing $10M. Owned by the District and operated by Events DC", "Leonsis bought the Mystics from Abe Pollin's Washington Sports & Entertainment in May 2005. Arena (formerly Entertainment and Sports Arena) opened in 2018; final cost $69M, up from a $65M estimate, with overruns covered by DC taxpayers. Leonsis has said he wants the Mystics back at Capital One Arena full-time after its renovations."]]}, {"id": "nwsl", "name": "NWSL", "kicker": "Section H · Women's Soccer", "source": "Forbes 2026", "blurb": "Sixteen clubs, fourteen of them valued by Forbes in 2026. The two 2026 expansion clubs, Boston Legacy FC and Denver Summit FC, were excluded from that ranking, so their current values are shown as “—”.", "leagueNotes": "Boston Legacy FC and Denver Summit FC join as expansion teams in 2026. Valuations are from Forbes' 'The NWSL's Most Valuable Teams 2026' list (published April 23, 2026); Boston and Denver were excluded from that ranking as debut-season expansion clubs. Atlanta and Columbus expansion teams (fees of $165M and $205M) begin play in 2028 and are not included.", "rows": [["Angel City FC", "Willow Bay and Bob Iger", 2024, 250.0, 340.0, "BMO Stadium", 350.0, "Privately financed by LAFC ownership group; Angel City FC is a tenant", "Bay and Iger bought a controlling stake in July 2024 at a $250M valuation (reportedly ~$87M for the stake plus a $50M additional investment). Founding owners paid a ~$2M expansion fee in 2021. BMO Stadium opened in 2018 as Banc of California Stadium; Angel City are tenants of MLS club LAFC."], ["Bay FC", "Sixth Street", 2023, 53.0, 230.0, "PayPal Park", 100.0, "Privately financed by San Jose Earthquakes ownership with no public money; Bay FC is a tenant", "Expansion club; $53M expansion fee paid in 2023, began play in 2024. Owned by private equity firm Sixth Street; founded by former USWNT players Aly Wagner, Brandi Chastain, Danielle Slaton and Leslie Osborne. PayPal Park opened in 2015."], ["Chicago Stars FC", "Laura Ricketts", 2023, 35.5, 144.0, "Northwestern Medicine Field at Martin Stadium", null, "Unknown — university-owned stadium; Stars are tenants of Northwestern University", "Ricketts-led group bought the club (then Chicago Red Stars) from Arnim Whisler in September 2023 for $35.5M plus a $25M investment commitment. Moved from SeatGeek Stadium in Bridgeview to Northwestern's Martin Stadium for the 2026 season. The club withdrew its permit application to play at Northwestern's new Ryan Field in March 2026 after local opposition, so its long-term home is unsettled. Building a club-owned performance center in Bannockburn, Illinois, due by end of 2027. Martin Stadium construction cost could not be verified."], ["Houston Dash", "Ted Segal", 2021, null, 146.0, "Shell Energy Stadium", 95.0, "Public-private: $35.5M from the City of Houston and $60M from Houston Dynamo FC; Harris County paid for half the land", "Segal bought majority ownership of the Dynamo and Dash together in June 2021 for a reported ~$400M; the Dash's share of that price was not disclosed, so purchasePrice is null. In October 2025, Sportico reported Segal was in advanced talks to sell the Dash to RHC Group for $120M, with NWSL due diligence ongoing; Segal would retain the Dynamo. Shell Energy Stadium (opened 2012) is owned by the Harris County-Houston Sports Authority."], ["Kansas City Current", "Angie and Chris Long", 2020, 3.0, 325.0, "CPKC Stadium", 140.0, "Privately financed by Angie and Chris Long", "Expansion club awarded December 2020 after the Utah Royals folded; the Longs secured the franchise and Utah's player rights for a reported $3M fee (reports vary from $2M to $5M). CPKC Stadium, opened March 2024, was the first stadium built primarily for a professional women's sports team. In 2026 Kansas City approved public support (reported $185M-$235M, funded via sales-tax-backed bonds) for a stadium expansion to ~18,000 seats and surrounding development."], ["NJ/NY Gotham FC", "Carolyn Tisch Blodgett", 2023, null, 190.0, "Sports Illustrated Stadium", 200.0, "Privately financed by Red Bull GmbH; Gotham FC is a tenant of the New York Red Bulls", "Tisch Blodgett (through her firm Next3) became majority owner and governor in 2023; purchase price was not disclosed. In November 2026 Gotham announced a $100M capital raise at a $350M valuation, with Next3 retaining majority ownership. Gotham will move to Etihad Park (NYCFC's new stadium) in 2028. Sports Illustrated Stadium (formerly Red Bull Arena) opened in 2010; Gotham rents the field from the Red Bulls."], ["North Carolina Courage", "Steve Malik", 2017, 3.5, 155.0, "First Horizon Stadium at WakeMed Soccer Park", 14.5, "Publicly financed through Wake County hotel room and prepared food and beverage taxes; owned by Wake County, operated by the Town of Cary", "Malik bought the Western New York Flash in 2017 and relocated the club to Cary; the price was not officially disclosed but is reported at ~$3.5M. Stadium cost is the original $14.5M (2002); a $6.3M expansion followed in 2011. In 2026, Marc Lasry's Avenue Sports Fund agreed to buy a significant minority stake at a $155M valuation. Malik and developer John Kane have long proposed a Downtown South stadium project in Raleigh."], ["Orlando Pride", "Mark Wilf", 2021, null, 150.0, "Inter&Co Stadium", 155.0, "100% privately funded by Orlando City SC", "The Wilf family (Zygi, Leonard and Mark Wilf) bought Orlando City SC, the Pride and the stadium together in July 2021 for an estimated $400M-$450M; the Pride's share was not disclosed, so purchasePrice is null. Mark Wilf is chairman. Inter&Co Stadium (opened 2017 as Orlando City Stadium) is owned by Orlando City SC and shared with the MLS sister club."], ["Portland Thorns FC", "Lisa Bhathal Merage and Alex Bhathal (RAJ Sports)", 2024, 63.0, 205.0, "Providence Park", 85.0, "2019 expansion privately funded by Peregrine Sports; stadium owned by the City of Portland, Thorns are tenants", "RAJ Sports bought the Thorns from Merritt Paulson in January 2024 for $63M, then a record for an NWSL club. Providence Park was originally built in 1926 for $502,000; stadiumCost shown is the $85M 2018-19 expansion (a $36M renovation also occurred in 2010-11). The Bhathals also own the WNBA's Portland Fire and opened a $150M joint training facility in Hillsboro in 2026."], ["Racing Louisville FC", "John Neace (Soccer Holdings LLC)", 2019, 1.0, 140.0, "Lynn Family Stadium", 65.0, "Public-private: $30M city funding for land acquisition and infrastructure plus $21.7M state tax-increment financing; stadium owned by Soccer Holdings LLC", "Expansion club awarded October 2019 for a reported $1M fee (some reports $1M-$2M); began play in 2021. On November 17, 2026, Soccer Holdings confirmed it is selling the club and is reportedly near a deal with FC Cincinnati's ownership to relocate the franchise to Cincinnati in 2028; Racing will play the 2027 season in Louisville. Lynn Family Stadium (opened 2020) is also home to Louisville City FC (USL), which Soccer Holdings is not selling."], ["San Diego Wave FC", "Lauren Leichtman and Arthur Levine (Levine Leichtman family office)", 2024, 113.0, 225.0, "Snapdragon Stadium", 310.0, "Funded by San Diego State University through $225M in CSU system revenue bonds plus ~$85M in philanthropy; Wave are tenants", "Leichtman and Levine bought the club from Ron Burkle in a two-step 2024 deal: $35M for 35% in March, then $78M for the remaining 65% at season's end — $113M total cash at a $120M valuation. Burkle had paid a ~$2M expansion fee in 2021. Alex Morgan and Jimmy Butler later joined as minority investors. Snapdragon Stadium (opened 2022) is owned by San Diego State University."], ["Seattle Reign FC", "The Carlyle Group and Seattle Sounders FC (Adrian Hanauer)", 2024, 58.0, 195.0, "Lumen Field", 430.0, "Public-private: $300M public (state lottery, King County sales and hotel taxes, admissions/parking taxes) and $130M private from Paul Allen's First & Goal Inc.; Reign are tenants", "Carlyle (majority investor) and the Sounders bought the Reign from OL Groupe in June 2024 for $58M; OL Groupe had paid ~$3.5M in 2019. Adrian Hanauer is the club's NWSL governor; the Sounders are managing owner. Lumen Field cost is the $430M entire complex ($360M stadium portion); it is publicly owned by the Washington State Public Stadium Authority."], ["Utah Royals", "Gail Miller (Miller Sports + Entertainment)", 2025, null, 142.0, "America First Field", 110.0, "Public-private: $35M from the State of Utah plus Salt Lake County hotel-tax revenue; remainder private", "Miller Sports + Entertainment acquired controlling interest in April 2025 as part of a $600M deal including Real Salt Lake and the stadium; the Royals' share was not disclosed, so purchasePrice is null. The Royals were relaunched for the 2024 season by prior owners Ryan Smith and David Blitzer at a reported $2M-$5M expansion fee after the original club folded in 2020. America First Field (opened 2008 as Rio Tinto Stadium) is shared with Real Salt Lake."], ["Washington Spirit", "Michele Kang", 2022, 35.0, 215.0, "Audi Field", 300.0, "Public-private: D.C. and D.C. United split the $300M cost; the District provided the land and the team built the stadium; Spirit are tenants", "Kang took majority control in March 2022 at a $35M valuation, buying out Steve Baldwin and Bill Lynch. Audi Field (opened 2018) is owned and operated by MLS club D.C. United. A $620M Audi Field roof and expansion proposal ($300M public, $320M private) was before the D.C. Council in 2026."], ["Boston Legacy FC", "Boston Unity Soccer Partners (led by Jennifer Epstein)", 2023, 53.0, null, "White Stadium", 325.0, "Public-private renovation: $135M from the City of Boston and $190M private from the club; stadium remains publicly owned and shared with Boston Public Schools", "Expansion team that began play in 2026; $53M expansion fee paid in 2023. Excluded from Forbes' 2026 valuation ranking as a debut-season expansion club, so currentValue is null. White Stadium renovation (originally ~$80M, now $325M) was delayed by lawsuits and political disputes; the club played its 2026 season split between Gillette Stadium (8 home games) and Centreville Bank Stadium in Pawtucket, RI (7 games), will play all of 2027 in Pawtucket, and plans to move into renovated White Stadium in 2028."], ["Denver Summit FC", "Robert L. Cohen", 2025, 110.0, null, "Centennial Stadium", 25.0, "Temporary stadium: $15M from a Cherry Creek School District bond, remainder private", "Expansion team that began play in 2026; $110M expansion fee paid in January 2025, a league record at the time. Excluded from Forbes' 2026 valuation ranking as a debut-season expansion club, so currentValue is null. Minority owners include Peyton Manning, Mikaela Shiffrin and Mellody Hobson. Home opener at Empower Field at Mile High drew a league-record 63,004 fans. Permanent 14,500-seat stadium at Santa Fe Yards in Denver (~$225M, mostly privately funded with ~$50M city subsidy for land/improvements) broke ground October 2026 and is scheduled to open in late 2028 or early 2029."]]}];
+    </script>
+    <script>
+      function fmtM(m){
+        if (m === null || m === undefined) return "—";
+        if (m === 0) return "$0";
+        if (m < 0.01) return "$" + Math.round(m * 1000) + "K";
+        if (m < 1) return "$" + Math.round(m * 1000) + "K";
+        if (m >= 1000){
+          var b = m / 1000;
+          return "$" + (b >= 10 ? b.toFixed(1).replace(/\.0$/, "") : b.toFixed(2).replace(/0$/, "")) + "B";
+        }
+        return "$" + Math.round(m) + "M";
+      }
+      function esc(s){
+        return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+      }
+      var COLS = [
+        {label:"Franchise", key:0},
+        {label:"Controlling owner", key:1},
+        {label:"Year purchased", key:2, num:true},
+        {label:"Purchase price", key:3, num:true},
+        {label:"Current value", key:4, num:true},
+        {label:"Gain (value − purchase)", key:"gain", num:true},
+        {label:"Stadium / arena", key:5},
+        {label:"Stadium cost", key:6, num:true},
+        {label:"How it was financed", key:7}
+      ];
+      function gainOf(r){ return (r[3] === null) ? null : r[4] - r[3]; }
+
+      function renderLeague(lg, idx){
+        var totalVal = 0, topTeam = null, topVal = -1, known = 0, gainSum = 0;
+        lg.rows.forEach(function(r){
+          totalVal += r[4];
+          if (r[4] > topVal){ topVal = r[4]; topTeam = r[0]; }
+          var g = gainOf(r);
+          if (g !== null){ known++; gainSum += g; }
+        });
+        var sec = document.createElement("section");
+        sec.id = lg.id;
+        var stats =
+          '<div class="league-stats">' +
+            '<div class="stat"><div class="n">' + lg.rows.length + '</div><div class="l">Franchises</div></div>' +
+            '<div class="stat"><div class="n">' + fmtM(totalVal) + '</div><div class="l">Combined current value</div></div>' +
+            '<div class="stat"><div class="n">' + fmtM(topVal) + '</div><div class="l">Most valuable — ' + esc(topTeam) + '</div></div>' +
+            '<div class="stat"><div class="n">' + fmtM(gainSum) + '</div><div class="l">Combined paper gain (' + known + ' known purchase prices)</div></div>' +
+          '</div>';
+        var pageBar = '<div class="page-bar"><a class="back-link" href="#news">&larr; Back to The Wire</a><span class="page-crumb">Pay to Play Politics &middot; Franchise Ledgers</span></div>';
+        var head = pageBar +
+          '<div class="sec-head"><span class="kicker">' + esc(lg.kicker) + '</span><h2>' + esc(lg.name) + ' — Franchise Ledger</h2></div>' +
+          '<p class="sec-sub">' + esc(lg.blurb) + '</p>' + stats +
+          '<div class="table-tools"><input type="search" placeholder="Search ' + esc(lg.name) + ' teams, owners, stadiums…" aria-label="Search ' + esc(lg.name) + ' table" />' +
+          '<span class="hint">Click a column heading to sort.</span></div>';
+        var notesHtml = "";
+        lg.rows.forEach(function(r){ if (r[8]) notesHtml += '<li><b>' + esc(r[0]) + ':</b> ' + esc(r[8]) + '</li>'; });
+        var srcBox = '<div class="src-note"><b>Values source — ' + esc(lg.source) + '</b><br />' + esc(lg.leagueNotes) + '</div>';
+        var teamNotes = notesHtml ? '<details class="team-notes"><summary>Team notes, pending sales &amp; caveats (' + lg.rows.filter(function(r){return !!r[8];}).length + ')</summary><ul>' + notesHtml + '</ul></details>' : "";
+        var prevLg = idx > 0 ? LEAGUES[idx - 1] : null;
+        var nextLg = idx < LEAGUES.length - 1 ? LEAGUES[idx + 1] : null;
+        var pager = '<nav class="league-pager" aria-label="More leagues">' +
+          (prevLg ? '<a href="#' + prevLg.id + '">&larr; ' + esc(prevLg.name) + '</a>' : '<a href="#news">&larr; The Wire</a>') +
+          '<a href="#news">All leagues</a>' +
+          (nextLg ? '<a href="#' + nextLg.id + '">' + esc(nextLg.name) + ' &rarr;</a>' : '<a href="#news">The Wire &rarr;</a>') +
+          '</nav>';
+        sec.innerHTML = head + '<div class="tbl-wrap"><table><thead><tr></tr></thead><tbody></tbody></table><div class="no-results">No franchises match that search.</div></div>' + srcBox + teamNotes + pager;
+        var thead = sec.querySelector("thead tr");
+        COLS.forEach(function(c, i){
+          var th = document.createElement("th");
+          th.textContent = c.label;
+          if (c.num) th.className = "num";
+          th.setAttribute("data-col", i);
+          th.title = "Sort by " + c.label;
+          thead.appendChild(th);
+        });
+        var tbody = sec.querySelector("tbody");
+        function draw(rows){
+          tbody.innerHTML = "";
+          rows.forEach(function(r){
+            var tr = document.createElement("tr");
+            var g = gainOf(r);
+            var cells = [
+              {v: r[0], cls:"team"},
+              {v: r[1]},
+              {v: r[2], num:true},
+              {v: fmtM(r[3]), num:true},
+              {v: fmtM(r[4]), num:true},
+              {v: (g === null ? "—" : (g < 0 ? "−" + fmtM(-g) : "+" + fmtM(g))), num:true, cls: g !== null && g < 0 ? "gain neg" : "gain"},
+              {v: r[5], cls:"venue"},
+              {v: fmtM(r[6]), num:true},
+              {v: r[7], cls:"fin"}
+            ];
+            cells.forEach(function(c, i){
+              var td = document.createElement("td");
+              td.textContent = c.v;
+              if (c.num) td.className = (td.className + " num").trim();
+              if (c.cls) td.className = (td.className + " " + c.cls).trim();
+              td.setAttribute("data-label", COLS[i].label);
+              tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+          });
+          sec.querySelector(".no-results").style.display = rows.length ? "none" : "block";
+        }
+        var state = { col: 4, dir: -1 };
+        function apply(){
+          var rows = lg.rows.slice();
+          rows.sort(function(a, b){
+            var key = COLS[state.col].key;
+            var av = key === "gain" ? gainOf(a) : a[key];
+            var bv = key === "gain" ? gainOf(b) : b[key];
+            if (av === null && bv === null) return 0;
+            if (av === null) return 1;
+            if (bv === null) return -1;
+            if (typeof av === "number") return (av - bv) * state.dir;
+            return String(av).localeCompare(String(bv)) * state.dir;
+          });
+          draw(rows);
+          thead.querySelectorAll("th").forEach(function(th, i){
+            var base = COLS[i].label;
+            th.innerHTML = esc(base) + (i === state.col ? ' <span class="arrow">' + (state.dir === 1 ? "▲" : "▼") + "</span>" : "");
+          });
+        }
+        thead.addEventListener("click", function(e){
+          var th = e.target.closest("th");
+          if (!th) return;
+          var col = parseInt(th.getAttribute("data-col"), 10);
+          if (state.col === col){ state.dir *= -1; } else { state.col = col; state.dir = COLS[col].num ? -1 : 1; }
+          apply();
+        });
+        var input = sec.querySelector('input[type="search"]');
+        input.addEventListener("input", function(){
+          var q = input.value.trim().toLowerCase();
+          if (!q){ apply(); return; }
+          var filtered = lg.rows.filter(function(r){
+            return r.join(" ").toLowerCase().indexOf(q) !== -1;
+          });
+          draw(filtered);
+        });
+        apply();
+        return sec;
+      }
+      var host = document.getElementById("league-sections");
+      LEAGUES.forEach(function(lg, i){ host.appendChild(renderLeague(lg, i)); });
+
+      /* League directory cards on the home view */
+      var leagueGrid = document.getElementById("league-grid");
+      if (leagueGrid){
+        LEAGUES.forEach(function(lg){
+          var total = 0, topTeam = null, topVal = -1;
+          lg.rows.forEach(function(r){
+            total += r[4];
+            if (r[4] > topVal){ topVal = r[4]; topTeam = r[0]; }
+          });
+          var card = document.createElement("a");
+          card.className = "league-card";
+          card.href = "#" + lg.id;
+          card.innerHTML =
+            '<span class="lg-name">' + esc(lg.name) + '</span>' +
+            '<span class="lg-meta">' + lg.rows.length + ' franchises &middot; ' + fmtM(total) + ' combined value</span>' +
+            '<span class="lg-top">Most valuable: ' + esc(topTeam) + ' (' + fmtM(topVal) + ')</span>' +
+            '<span class="lg-go">View the ledger &rarr;</span>';
+          leagueGrid.appendChild(card);
+        });
+      }
+
+      /* Page routing: The Wire is the home page; each league is its own page */
+      var leagueIds = LEAGUES.map(function(l){ return l.id; });
+      var navLinks = document.querySelectorAll("nav.leagues a");
+      function currentRoute(){
+        var h = (location.hash || "").replace(/^#\/?/, "");
+        return leagueIds.indexOf(h) !== -1 ? h : "news";
+      }
+      function showView(route){
+        if (route !== "news" && leagueIds.indexOf(route) === -1) route = currentRoute();
+        var isHome = route === "news";
+        document.getElementById("news").hidden = !isHome;
+        var dir = document.getElementById("league-directory");
+        if (dir) dir.hidden = !isHome;
+        LEAGUES.forEach(function(lg){
+          var s = document.getElementById(lg.id);
+          if (s) s.hidden = lg.id !== route;
+        });
+        navLinks.forEach(function(a){
+          var on = a.getAttribute("href") === "#" + route;
+          a.classList.toggle("active", on);
+          if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+        });
+        var lgName = null;
+        LEAGUES.forEach(function(l){ if (l.id === route) lgName = l.name; });
+        document.title = lgName ? lgName + " Franchise Ledger — Pay to Play Politics" : "Pay to Play Politics — Sports Business × Public Power";
+        var root = document.documentElement;
+        var prevBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, 0);
+        root.style.scrollBehavior = prevBehavior;
+      }
+      window.addEventListener("hashchange", function(){ showView(); });
+      window.addEventListener("popstate", function(){ showView(); });
+
+      /* League navigation: switch the view directly on click instead of
+         relying on the browser following the #hash link — inside the app's
+         embedded frame that fragment jump can be swallowed, which left the
+         league links looking dead. The hash is still updated (guarded: a
+         sandboxed frame may refuse history writes) so league pages keep
+         their shareable links and the back button keeps working. */
+      function goTo(route){
+        try { history.pushState(null, "", "#" + route); } catch (err) {}
+        showView(route);
+      }
+      document.addEventListener("click", function(e){
+        var t = e.target;
+        var a = t && t.closest ? t.closest('a[href^="#"]') : null;
+        if (!a) return;
+        var id = (a.getAttribute("href") || "").replace(/^#\/?/, "");
+        if (id !== "news" && leagueIds.indexOf(id) === -1) return;
+        e.preventDefault();
+        goTo(id);
+      });
+      showView();
+
+      /* News aggregator: topic filter + search + beat cards */
+      var buttons = document.querySelectorAll(".filters button");
+      var stories = Array.prototype.slice.call(document.querySelectorAll(".story"));
+      var searchInput = document.getElementById("news-search");
+      var countEl = document.getElementById("news-count");
+      var emptyEl = document.getElementById("news-empty");
+      var totalEl = document.getElementById("agg-total");
+      if (totalEl) totalEl.textContent = String(stories.length);
+      var activeFilter = "all";
+      function applyNews(){
+        var q = searchInput ? searchInput.value.trim().toLowerCase() : "";
+        var shown = 0;
+        stories.forEach(function(s){
+          var topicOk = activeFilter === "all" || s.getAttribute("data-topic") === activeFilter;
+          var textOk = !q || s.textContent.toLowerCase().indexOf(q) !== -1;
+          var show = topicOk && textOk;
+          s.classList.toggle("hide", !show);
+          if (show) shown++;
+        });
+        if (countEl) countEl.textContent = "Showing " + shown + " of " + stories.length + " stories";
+        if (emptyEl) emptyEl.style.display = shown === 0 ? "block" : "none";
+      }
+      function setFilter(f){
+        activeFilter = f;
+        buttons.forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-filter") === f ? "true" : "false"); });
+        applyNews();
+      }
+      buttons.forEach(function(btn){
+        btn.addEventListener("click", function(){ setFilter(btn.getAttribute("data-filter")); });
+      });
+      document.querySelectorAll("[data-beat-jump]").forEach(function(card){
+        card.addEventListener("click", function(){
+          setFilter(card.getAttribute("data-beat-jump"));
+          var grid = document.getElementById("news-grid");
+          if (grid) grid.scrollIntoView({behavior:"smooth", block:"start"});
+        });
+      });
+      if (searchInput) searchInput.addEventListener("input", applyNews);
+      applyNews();
+    </script>
+  </body>
+</html>
