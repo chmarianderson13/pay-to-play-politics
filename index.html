@@ -254,14 +254,30 @@
       }
       footer h4{ font-family:"Archivo Narrow",sans-serif; text-transform:uppercase; letter-spacing:.1em; font-size:.8rem; color:var(--ink); margin:0 0 8px; }
       footer p{ max-width:820px; margin:0 0 10px; }
+      footer .foot-nav{ margin-top:16px; padding-top:14px; border-top:1px solid var(--rule); }
+      footer .foot-nav a{
+        font-family:"Archivo Narrow",sans-serif; font-weight:700; letter-spacing:.06em;
+        text-transform:uppercase; font-size:.85rem; color:var(--ink); text-decoration:none;
+        margin-right:20px;
+      }
+      footer .foot-nav a:hover{ color:var(--accent); }
+
+      /* ---------- Info pages ---------- */
+      .page-body{ max-width:760px; margin:18px 0 0; }
+      .page-body p{ margin:0 0 14px; }
+      .page-body h3{
+        font-family:"Newsreader",serif; font-weight:700; font-size:1.25rem;
+        margin:26px 0 8px;
+      }
+      .page-body ul{ margin:0 0 14px; padding-left:22px; }
+      .page-body li{ margin:0 0 6px; }
+      .page-body a{ color:var(--accent); }
       @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
     </style>
   </head>
   <body>
     <div class="wrap">
       <div class="dateline">
-        <span>Tuesday, November 17, 2026</span>
-        <span class="mock">Verified Franchise Data</span>
         <span>Sports Business × Politics</span>
       </div>
 
@@ -285,59 +301,59 @@
       <!-- ================= NEWS ================= -->
       <section id="news">
         <div class="sec-head">
-          <span class="kicker">Section A · The Aggregator</span>
+          <span class="kicker">Section A</span>
           <h2>The Wire — Sports Business &amp; Politics</h2>
         </div>
-        <p class="sec-sub">Pay to Play Politics pulls the day's sports-business story into one place — from <strong>Sportico, Front Office Sports, Sports Business Journal, ESPN, Bloomberg, The Athletic</strong> and statehouse reporting — and sorts it by the five beats where money and public power collide. Every headline links to the original publisher. This edition is a curated snapshot pulled <strong>Sunday, November 22, 2026</strong>; The Wire refreshes every morning; check the source for live updates.</p>
+        <p class="sec-sub">Pay to Play Politics pulls the day's sports-business story into one place — from <strong>Sportico, Front Office Sports, Sports Business Journal, ESPN, Bloomberg, The Athletic</strong> and statehouse reporting — and sorts it by the five beats where money and public power collide. Every headline links to the original publisher. This edition is a curated snapshot pulled <strong>Monday, November 23, 2026</strong>; The Wire refreshes every morning; check the source for live updates.</p>
 
         <div class="agg-bar" aria-label="Aggregator at a glance">
-          <div class="agg-stat"><div class="n" id="agg-total">28</div><div class="l">Stories in this edition</div></div>
+          <div class="agg-stat"><div class="n" id="agg-total">63</div><div class="l">Stories in this edition</div></div>
           <div class="agg-stat"><div class="n">5</div><div class="l">Beats tracked</div></div>
           <div class="agg-stat"><div class="n">12+</div><div class="l">Outlets aggregated</div></div>
-          <div class="agg-stat"><div class="n">Nov 22, 2026</div><div class="l">Snapshot date</div></div>
+          <div class="agg-stat"><div class="n">Nov 23, 2026</div><div class="l">Snapshot date</div></div>
         </div>
 
         <div class="beat-grid" aria-label="Browse by beat">
-          <button type="button" class="beat-card" data-beat-jump="valuations"><span class="cnt">6 stories</span><b>Franchise Valuations</b><span>What teams are worth, who is buying, and at what multiple.</span></button>
-          <button type="button" class="beat-card" data-beat-jump="stadiums"><span class="cnt">6 stories</span><b>Stadium Deals &amp; Public Funding</b><span>Taxes, bonds and votes behind new buildings.</span></button>
-          <button type="button" class="beat-card" data-beat-jump="labor"><span class="cnt">5 stories</span><b>Labor</b><span>CBAs, caps, unions and the NIL fight.</span></button>
-          <button type="button" class="beat-card" data-beat-jump="betting"><span class="cnt">5 stories</span><b>Betting Regulation</b><span>State law, prop bets and prediction markets.</span></button>
-          <button type="button" class="beat-card" data-beat-jump="media"><span class="cnt">6 stories</span><b>Media Rights</b><span>The TV &amp; streaming deals that fund everything else.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="valuations"><span class="cnt">10 stories</span><b>Franchise Valuations</b><span>What teams are worth, who is buying, and at what multiple.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="stadiums"><span class="cnt">22 stories</span><b>Stadium Deals &amp; Public Funding</b><span>Taxes, bonds and votes behind new buildings.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="labor"><span class="cnt">7 stories</span><b>Labor</b><span>CBAs, caps, unions and the NIL fight.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="betting"><span class="cnt">14 stories</span><b>Betting Regulation</b><span>State law, prop bets and prediction markets.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="media"><span class="cnt">10 stories</span><b>Media Rights</b><span>The TV &amp; streaming deals that fund everything else.</span></button>
         </div>
 
         <div class="agg-tools">
           <input type="search" id="news-search" placeholder="Search The Wire — try “Bears”, “WNBA”, “salary cap”, “Kalshi”…" aria-label="Search news stories" />
-          <span class="result-count" id="news-count">Showing 28 stories</span>
+          <span class="result-count" id="news-count">Showing 63 stories</span>
         </div>
 
         <div class="filters" role="group" aria-label="Filter news by topic">
-          <button type="button" data-filter="all" aria-pressed="true">All topics · 28</button>
-          <button type="button" data-filter="valuations" aria-pressed="false">Franchise Valuations · 6</button>
-          <button type="button" data-filter="stadiums" aria-pressed="false">Stadium Deals &amp; Public Funding · 6</button>
-          <button type="button" data-filter="labor" aria-pressed="false">Labor · 5</button>
-          <button type="button" data-filter="betting" aria-pressed="false">Betting Regulation · 5</button>
-          <button type="button" data-filter="media" aria-pressed="false">Media Rights · 6</button>
+          <button type="button" data-filter="all" aria-pressed="true">All topics · 63</button>
+          <button type="button" data-filter="valuations" aria-pressed="false">Franchise Valuations · 10</button>
+          <button type="button" data-filter="stadiums" aria-pressed="false">Stadium Deals &amp; Public Funding · 22</button>
+          <button type="button" data-filter="labor" aria-pressed="false">Labor · 7</button>
+          <button type="button" data-filter="betting" aria-pressed="false">Betting Regulation · 14</button>
+          <button type="button" data-filter="media" aria-pressed="false">Media Rights · 10</button>
         </div>
 
                 <div class="lead-grid">
           <article class="story lead" data-topic="stadiums">
             <span class="topic">Stadium Deals &amp; Public Funding · Lead Story</span>
-            <h3><a href="https://frontofficesports.com/videos/washington-spirit-ceo-address-the-stadium-conflict-trinity-rodman-michele-kang-more/" target="_blank" rel="noopener">Washington Spirit CEO Address the Stadium Conflict, Trinity Rodman, Michele Kang &amp; More</a></h3>
-            <p>At NWSL Championship Media Day in D.C., Spirit CEO Kim Stone joins Front Office Sports’ Margaret Fleming.</p>
-            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 21, 2026</p>
+            <h3><a href="https://frontofficesports.com/article/cowboys-owner-decision-time-bears-stadium-drama/" target="_blank" rel="noopener">Cowboys Co-Owner: Decision Time in Bears Stadium Drama</a></h3>
+            <p>A key league figure is eager to see the drawn-out saga resolved.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 23, 2026</p>
           </article>
           <div>
             <article class="story" data-topic="stadiums">
             <span class="topic">Stadium Deals &amp; Public Funding</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMi5gFBVV95cUxQVVZKcXRNZ29mSUFlYVdodWNVcnRiQVhfM2Fla0RjQTdWckt2RHNGWl9UcWNHTVFxVEVFeGFnRVE1SG51S2R4c1RJdmE2cVhsbEpNdDZ4UU1oT1BwdGFhQTNMdWlGdHhfdXRNcEt2dThyaFgwbHFVOHU4OXFGbURLS0t5aWtheTV4bkZ0ZlF6UGJSVEY1ZU1GZkRVUTRoSFNLNGtfTjhyR1RqcnprSXVWcnRnU3BUTW1QSEJXWlZINjNCdGswQ21OZkJvOHZIbW9JWVBZc1ZiWHZaaUx1WE92WExlRWc3UQ?oc=5" target="_blank" rel="noopener">Kansas Gov.-Elect Calls Out Chiefs’ Stadium Agreement &amp; Takes Veiled Jab at Clark Hunt</a></h3>
-            <p>Read the full story at NewsBreak: Local News &amp; Alerts.</p>
-            <p class="meta"><span class="source-pill">NewsBreak: Local News &amp; Alerts</span> · Nov 21, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMi9wFBVV95cUxOcDRnUmRHdHB3YXc1N3o4LWFXaGlrWEVFaXpqOWZMdVA1VEQweXUxT0lLQzFLWVdvMG94T2FFNWFMM2gzYXY1V2VSVEdoa1pETEtDdHVFVXQwLUtfcEc0eThDXzcxTzFwS0VxRFBUREppOEliODQzamRGWlc3dWw1M2ZpcGYtT1JiMkpEMUJZbEdIX0cyMmxqNnB0Wlg5a0ZYZHI5cnYzb3VmWi0tUTdxMHF2MllMOHRXcTBSS1NEbklpQ2dmTVk1RTkyRGhfMjFHdi1iY2NTZmlvdWE2Y3RQMXQ5Q00xaXJXUVlIWUNTOEZ3MmZoRnNV?oc=5" target="_blank" rel="noopener">Spending cap axed for Hobart’s AFL stadium amid cost blowout</a></h3>
+            <p>Read the full story at The Australian.</p>
+            <p class="meta"><span class="source-pill">The Australian</span> · Nov 23, 2026</p>
           </article>
             <article class="story" data-topic="stadiums">
             <span class="topic">Stadium Deals &amp; Public Funding</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMigAJBVV95cUxQZ2lyVGw3cHJTeWJERzhkTjNoQmdBRWJMSVJKMXRaZjdsSGNOeFRaSHBGVkNPMDJMNENWcHdCS3AtRHZYQUstSHdySnhScGNRbG1DNTJvRmJrTl83aElIb2NrYlNHaF81SGkxQTJiQXNVcDc5elQzTjR0Uy10WkdCZklHTUNYNUQyYWhFd0Y5NkIwSUMzVnBVbWU3WFllci12clFiQWdfY3dBLWl6QnJiOEUyd0I3b25YTndEeE80RFRDYjJVamlTUHdFSVJWNnR4X1BITU5vcmgxeTJndU4wSVpOZFhKQ2NTZW1sV3pDbVQ5MDdwbUYzQndIUG1UZ0tZ0gGGAkFVX3lxTE5lYkRxZFVDdVVzbnh3Znp6bWduZjRxUEg3UTgyZHVGNmRMUjBsX0dxQkJhTEVHQkp5dG5hb2tnQWRpalhQZWRpU093anJkdVlLXzh0eWRoZnVUSkNQQVIxWnJ3VGxNMUo2YmdlMGpuZ3dKdnNRRDhpUHJlMkdmYnR5bF80VU5mTDZ4dHVSVndwS0xTa25uR01OLW1GanRsRC1fWXh3NEZ3LVJwVFB3dkNWeFR6LUFxLVBaMDIxOWN4clFxQ0prZC05c1gyU1lOcURqT0lpWm1zQmhXZnFaNDJRRy1YNm0yd2RFR1VmMm1PUFNRa296Q0hDbTB6OEZ6OFNfcGtyMWc?oc=5" target="_blank" rel="noopener">Chiefs fans could pay up to $50,000 extra after taxpayers contribute $1.8 billion to new stadium</a></h3>
-            <p>Read the full story at The Times of India.</p>
-            <p class="meta"><span class="source-pill">The Times of India</span> · Nov 21, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxNSE0zeTJaT0c1NFV0R21mZXNwbTk1UlJQNkVxV21SX3F0bXpCa3UwcnlYQi1ERk51UmwybXpTc3JhUDNFSm9HakVtcnl4aVlHVzFkaUx6dUhGRkl0bm1SMTRrZ3plaHVzejR4cHMwTmdpektkM0JuOU1lZjFpb2dDMjBwUGd4Vm9JdHoyLUUzZkh6LS0tQmVaUDFDenQ?oc=5" target="_blank" rel="noopener">Taxpayers have final chance to weigh in on 2027 proposed property tax increases</a></h3>
+            <p>Read the full story at FOX 9 Minneapolis-St. Paul.</p>
+            <p class="meta"><span class="source-pill">FOX 9 Minneapolis-St. Paul</span> · Nov 23, 2026</p>
           </article>
           </div>
         </div>
@@ -346,9 +362,33 @@
           <!-- VALUATIONS -->
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://frontofficesports.com/article/nfl-nba-mlb-nhl-valuations-outpace-surge-in-american-wealth/" target="_blank" rel="noopener">NFL, NBA, MLB, NHL Valuations Outpace Surge in American Wealth</a></h3>
+            <p>The wealth available for team purchases has compounded.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
             <h3><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPRkdDZW1IRHlob0FlWFp6Rk5MTWIzREpuc19YRGNfQ3FfazJ6QzdDZ1hUQXN0aU80VzJ2T3BrZk5saE02SXRGUExOVU03ai1wY2pRTU5IOGlZeUNqZWE2NVhzNXBkVDNwWTNxdWV4QlVkajN1dENEdmVjUTNURHZsdVpxeHNjNU1SXzV2RWdENGEwb28xWEJvNA?oc=5" target="_blank" rel="noopener">In 2010, Jeff Vinik bought the Tampa Bay Lightning for $170 million; in 2024, he sold majority control at a $1.8 billion valuation</a></h3>
             <p>Read the full story at Athlon Sports.</p>
             <p class="meta"><span class="source-pill">Athlon Sports</span> · Nov 21, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNakJWaElOSGtaLWZ4U0w4b2dVTTlCYmo4a1Q5X1pyMC02UEM0NjFoQVJNRmhBeVAzdm9Malh5MlE2cXhpTE5rRzZ5S1M1bFZtb2hyY1BsZ20xaUlBbVFFaTlETkxUNEp1UlU3SHFOVWZLRGh1SFNSclpieVluMVJpdXB1ZjNvVVE3c01VQWh5Y3U0MWtMUGhuU0pn?oc=5" target="_blank" rel="noopener">In 2013, the New Jersey Devils sold for $320 million to Josh Harris and David Blitzer; twelve years later, Forbes values the team at $2.4 billion</a></h3>
+            <p>Read the full story at Athlon Sports.</p>
+            <p class="meta"><span class="source-pill">Athlon Sports</span> · Nov 21, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE45ckt4NjBKTV80VUx4MDJ1bzBrRUtwMFFVU0ZGdm1ZVUlIUHVJOWxHbGZfcmtlYUo3NU82enp2VnowNU5VN1VYZGZ5MW5SU1JrMDFwOFRlVE5LS01xc3hESm1obnFYdUkzZTY0VXN1ckRLTUtlNzBibllUMnVvUQ?oc=5" target="_blank" rel="noopener">Lakers Sale Turns Into a $12.5 Billion Family Feud</a></h3>
+            <p>Read the full story at NGSC Sports -.</p>
+            <p class="meta"><span class="source-pill">NGSC Sports -</span> · Nov 21, 2026</p>
+          </article>
+          <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE5mREJTd3JiUUFLcmN6Umctb21fM0N0dTViMk1iOUxEOV9iQVFHWkJiYlNsOFVtdjhsaUo4WDFzRVNjVXc1NU4xaTZfV1lUT3R1RklJWmZFcjkxSnJZTmVPdWlWWUFFN3FHb2dYd0dCaG00NEhjRXRsRzZ3?oc=5" target="_blank" rel="noopener">Private Equity Stakes in Pro Sports Teams Draw Congress Questions</a></h3>
+            <p>Read the full story at Legis1.</p>
+            <p class="meta"><span class="source-pill">Legis1</span> · Nov 20, 2026</p>
           </article>
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
@@ -364,34 +404,94 @@
           </article>
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE45ckt4NjBKTV80VUx4MDJ1bzBrRUtwMFFVU0ZGdm1ZVUlIUHVJOWxHbGZfcmtlYUo3NU82enp2VnowNU5VN1VYZGZ5MW5SU1JrMDFwOFRlVE5LS01xc3hESm1obnFYdUkzZTY0VXN1ckRLTUtlNzBibllUMnVvUQ?oc=5" target="_blank" rel="noopener">Lakers Sale Turns Into a $12.5 Billion Family Feud</a></h3>
-            <p>Read the full story at NGSC Sports.</p>
-            <p class="meta"><span class="source-pill">NGSC Sports</span> · Nov 20, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxQb1Y5VTEwWEZuSWxDb0RfNERuTEUtcEViR0RjMER3S180ajlhMko5aHV2eW1vbGViUWNaNmxJam1MNDl5VU5Xd0ZYY1h4T0pHZldTdVhURDlCUlB2Mk9hQ082VXBOb29TMUtCZF9pVk9ROVhGeE9WWmVBTTduWU1wMDNLWGhIQzBISWRKcF9VUDN6cUt0X1JwbHE2NzNTazV6amR1NzYtYnVxbjYxLXJMRWNnM3FkeXVqWlgzZUlJYnE4OVlRaFNr0gHHAUFVX3lxTFBvVjlVMTBYRm5JbENvRF80RG5MRS1wRWJHRGMwRHdLXzRqOWEySjlodXZ5bW9sZWJRY1o2bElqbUw0OXlVTld3RlhjWHhPSkdmV1N1WFREOUJSUHYyT2FDTzZVcE5vb1MxS0JkX2lWT1E5WEZ4T1ZaZUFNN25ZTXAwM0tYaEhDMEhJZEpwX1VQM3pxS3RfUnBscTY3M1NrNXpqZHU3Ni1idXFuNjEtckxFY2czcWR5dWpaWDNlSUlicTg5WVFoU2s?oc=5" target="_blank" rel="noopener">How much could Dhoni&#x27;s retirement wipe off CSK&#x27;s brand valuation?</a></h3>
+            <p>Read the full story at BMI.</p>
+            <p class="meta"><span class="source-pill">BMI</span> · Nov 19, 2026</p>
           </article>
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
-            <h3><a href="https://www.sportico.com/business/team-sales/2026/wnba-los-angeles-sparks-sale-feliciano-jones-1234958926/" target="_blank" rel="noopener">WNBA’s LA Sparks Near Record $705 Million Sale to Feliciano, Jones</a></h3>
-            <p>Private equity billionaire José E. Feliciano and his wife, Kwanza Jones, are near a deal to buy the WNBA&#x27;s Los Angeles Sparks for $705 million from Mark Walter.</p>
-            <p class="meta"><span class="source-pill">Sportico</span> · Nov 19, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE1LVVVOcmFMOGF1ZWg5ako2eFdkOTFyX1hIdzE4UG5qYk42WENZX1ZKTkhyOHIwemQxc3dkNHV3MGZpOWxtZ1lNM1VHbmYxN2VKczA4WWRsSnhDcVRUZEVLYjFoTlZHZw?oc=5" target="_blank" rel="noopener">WNBA Sets $250 Million Expansion Fee as Franchise Valuations Surge</a></h3>
+            <p>Read the full story at azat.tv.</p>
+            <p class="meta"><span class="source-pill">azat.tv</span> · Nov 19, 2026</p>
           </article>
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNX2pCYy1McTd5bW15LU9HcTlGcUdyVHdYc0JfcUhWbHNVa05IX2IxVDQ5aG5JQnkxTnBBejNoY05iWlJwLTFIZVVwYmc4MHVTV1A2LUthXzMxenFxTmphNWVhLUxIQkRQWl85cU12VllmYVhuZGU5dHNzRTBvV2xqbnZEcmJOSkU?oc=5" target="_blank" rel="noopener">Leafs, Raptors, Jays empire is worth $25B: Rogers plans to sell pieces to pay down debt. What investors should watch</a></h3>
-            <p>Read the full story at Yahoo! Finance Canada.</p>
-            <p class="meta"><span class="source-pill">Yahoo! Finance Canada</span> · Nov 15, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQSFByYjl2ZjdaQXFQbzljQnA1dkIxYjZoNm9MSUtPb3JtVHhuXy1SZE9FeWpOSHYtbUpaME4tSFpQMGYyUXo1UkEycC1PcXc2dGk1R2V2MF9RaTQyMTVEZFJGYk9MM0hyejNlOGV1SkNpM0pTSXlwWEwybXI3cnNoeVEyUE05NkIyZWdES3p6NGEzNVNVQnlIYllCRXZuaHl1c2phbEdwcE9NYkw5ZHpINHV5M2xaSEZYTW5JWm1HczNaQQ?oc=5" target="_blank" rel="noopener">Shah Rukh Khan&#x27;s KKR May Welcome New Investor As Jay Mehta Plans $400 Million Stake Sale</a></h3>
+            <p>Read the full story at Mashable India.</p>
+            <p class="meta"><span class="source-pill">Mashable India</span> · Nov 18, 2026</p>
           </article>
           <!-- STADIUMS -->
           <article class="story" data-topic="stadiums">
             <span class="topic">Stadium Deals &amp; Public Funding</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQUTQzMDlGcTFSa0dTdGRmdURTdDJDVnlROFRra2lXV0xXRll5cmtCdm14NFFDbGZSWThxZUw5NXVFWEFNZTN4QnQ1b3hqVWZ5aXU4elhadDdVMERGNmF3enFlSDA4SUE0Q3RyVUhBUFdTOHE0dVZaWVU0S3ZKN1hTUkdrNDBaQUJLRVpHRlBvRDhaT1NB?oc=5" target="_blank" rel="noopener">Illinois Quick Hits: Chicago taxpayers, construction fees fund West Side building rehab</a></h3>
-            <p>Read the full story at The Center Square.</p>
-            <p class="meta"><span class="source-pill">The Center Square</span> · Nov 20, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQMTExRjlzNmNxOHZ4QkNwUkhNVXhfcHdoTXh2X0xlYndVRjhaTENQdE93WEJyRVYxSW53U1BsbmYzS3NTVUU4MVphSEgxeXNlSFJoS2NCaGhpbFpidXR6SzRzZnluWkJOZWtpSG1pTHhYNjFNN1oyc3gwWEZReTM4bDZ5X1l2QjNwOGNIVXNQWDhsSmUyX09oWjFwQQ?oc=5" target="_blank" rel="noopener">REPORT: Bears In Talks For Public Financing For Arlington Heights Stadium</a></h3>
+            <p>Read the full story at Yahoo.</p>
+            <p class="meta"><span class="source-pill">Yahoo</span> · Nov 23, 2026</p>
           </article>
           <article class="story" data-topic="stadiums">
             <span class="topic">Stadium Deals &amp; Public Funding</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxObURCQnlSUG9qcHlHb1FKRjhKczVMMzVaS3AtQlk2YTRpeDhjU25RTFZfUy1oRTlWVXNyUFNfc0p5UlI5bWFNM1NueTgyR29RTkhNdFAzakE4TlVxeXlVMzNTaVlVVWw2N1RnZUhNc3BNMkljUmJlYk42LWtRZHkwSFhSUTlKc3ZORGxjOW9JelUtdktfcENxSU1KNWpISFhCaWFMMw?oc=5" target="_blank" rel="noopener">Can taxpayers shortchange Hamilton County like it does them? | Letters</a></h3>
-            <p>Read the full story at Yahoo.</p>
-            <p class="meta"><span class="source-pill">Yahoo</span> · Nov 20, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMiggJBVV95cUxOTjFtRTBYbG1uYnV0ZWJmSTFLaGx4ZzNmbzdyZ2JHTW1iZGkyQlUtSkZBQllrc3lJY3pQcUxOejRWUWVJeWc3WFd6dWlvd0R1ODhCVHFZMFlTU1JuZUNfRURZZUFpUng2Vk1YNVhlQ2JFcUJmUXg4c2poS092VVh3amwzaFBtS2NQbTZURUZ1eDZBaTRSOTR1Y1FFbTVUQWdCY0pIVnRaR2ktejgxLWNEaXpLdUt2aFlQV3FrNEdoYW94cjFubW5BMERQeE1qU3RQelRaZVRlYTJlVGU2WHlHWExmVk1vZEV2S2VZa0FHRjR5cEZ0TjM0OWxOLXA4VUhFdWc?oc=5" target="_blank" rel="noopener">Greens warn Premier set to break $875m stadium promise as Tasmania reveals updated cost</a></h3>
+            <p>Read the full story at The Mercury.</p>
+            <p class="meta"><span class="source-pill">The Mercury</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiUEFVX3lxTFBUOXJOZ0NGYkNaZmt1b0dYYVFqU0V6eEhhV28wQmNTMHYzZnRnS1ZfZy01UWFFT2hYeDZRbTIzU2RBY0MwLUwwbWJRSEk2VjFu0gFWQVVfeXFMTl92Vm1xYjZKUjhOZGhvYjVUOEV0T3ByNHVrRVBmOWRQdUxtZFpYYUEzcXJ5RllVbF8xbHZ1M2M1d3dqWWFUNzZoVjhLWEJqNGJOXzBqTVE?oc=5" target="_blank" rel="noopener">Profits on BSCs, PBA: FBR fails to give relief to taxpayers</a></h3>
+            <p>Read the full story at Business Recorder.</p>
+            <p class="meta"><span class="source-pill">Business Recorder</span> · Nov 22, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxPVDJJaWs3b25NT3FVWnZiMmtnRVd2cTdqNXJNY1hmZ3VHZzlwa0tJcFBzcFlEdExic1R4S3diY25zOTdBdGgtN1BUaDhmQkRBNjBIWnlYYnBRMlU3cVJ0RE8tZXpEdDlMdmJqc0daUENuemdQcHk1RjBIcXZiOWNfYTRtWk5pbS1nUzVjaHBwcw?oc=5" target="_blank" rel="noopener">Kansas Approves Chiefs Stadium Agreements</a></h3>
+            <p>Read the full story at Wisevoter.</p>
+            <p class="meta"><span class="source-pill">Wisevoter</span> · Nov 22, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxNRGsxX2lLS2pRazBiUzhiNmJMOWtqaWxQZlFwbUh6RjUtUl9VYW5QSlMtVzhSdF9XUHJpSTJuaURXNWZIVDlGRkhDMHVnVjkxaG5ndElETldjZ1pLZWZKQ1hRT09TekNCS1pyS0VCd09IUjRTQzhFS3BWQmxPUHp3Y3EzdnF3MzJHNjN5bU1SbTdZeXIwaHpVWGcyWWRnRzlHanJMZw?oc=5" target="_blank" rel="noopener">Clock ticks on Bears’ $5B stadium deal as new deadline set after meeting with NFL</a></h3>
+            <p>Read the full story at talkSPORT.</p>
+            <p class="meta"><span class="source-pill">talkSPORT</span> · Nov 22, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://frontofficesports.com/videos/washington-spirit-ceo-address-the-stadium-conflict-trinity-rodman-michele-kang-more/" target="_blank" rel="noopener">Washington Spirit CEO Address the Stadium Conflict, Trinity Rodman, Michele Kang &amp; More</a></h3>
+            <p>At NWSL Championship Media Day in D.C., Spirit CEO Kim Stone joins Front Office Sports’ Margaret Fleming.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 21, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxPNW5ydTh3dF9yS2FVaXhWaVlSWnlaMGZWSERNamRsSEdmM1BxR19KZDVPUGM1VjZ1Tkw4VFF6bk8yTEhidVducTZTd0VKT0ZnZjVPVVdUbzdsNlhER0pSamtraWJLU09udmo0c1hrYV9nbHVhUVlHZGZVNDZEczM3VHFMZmJwdzlWR0Z0ZUZCSmI0MnhaNTFBS2Y1bmFwdw?oc=5" target="_blank" rel="noopener">‘Hate’ rant album wins £20,000 taxpayer-funded prize</a></h3>
+            <p>Read the full story at The Times.</p>
+            <p class="meta"><span class="source-pill">The Times</span> · Nov 21, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQZlV0WmNQZVFOWGVBMDl0enJIXzJhWVdoZTRUQlRRd3FxUnJURTdBYlVRSTg3YmpTa1l3NEhWRGxnWXU3MDVsUFNhX1djRDU5YW82SXo3WWF0emR4eENqbThVVEloYk1JamNEWlZjQUFBbVctTV82ZlhVdmVfOUFBOXlzMGgyQk42eDlnTzViajJFWFJTa3ZTQw?oc=5" target="_blank" rel="noopener">Hillsborough election delivered a win for Rays’ Tampa stadium pursuit</a></h3>
+            <p>Read the full story at Tampa Bay Times.</p>
+            <p class="meta"><span class="source-pill">Tampa Bay Times</span> · Nov 21, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxOMjU5R3hfSnl3TFpYN1Z5Y1l4MDJBRFFZV3dYelQ3V0xUZmM5dGRid21tVFI2Zl9YaFhuS2c4VW00NUdXUTd3QzA1TW4yUmJ6UDAtb1c0Mkp2YVF2ZVlmUDA5WDJqcVA1LWcyc2sySGR2d1lKV3I2aGtLUjktYURhLWloak04dkJEM0V6Z0FYek5VM0tmZjFJWElCNUs?oc=5" target="_blank" rel="noopener">Yellowstone County releases list of top 10 taxpayers in 2026</a></h3>
+            <p>Read the full story at The Missoulian.</p>
+            <p class="meta"><span class="source-pill">The Missoulian</span> · Nov 20, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMihgJBVV95cUxQZnB5MUsybDMzSjJSMl85VjNiYy1JQ1NQcXVIUlZIS0xUTUFzRnBTaHkwamN4Q1pwUEpVcjRFTzNNOWRWN2tNclctY25laUZnTThycS0yUEhqU2E0U0lUcEFTaDl3Vnk0RVk3QkY0eThpQU0tRGZSTXYzeVFJZzJFWWtlcnp6R3NCVVBWX2RqNzJOdUswa0tFS05HUk9LVXRUVlRSZHNaTi1tSWVsYXpNdFRqdm5DSkRRd0FIUWpsR1ZlRmFDRnU5UWUxS1o2ZEZ5TEFtck5zNFNnQzdGb3pLSVowSV9xWFRCNnZ3RHFkRlAxdlZNbk92Z2p3RF9YSFdWLU1iVWR3?oc=5" target="_blank" rel="noopener">Other projects could face chop to pay for stadium: Treasurer</a></h3>
+            <p>Read the full story at The Mercury.</p>
+            <p class="meta"><span class="source-pill">The Mercury</span> · Nov 20, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNNTk5WVRvWjF1cGFrUk5oeVFKTGVFQmNqbkhfbVZrVUJ3X3BncG9WMDRpSmhCalZYUGNQOWNrbGhxcEhzYWJNNEpDTEVzdndfNUdkbmNuamUzRktDaEEzdXNRSzdsSWkxX2lVVHdHRnZHTG5DbGtaNWpoRVNDa250b1JqU1JUamVUVDUwOGdqOXhHZnVXZXk2OTU2REE5cVphMVdxR0tUZWxvNTdCRG5LZ1hXWFFVMVc2d3drR084NFdzd0c5TlUyOFY0bTlWTE9sWGQ2Q3lKWE5KbklkYjVzLWtPV2dBMTNTZFE?oc=5" target="_blank" rel="noopener">Paid leave for embattled police, fire chiefs has cost Berkshire taxpayers hundreds of thousands of dollars</a></h3>
+            <p>Read the full story at Berkshire Eagle.</p>
+            <p class="meta"><span class="source-pill">Berkshire Eagle</span> · Nov 20, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQUTQzMDlGcTFSa0dTdGRmdURTdDJDVnlROFRra2lXV0xXRll5cmtCdm14NFFDbGZSWThxZUw5NXVFWEFNZTN4QnQ1b3hqVWZ5aXU4elhadDdVMERGNmF3enFlSDA4SUE0Q3RyVUhBUFdTOHE0dVZaWVU0S3ZKN1hTUkdrNDBaQUJLRVpHRlBvRDhaT1NB0gGaAUFVX3lxTE9qUms5dHMxRGxLV2VjYy1MbEo3NFFBUUQ3WF9peTNLcXU1MWFCQ1d1XzNXTGNXM01JSzZaNzBxdks0TkVLQUtVbHJRMmJ3WWQxRWJza0t3S1E3OFVZbHp2Rms5cHVDZWlkT21CeUlfMTFkZ0g4cnhQOEFIZHFSQ3p0YTMwU0xQQ3Q4T3JJY0ZyNG9zN2tpaFlyY1E?oc=5" target="_blank" rel="noopener">Illinois Quick Hits: Chicago taxpayers, construction fees fund West Side building rehab</a></h3>
+            <p>Read the full story at The Center Square.</p>
+            <p class="meta"><span class="source-pill">The Center Square</span> · Nov 20, 2026</p>
           </article>
           <article class="story" data-topic="stadiums">
             <span class="topic">Stadium Deals &amp; Public Funding</span>
@@ -399,7 +499,61 @@
             <p>Read the full story at Pulse Tasmania.</p>
             <p class="meta"><span class="source-pill">Pulse Tasmania</span> · Nov 19, 2026</p>
           </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxNVmZ4Q21mcmRYcjBFbno5SDJrY1ZLQVlLNmw0QVFPLVdwaWhQSWJaN0taYkw5eHpnNnFoMklCOTJQZWRkWU43eDN2bjdNdjhVTm8zV3FDZzl4eF94OEhxcV8zZUZfcXc0M0NZUF9iakh0TEVOc1NYSHlKaWRoMlF6cmlDaXhMMnNqUVRtcA?oc=5" target="_blank" rel="noopener">Stadium Funding Concerns Grow Following PAC</a></h3>
+            <p>Read the full story at Tasmanian Greens MPs.</p>
+            <p class="meta"><span class="source-pill">Tasmanian Greens MPs</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxOQnZnWDRrdDlQbEtmNVFMYVdzeWpJS2E0OFRnTzdlN21sYkdLSkVfWHFHVWxqamRqRTVzM2F1Nmk4VVNpdE1pS2RFNTdjWmdtc25RZGpjY1pKNjc2aEpnUTI4LWF0dXBLaDZZRnFLLUx6MDA5d1Z2bWxWNTdVRzNvOHZGT2g3T0RtT1MxLUtVX3ZaVjlLSHh6OUQwY1c0LUd1YUJpY2xFbWwxR192RzZ6Tm10X1lOUFExSU5CbjFESVZkOHBvRXl5VE8wRmlOYS0wdEJLcU8tN1Fsb0hxMmhWLVU2dw?oc=5" target="_blank" rel="noopener">Prop. 4 fails, ending latest effort to allow taxpayer funding of California political campaigns</a></h3>
+            <p>Read the full story at Pleasanton Weekly.</p>
+            <p class="meta"><span class="source-pill">Pleasanton Weekly</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMi9AFBVV95cUxQVnQ3TWlhU3lzMjBKM2F6RjdlNk42a1ZHbDVNUFFYRm1sY2FhTkVnT3h3T04xY0NJbE9fc1VNdnlPdnJqN1VQODRvLUZVdE5UVHpsMmxIRGh0OU9DNHZpMWlzbmtjQllyWnkwLWdiTUV1Nk9XT3luUVJMWjRubmhrazNicG9tNFRmTEFRVlB0cDcxWE92TWl6UWVYYVdOclhjY0Q5ZWZ3OU14Q2E3M3dmUFVhWnhiSUZFeS1mZW40R3VVUG5iQW9KVGp3eHI3Z19kUFRIZkVPMUVNX0cwSlJuWDd3WXBRelZPdndwYnlqbU43ZkxI0gGIAkFVX3lxTE54NlJzSzVKdVFPdy1CTjVGeERFcWcxcVdNX1ZiSENkRHp4SlBxaDJLZEhjZ1hJcFZjMldHVkl4QnFNN21ST0RaRkF4ZkVtMXhTVUhRM2ZlTDRuTXFOTlBSUjVocTlHNjNpMkxUcjh4MVpaUTl6MWZXVzhYeTNDWThUN2xDUmFzSUhwcHd3bzlNUjREekxHMFJQYWhFUldXekJFS1hpUmJnWnBqVlMtb3oxN2ZYYXdXR0tvNFhiN01PSm9DaUpERmE0NHgtOWFCOE91c3hkOUhZSnpNVDRHa1Y1REpmX0ZFYjRaeG8tUFQ5YVhzNld4azZfcjFDRHJlUlZ4YUFkRGUxZg?oc=5" target="_blank" rel="noopener">‘Taxpayers deserve full accounting’ after state buys nearly $1 million surveillance-equipped SUV</a></h3>
+            <p>Read the full story at WSB-TV.</p>
+            <p class="meta"><span class="source-pill">WSB-TV</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxNSGhSSVVKX0czcVVxaWJHczl6UkowdF9lZnNtOFNNaTNGWnRycWprVUhxOExZT1c2YUxONnJSeFdHZjZfSzQ3eGJsMzB2a2dVRE8yX21yV1dKcnBWTGZkZjBwZlZnTXlCTUxlNjJZNXR1MmR2Vk94TGRDbW9kLVQxT1NCYXNIdw?oc=5" target="_blank" rel="noopener">Suburban mayor says taxpayer impact of stadium &#x27;complex&#x27;</a></h3>
+            <p>Read the full story at AOL.com.</p>
+            <p class="meta"><span class="source-pill">AOL.com</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQMlBjdnhWZUtrRjZhRlE0eng2QkJWZS0teWNsN1dnLWtnMldoeEhqekVQckYyU3hVeklHdEFDOWxrRzF6R1Q1WHZzdnhqeXdWZ0w1ZFNpNkczU1BQX0NaaFVzdnFGNDJaZDlIUDFkWG5OUEJJRDRwSnFLYTNFbHZFQzVUNTF4emY5Y2E4aFJBbDhOTl9PS2lJQnFWM0EtVlJLYVU5aWx3?oc=5" target="_blank" rel="noopener">Bears’ Illinois Stadium Plan Comes With an $855 Million Catch</a></h3>
+            <p>Read the full story at Heavy.com.</p>
+            <p class="meta"><span class="source-pill">Heavy.com</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOb0NtXzZBV1RmRElTYzlVS08xZGYxaHNuOUl5Z0hoNldmQTAxXzg1ODliZEJYVDFBZnhTcjZKMWwxNTB1Z1dYd0hlaWtBUGs1T0FCNGtBOWJMMlp6N2EwM0xWb0NxSFdWdmJUUXU2S3NOR3ZqaTlsU0pYeXkwNm9TS04zc3U3bnVEalh6TjI5UWh3T0JfUklZTzQwQl9abF9MTzNuY2lsMW81R2ZFSU9jRTdB?oc=5" target="_blank" rel="noopener">Why claims that independent schools drain public funds are wrong</a></h3>
+            <p>Read the full story at The Canberra Times.</p>
+            <p class="meta"><span class="source-pill">The Canberra Times</span> · Nov 19, 2026</p>
+          </article>
           <!-- LABOR -->
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxPdlllSWxMSVVHM3JHekVKcFlpenBTZGFJRlNDVTdXUzFIOEpiUTZWeTNqSm9mYndzUXRNY0d3UDhobmV2dDd1TjFfVWpNc0NGWjVoRVFhUlB3cG5UWTR4UThLN01MMDVaMlktMDhDdE5ubmFiUDlIR3NoT1NGYmczRXFsOEhLNGh2UlE?oc=5" target="_blank" rel="noopener">The Tarik Skubal domino effect: What record-breaking Mets contract means for pending MLB lockout</a></h3>
+            <p>Read the full story at Yahoo Sports.</p>
+            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://www.sportico.com/leagues/baseball/2026/skubal-mets-contract-cba-impact-450-million-mlb-mlbpa-1234959188/" target="_blank" rel="noopener">Skubal’s $450M Deal Is What MLB Owners Say They Want to Avoid</a></h3>
+            <p>Tarik Skubal’s nine-year, $450 million deal with the New York Mets is just the kind of contract MLB’s proposed salary cap is designed to prevent. The league’s latest collective bargaining agreement proposal would institute a maximum contract size. For players switching teams, tie-ups would cap out…</p>
+            <p class="meta"><span class="source-pill">Sportico</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://www.sportico.com/law/analysis/2026/mlb-antitrust-exemption-repeal-impact-lockout-1234959083/" target="_blank" rel="noopener">MLB’s CBA Expiration Revives Antitrust Exemption Fight</a></h3>
+            <p>As the clock ticks toward the MLB lockout, expected to begin at 12:01 a.m. ET on Dec. 2, members of Congress have resurfaced a favorite threat: stripping baseball of its exemption from federal antitrust law. It’s a threat that members of Congress have made numerous times over the last 75 years…</p>
+            <p class="meta"><span class="source-pill">Sportico</span> · Nov 23, 2026</p>
+          </article>
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
             <h3><a href="https://frontofficesports.com/article/mlb-owners-make-draft-concession-as-salary-cap-standoff-continues/" target="_blank" rel="noopener">MLB Owners Make Draft Concession As Salary Cap Standoff Continues</a></h3>
@@ -414,15 +568,9 @@
           </article>
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxOUzRGOUlPNklCdHJ2VDlnMWZVNjlxNkc4NW9jSzZkMklaTENsVTdkU2NFNTJSU1B1WWtkX3ZTYm0tWGM3X0QxZVlFeU1KRWZWa0dXQ3cwMVQ0UmRhTGkzcGdhMkRaVk10SVg1WU9kLWJCZDFmY2gwejVsSUI2N3d3SEVIekdRbXNBYUE?oc=5" target="_blank" rel="noopener">MLB owners have a hidden incentive to avoid the looming lockout next year</a></h3>
-            <p>Read the full story at Yahoo Sports.</p>
-            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 19, 2026</p>
-          </article>
-          <article class="story" data-topic="labor">
-            <span class="topic">Labor</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQd2l3NG5pNEFWY08xZGlBVHotcDlFZ0lnMXViVjBfYjRGUk9mR3l4RzNVSzJ0UG9kRk5lQjBWMlpJLW50TWRnMWdnSTc1UXFSMVJSclJ0Y2dEcXZVTUpTX0VUR2hyaGpROHp1U0txUnJGVktLV2x0Q2tPXzRzelpGN0hySmQ4QQ?oc=5" target="_blank" rel="noopener">Manfred Demands Salary Cap, Minimum Floor Amid Lockout Threat</a></h3>
-            <p>Read the full story at 조선일보.</p>
-            <p class="meta"><span class="source-pill">조선일보</span> · Nov 19, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxPLXp6OUZvMUF0T25qWmxFNGNLRExCcmltS0pPRG9pellfdENSZ2hWaDlUdDl3aWVjZTNtTGtQTjNnQ0xVWXZoTW9HMHdPOFhsd0xlS2xpWXRMRG5NX0Y0VGozMEI3VUZxN24wWDJ1ZXVuMVlNWmRoTVpMSGZBOVdkWl8wU242Zw?oc=5" target="_blank" rel="noopener">Rob Manfred blasts union, says he ‘can’t imagine’ labor deal without salary cap - The Athletic</a></h3>
+            <p>Read the full story at The New York Times.</p>
+            <p class="meta"><span class="source-pill">The New York Times</span> · Nov 18, 2026</p>
           </article>
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
@@ -433,15 +581,39 @@
           <!-- BETTING -->
           <article class="story" data-topic="betting">
             <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE9jclRnZjBmT1d4cmhFaTdpb3hmNkpXVmpPbEw5aHJIZDRmSkZBTlFZMHdPV2xaQU5yYmM0Y1NTZEpQT2NlSmk5MmRQV09XbUhLby1kTlQyUWdnZ3E0VU5wUm5XT01TU1p1dEZJM1RNTk5mT1dsOGc?oc=5" target="_blank" rel="noopener">Washington Sports Betting: Legal WA Sportsbooks, Apps and Betting Rules for 2026</a></h3>
+            <p>Read the full story at FOX Sports.</p>
+            <p class="meta"><span class="source-pill">FOX Sports</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxPaTRfc2d6ODFZODlzekE0aC1ldDZMcGFEa184SUVtR0pxOC0ydkh0SjdObm5BVFE5b3FiUEVtTFBKaGhjYTZXQmthWm51Y0JOSXRhdE84NXR6VzBKajJRLVV1WUVJR2FHSUF0a1ZvZnROMmlHbU9rV2duTFVTbEZrZlVESTdkeF9vclQ1VDdyd0Q1ZGhWUUNTbTJwU2NITGd3QVBKM0pQNGlZajJaczZvS1NKYWdvS0JOYWtzS3NESmhudmFDUGhfelQ0cGJUQ0c3OVBjbGJxaFFMRkFwRlJR?oc=5" target="_blank" rel="noopener">Kalshi Escapes New York TRO, But Underage Sports Betting Concerns Loom Over January Showdown</a></h3>
+            <p>Read the full story at Forbes.</p>
+            <p class="meta"><span class="source-pill">Forbes</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://frontofficesports.com/article/kalshi-notches-win-as-judge-denies-new-york-a-temporary-restraining-order/" target="_blank" rel="noopener">Kalshi Notches Win As Judge Denies New York a Temporary Restraining Order</a></h3>
+            <p>New York’s request for emergency relief was not granted.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
             <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxPLWFqVTdqQ0RyOWNFMU5xWmtxdllyUjJTTEJzVy1WNFhwUG52cHd1eUx6OTJSYnFxN19HZ3hMUmQzMGltNW14RlRrQ1pwMmtsRlA2aUF0OHM0RGN0Yzd4clFFTHNWMVJEWFRsX0VCaGxkdXVuekx5bWhqbGVDNzQybzJ1WXJkaDV1WWxGa1J2REQwYjdBWGpZQXhIV0Y2blRP?oc=5" target="_blank" rel="noopener">Chicago Mayor Johnson Proposes 20% Sports Betting Tax</a></h3>
             <p>Read the full story at Betting News.</p>
             <p class="meta"><span class="source-pill">Betting News</span> · Nov 21, 2026</p>
           </article>
           <article class="story" data-topic="betting">
             <span class="topic">Betting Regulation</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxOOFV0bmZGWUJza1dBcW9wemYyeGV5cmNiV1NFczJZSjhNX016U3lOc1VLRFpSOEF1N0NmVVlJRFVmU0pqQXJJRzlEaXVjeHN6VDB4azJhVEQ3dF8xRzhqU0dqakgyNFhxUW5OeG8wVi1XeU9sQTV3NGNZemtIN3gyQkx4YXpIX1VqRWZNUG1pZmZrNlJ0RDc3ZlVjQXFEZlk?oc=5" target="_blank" rel="noopener">Attorneys General Oppose Federal Prediction Market Gambling Rules</a></h3>
-            <p>Read the full story at Wisevoter.</p>
-            <p class="meta"><span class="source-pill">Wisevoter</span> · Nov 21, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNNTVJN00talZvUF82cGVMNVQtZjEwbHREVGFlckMwQUF5d1QwUTNJbi0wWVZYZ0xWb1BJdXNRdXVySGszZEFfR0h6b0FoR0pSb3BNVExxRWtBWmFtY2Z5LXF2VVNWSVBROXotM1BvWC1YVG9pUDgxN3JaUzQ3aE51Z0Y0UDJxYlJLODFEUFZGUGRuUzlpS0FfdWF0WkZCazZs?oc=5" target="_blank" rel="noopener">44 Attorneys General Oppose CFTC Rules on Prediction Markets</a></h3>
+            <p>Read the full story at PlayPennsylvania.</p>
+            <p class="meta"><span class="source-pill">PlayPennsylvania</span> · Nov 20, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMi4AFBVV95cUxNSnNmUnpnLS13WlEyY0xBMnhHQVFtNUNhazlON0JaMTFvZzJ5UVR1MjdLa3dvOHVOSnhQdTJNSkFkNjlCTy1Ra096TFdCQUZjX21XOEQ3QnhvMVdMa2dZUW1jVVNPRmc0alkwQmZxV0ZWTFRWSm5MYzY1Wkp6TVRuRC1VWU9YOUVJM05wV2Q3TWZWYXZLRnNsSnp6NGVyZFBveTZaT3JZeXIxN3RsQlNnN0VNeTkzTzFaWTBEUDZUZjIyT0JMRmQ2Y1J0RWRCTm1NNWl4S09YNm90YnlFNjE2Ug?oc=5" target="_blank" rel="noopener">U.S. sports betting: Where all 50 states stand on online sports betting sites</a></h3>
+            <p>Read the full story at CBS Sports.</p>
+            <p class="meta"><span class="source-pill">CBS Sports</span> · Nov 20, 2026</p>
           </article>
           <article class="story" data-topic="betting">
             <span class="topic">Betting Regulation</span>
@@ -451,28 +623,76 @@
           </article>
           <article class="story" data-topic="betting">
             <span class="topic">Betting Regulation</span>
-            <h3><a href="https://www.sportico.com/law/analysis/2026/kalshi-maryland-4th-circuit-ruling-decision-1234958963/" target="_blank" rel="noopener">Making Sense of Kalshi’s Latest Appellate Court Loss</a></h3>
-            <p>The unsettled legal status of sports prediction markets became more convoluted this week when a divided three-judge panel on the U.S. Court of Appeals for the 4th Circuit ruled against Kalshi and found its sports event contracts are subject to state gambling laws. The ruling featured two separate…</p>
-            <p class="meta"><span class="source-pill">Sportico</span> · Nov 19, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE5DVnBjUHRxUVRqNkxyRDZyUmJhNWZRdC1TV0pqYlJja1daRzYweEZDcHA3d0JyeEFQS001UDJ0dXB6U3dwWWt4NVYwNTFneU1lRjdSSUx5SF85RnNtcEVhbFlZOUJaVDFLM1NzbWtvbkxkaEnSAXNBVV95cUxNQVgzSlBBb1VGX0RIMW5yd3Q0b1ZKaE9RT28xMHFRRjI0Y0tzVWcybWRReTFFQzZRLUEtaFNfczJiTFE1a2pmUnI0WjVmZk5WTHFhV2hvbkQxblFuMUR2c1hacVNwTzdhMkQySEZfV0lJdWRr?oc=5" target="_blank" rel="noopener">Best Prediction Market Apps (2026): Top Platforms Compared</a></h3>
+            <p>Read the full story at FOX Sports.</p>
+            <p class="meta"><span class="source-pill">FOX Sports</span> · Nov 19, 2026</p>
           </article>
           <article class="story" data-topic="betting">
             <span class="topic">Betting Regulation</span>
-            <h3><a href="https://frontofficesports.com/videos/kuzma-on-space-tech-and-investing/" target="_blank" rel="noopener">Kyle Kuzma on Space, Kalshi, Athlete Investing</a></h3>
-            <p>Kyle Kuzma on Kalshi, his podcast Read the Room and the NFL&#x27;s Saquon Barkley ruling.</p>
-            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 18, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOU0hVdktpT3J2TzhEa2QySmV3VnpwVVk3MlA4eDd2TDQ1SXhDYWxDSXlqYkc3aWdUOUROazExQlliN2lhMmZLMG9oMFRMZzZVcVNDX1lPbi1SRkVFdlN1bExKZWhFMzZjNDZBYXZhVmZvNlhOeXNoY1VMWHlEWTY4YW5kbzd5aFJ4?oc=5" target="_blank" rel="noopener">Prediction Markets: 82% Back Gambling Regulation, AGA Poll</a></h3>
+            <p>Read the full story at PlayUSA.</p>
+            <p class="meta"><span class="source-pill">PlayUSA</span> · Nov 19, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFB6UEZCNXJsd0RnQ3J2T1I0WVZ1aU1hMFVxYWZ4bGZJWFFWVGtiQVJSWFhhb09KUkFzWmlrQ3pobnhQWXZCbW8tYlloWWNPOGxLNWVxa2hQR05yaDA?oc=5" target="_blank" rel="noopener">Fourth Circuit Backs Maryland Authority to Regulate Kalshi Sports Contracts</a></h3>
+            <p>Read the full story at TOKENPOST.</p>
+            <p class="meta"><span class="source-pill">TOKENPOST</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOSlhSVVMzZFdKRmc3QS1MT2tkR0RLNE1WREptYTl2dk9CYk1FMUFEbXhpM1FWa0FXUVd6MUlnXzdNNXBDYnFpcGR2SjREUnJpZ0lGNGFXZUg2RzliQm9FVERLZEpzOTFrYU96eUg5SnJfX2ZiMUE4N1BCU3B0bVNxM3hfZw?oc=5" target="_blank" rel="noopener">Kalshi loses appeal to prevent Maryland from enforcing state gambling laws</a></h3>
+            <p>Read the full story at CBS News.</p>
+            <p class="meta"><span class="source-pill">CBS News</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxOTVRIUkF6d1pWNUJMYy10RzRMLU95OEdIOWl1U1BCaS1WNmtmbUxXd3M0Q1cxV1RYZ1JBZ3l3Ym5HVkdXN3ExQWVVTVY4VDc5QXA5VE9QVEg2MHhkcG4xWVdtZVBNZ29HWVlNQzFQQXNGTzZZaEhKYWFHMUo5aGhlTVo0b05maGZWNnJOR3NtYWzSAZYBQVVfeXFMTm8xOGlJdFEyRFotaVZISXA2VTBMOXVJcDhGZU9iamp5SlpEbjY5VkVrLXVhQ2c2bkNRbFZaYXNUQThzMEdEdEIwLUExVUIxN1ZKUi1PZTQxZTBpZG9XcUtJMUwya0hBWTZ1WWRQZEJaeDl2U1JWSWRVcTFnd0ZEdkVrX1ZvYmhfZkgyVEpCWV9FOU1yOGFB?oc=5" target="_blank" rel="noopener">SSRA, NCA move to tighten regulation of betting, gambling companies</a></h3>
+            <p>Read the full story at Eye Radio.</p>
+            <p class="meta"><span class="source-pill">Eye Radio</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxPOXlVOHI2QWtwQko1dGtOQUNRdFNjS1JDRGVVZ3BNU3hNSGNER0ZwYi13NVBLVjlLTEtxdFRJcDNvYzk2MGMwMHgzMUJnS1hOSWhTaHMzc0xZc3RpWGRjMUZlSmxybEtTOUV4Rmo5UXhrZERKMmRIZEJ2LXVJTDE0OEctdk5EMjFSTVV3UlJKb1czeFlEYzYwaTdka215MURadUZ5YUxSOGhZaEVSTEFWR2d2ODcwcWR2dGhPMEM2Qm9XSE5ORUE?oc=5" target="_blank" rel="noopener">CFTC Nominees: Regulatory Fight Over Sports Event Contracts Best Left to Courts</a></h3>
+            <p>Read the full story at Sports Betting Dime.</p>
+            <p class="meta"><span class="source-pill">Sports Betting Dime</span> · Nov 17, 2026</p>
+          </article>
+          <article class="story" data-topic="betting">
+            <span class="topic">Betting Regulation</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE8zSU50MlRXV2JUQlZqcEs4WGE1eFdteVNMM2h0ZEg4MGpSbDJBbWlocnY0NzZ0Smt5VmVpa1g0Tm92QkdYbXA3NkpMbXI3S0l3amZmWG9GT1prMXc5eUdCblNkNGMtNVdWOEZJRTVIaDFZTlk?oc=5" target="_blank" rel="noopener">House Panel Probes College Betting And Prediction Markets</a></h3>
+            <p>Read the full story at Legis1.</p>
+            <p class="meta"><span class="source-pill">Legis1</span> · Nov 17, 2026</p>
           </article>
           <!-- MEDIA -->
           <article class="story" data-topic="media">
             <span class="topic">Media Rights</span>
+            <h3><a href="https://frontofficesports.com/article/nwsl-tv-ratings-soccer-cbs-abc/" target="_blank" rel="noopener">NWSL Playoff Ratings Up on CBS, ABC</a></h3>
+            <p>Both networks saw increased semifinal and quarterfinal viewership.</p>
+            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
             <h3><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxPeDdZNmlJTnp3dWVkWTVEWElZb0s4bHpBNWNnX3JkMlYzckl4c01tVG1aSVhmeTZHb0huMl8xZFR0Nmd1VkM3TngtN3pCSnV1OGdXdUcwSXN3UENkX3JJQUtvV2gxeXNJUi15MEdBX2J0T0RUcnhvSjVvaThLcy15Sy05NFVXVm5FV19leGg3UEF2WkYxT00yNmp3WmJ4Z0M3Smc?oc=5" target="_blank" rel="noopener">News: Paramount-WBD, ESPN, TNT Sports and more</a></h3>
             <p>Read the full story at Sports Media Watch.</p>
-            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 21, 2026</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxQTl9DTWRIMHBrQ213REVSZEw2NmxvVnJwZ0VtXzNiVl8wcGZKTlctZUFzU2oyNFVvMGVMQUkwWnpHQkhsMlFEcjFheXFRc1Zwc0FselhyM2drbnhXS01KRnRmVElKUlZJZmNsbE9RR1VNcFBCbHZvN1FUb000M0dzSVV5NjZab0lWRGRjVFNUX1B6anRZQ1FaREtKQUxZZ0pBRjljWERCdzBWb3hLNzcwUXlENkR1cm1QSmctRzlsWWNNZFc4?oc=5" target="_blank" rel="noopener">FIBA Africa moves Road to BAL qualifiers to exclusive streaming partner</a></h3>
+            <p>Read the full story at www.businessofsportsafrica.com.</p>
+            <p class="meta"><span class="source-pill">www.businessofsportsafrica.com</span> · Nov 22, 2026</p>
           </article>
           <article class="story" data-topic="media">
             <span class="topic">Media Rights</span>
             <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPNEtMWjJzNmlTbmpGZVdMejBxVmFnZWhhUzVmc1RURHlyZ3VRYTI3eXNGbkhjTGQ2ZUFVVHo0T25RQnYwdzRtRVlMZHdYSEczVlM5QmFLOWhXNkxxcWlSc0JfTi1FeWpDbWhXLTdFOW1VZVFCa2l1eUJmU0UzWmxBdlpwamdyWHo2S2loRGQxOEtxQW0y?oc=5" target="_blank" rel="noopener">FOX, NBC, get two of ex-ESPN games at center of NFL media rights talks</a></h3>
             <p>Read the full story at Sports Media Watch.</p>
             <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 21, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQaFlWN0RDdjdVd1d6b2V4TFdDZGlLV3d4UFdRVmk1MUNtbDNUQUNxTUlLRDczTzVFNGdfZFRSVlpXRlljcm5ZdW5iRnpCcDdEV052b1hBSGU2NlhBTW94TjBqX1VlR1ZZYm05TXppd19fdnJ5aVZvak1fS1RsSDNHVzBUYlFUTUk?oc=5" target="_blank" rel="noopener">Rogers fires back over exclusive Monday NHL streaming amid rival providers&#x27; complaint</a></h3>
+            <p>Read the full story at Yahoo.</p>
+            <p class="meta"><span class="source-pill">Yahoo</span> · Nov 20, 2026</p>
           </article>
           <article class="story" data-topic="media">
             <span class="topic">Media Rights</span>
@@ -488,13 +708,19 @@
           </article>
           <article class="story" data-topic="media">
             <span class="topic">Media Rights</span>
-            <h3><a href="https://frontofficesports.com/article/lpga-working-with-pga-tour-networks-for-better-tv-windows/" target="_blank" rel="noopener">LPGA Working With PGA Tour, Networks for Better TV Windows</a></h3>
-            <p>This year’s U.S. Women’s Open drew an average audience of 1.3 million viewers on NBC.</p>
-            <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 18, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPenRVSzFSRWk0cEx2M25fS29id1FjWFNReG9mRG9UZ0FHZkdrb1NZcTBHMHM0VnBIUGo1T2Jqb3RjWTdWUHU4N2dzaktJRE84UkVsbG1mYUJRdS1uQ09VS29xZmU5N3lJSkRoNHItWHhoMzNpX19lMTVfblJ6WDc3RHBQR0xvUWU5SDZwLUlURzlJNHA1bV9JRWxJQkxrMHlGMi1lb09zeDZlVDNJUWtfczFqQW8?oc=5" target="_blank" rel="noopener">CAF Awards FeedConstruct Exclusive Global Match Data Rights Deal</a></h3>
+            <p>Read the full story at Broadcast Media Africa.</p>
+            <p class="meta"><span class="source-pill">Broadcast Media Africa</span> · Nov 19, 2026</p>
           </article>
           <article class="story" data-topic="media">
             <span class="topic">Media Rights</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQV0ZaenU1LWZTOXpmWExrb3RNUEltbkdORGxPRFN3VXQzS0JtWlpwcUJPZmpiOEZubG1WSDZ1d21IXzlNa3VqUGVRRXZjUmlGYnBZZnN4RmEyYWdjaUplQU4xQWZSTS1EVGFfOEJYRjNyTWVxRUlKYVlId3BiWXVucmNueTRkWjkyYTJsMDlyeTRjaWQ1djJoenlmZ0FXU091?oc=5" target="_blank" rel="noopener">Gov’t said to open investigation into NFL over games on streaming services</a></h3>
+            <h3><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQYkVPZlNFNDNKU3RtelVRX1Q1dlZ0aTFlOTkxeXFzQTB0ZzJFdTBHcXNBeF8yTGl4QjRUUDZhUFpFMEN6d2Z2dTNYQVBBYkRDM0RJMDduSGozT1BwXzZWYW1NcWNqUW84LUxUeEhFTVVoWWlzM2pya0VqWXFuSHFtLVZvcGxEd2pP?oc=5" target="_blank" rel="noopener">Walmart tipped to bid for sports streaming rights in unexpected move</a></h3>
+            <p>Read the full story at AOL.co.uk.</p>
+            <p class="meta"><span class="source-pill">AOL.co.uk</span> · Nov 18, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNUnBrQTlYY3pXampQOFdTNzgxbkxnaGZGMGZ1eEQ1SWpGSmYxemYtOVAySUNJbFAwZnV2ajNLVl8tLTZFLUlqVUp6dzlielRGT0pzMmJDQ09ad2MxY0VuWnhiX0JrQ1AwczdQd0dLMGU1cDh6QW1vSFpKUVVDUHRKWUw1eXhvYURBRktaZXBIRlViWEF3MmJrYWJB?oc=5" target="_blank" rel="noopener">News: Duke-Michigan, Peacock, NFL Network and more</a></h3>
             <p>Read the full story at Sports Media Watch.</p>
             <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 18, 2026</p>
           </article>
@@ -521,10 +747,67 @@
       <!-- League pages are rendered by script below; one shows at a time -->
       <div id="league-sections"></div>
 
+      <!-- ================= ABOUT ================= -->
+      <section id="about" hidden>
+        <div class="sec-head">
+          <span class="kicker">About</span>
+          <h2>About Pay to Play Politics</h2>
+        </div>
+        <p class="sec-sub">Independent coverage of the business of sports and the politics behind it.</p>
+        <div class="page-body">
+          <p>Pay to Play Politics covers the intersection of sports business and public power: franchise valuations, stadium deals and public funding, labor, betting regulation, and media rights. The Wire gathers the day&rsquo;s reporting from Sportico, Front Office Sports, Sports Business Journal, ESPN, Bloomberg, The Athletic, and statehouse reporting nationwide, and every headline links to the original publisher.</p>
+          <p>The Franchise Ledgers track all 183 teams across the NBA, NFL, MLB, MLS, NHL, WNBA, and NWSL: the controlling owner of each franchise, the year purchased and the price paid, today&rsquo;s estimated value, and the stadium &mdash; what it cost and how it was financed. Values are published estimates from Forbes and Sportico; purchase prices are the reported price of the controlling stake.</p>
+          <p>The site is published by Chmari L. Anderson, a Business Intelligence Engineer in Orlando, Florida, and a PhD in Business Administration candidate at Hampton University researching capital access and ownership in professional sports. The Wire refreshes every morning.</p>
+          <p>Questions or corrections? See the <a href="#contact">Contact page</a>.</p>
+        </div>
+      </section>
+
+      <!-- ================= CONTACT ================= -->
+      <section id="contact" hidden>
+        <div class="sec-head">
+          <span class="kicker">Contact</span>
+          <h2>Contact</h2>
+        </div>
+        <p class="sec-sub">Tips, corrections, and questions about the site.</p>
+        <div class="page-body">
+          <p>For story tips, corrections to the franchise data, or questions about the site, email <a href="mailto:andersonchmari@gmail.com">andersonchmari@gmail.com</a>.</p>
+          <p>The franchise ledgers are built from published reporting. If you spot an error in an owner, a price, or a stadium figure, send the correction with a source and it will be checked.</p>
+          <p>Pay to Play Politics does not accept payment for coverage.</p>
+        </div>
+      </section>
+
+      <!-- ================= PRIVACY POLICY ================= -->
+      <section id="privacy" hidden>
+        <div class="sec-head">
+          <span class="kicker">Privacy Policy</span>
+          <h2>Privacy Policy</h2>
+        </div>
+        <p class="sec-sub">Effective November 23, 2026.</p>
+        <div class="page-body">
+          <h3>What this site collects</h3>
+          <p>Pay to Play Politics does not require accounts, does not run forms that collect personal information, and does not sell personal information. If you email the address on the <a href="#contact">Contact page</a>, your message and email address are used only to reply to you.</p>
+          <h3>Cookies and advertising</h3>
+          <p>This site displays ads served by Google AdSense and other third-party vendors. Google and its partners use cookies to serve ads based on your prior visits to this site or other websites. Google&rsquo;s use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and other sites on the internet. You may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google&rsquo;s Ads Settings</a>, or by visiting <a href="https://optout.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>. Third-party vendors may also use cookies to serve ads; see their own policies for details.</p>
+          <h3>Third-party links</h3>
+          <p>The Wire links to articles on other publishers&rsquo; websites. Those sites have their own privacy policies, and this policy does not cover them.</p>
+          <h3>Children&rsquo;s privacy</h3>
+          <p>This site is not directed at children under 13, and does not knowingly collect information from children under 13.</p>
+          <h3>Changes to this policy</h3>
+          <p>This policy may change as the site changes. The effective date above will be updated when it does.</p>
+          <h3>Contact</h3>
+          <p>Questions about this policy? See the <a href="#contact">Contact page</a>.</p>
+        </div>
+      </section>
+
       <footer>
         <h4>About the numbers &amp; sources</h4>
-        <p><b>Pay to Play Politics</b> franchise tables were researched and verified on November 17, 2026. Current values are published estimates, attributed per league: NBA, NFL, MLB and NWSL from Forbes (2026 editions); MLS and WNBA from Sportico (2026); NHL from Forbes (2025, published December 2025 — Sportico published a newer NHL list in September 2026 with higher values). Purchase prices are the reported price of the controlling stake. “Gain” is current estimated value minus purchase price — it excludes debt, operating results, and distributions, so treat it as an appreciation snapshot, not an investment return. Negative gains are real, not errors. Stadium costs are reported original construction costs in nominal dollars at the time of construction; Canadian-dollar costs were converted to USD at approximate historical rates where converted, with originals preserved in the team notes — three Canadian MLS stadium costs are shown as “—” with the CAD figures in the notes. A “—” means no reliable public figure was found; nothing has been filled in or estimated. Pending sales, relocations, and planned stadiums are flagged in each league's team notes.</p>
-        <p>News headlines in The Wire are real stories pulled Nov 22, 2026, from Sportico, Front Office Sports, ESPN, Bloomberg and the other outlets listed in the aggregator, and link to the original publishers. The Wire refreshes every morning.</p>
+        <p><b>Pay to Play Politics</b> franchise tables were researched and verified. Current values are published estimates, attributed per league: NBA, NFL, MLB and NWSL from Forbes (2026 editions); MLS and WNBA from Sportico (2026); NHL from Forbes (2025, published December 2025 — Sportico published a newer NHL list in September 2026 with higher values). Purchase prices are the reported price of the controlling stake. “Gain” is current estimated value minus purchase price — it excludes debt, operating results, and distributions, so treat it as an appreciation snapshot, not an investment return. Negative gains are real, not errors. Stadium costs are reported original construction costs in nominal dollars at the time of construction; Canadian-dollar costs were converted to USD at approximate historical rates where converted, with originals preserved in the team notes — three Canadian MLS stadium costs are shown as “—” with the CAD figures in the notes. A “—” means no reliable public figure was found; nothing has been filled in or estimated. Pending sales, relocations, and planned stadiums are flagged in each league's team notes.</p>
+        <p>News headlines in The Wire are real stories pulled Nov 23, 2026, from Sportico, Front Office Sports, ESPN, Bloomberg and the other outlets listed in the aggregator, and link to the original publishers. The Wire refreshes every morning.</p>
+        <nav class="foot-nav" aria-label="Site pages">
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="#privacy">Privacy Policy</a>
+        </nav>
       </footer>
     </div>
 
@@ -697,15 +980,24 @@
         });
       }
 
-      /* Page routing: The Wire is the home page; each league is its own page */
+      /* Page routing: The Wire is the home page; each league is its own page;
+         About, Contact and Privacy Policy are info pages. */
       var leagueIds = LEAGUES.map(function(l){ return l.id; });
+      var pageIds = ["about", "contact", "privacy"];
+      var pageTitles = {
+        "about": "About — Pay to Play Politics",
+        "contact": "Contact — Pay to Play Politics",
+        "privacy": "Privacy Policy — Pay to Play Politics"
+      };
       var navLinks = document.querySelectorAll("nav.leagues a");
       function currentRoute(){
         var h = (location.hash || "").replace(/^#\/?/, "");
-        return leagueIds.indexOf(h) !== -1 ? h : "news";
+        if (leagueIds.indexOf(h) !== -1) return h;
+        if (pageIds.indexOf(h) !== -1) return h;
+        return "news";
       }
       function showView(route){
-        if (route !== "news" && leagueIds.indexOf(route) === -1) route = currentRoute();
+        if (route !== "news" && leagueIds.indexOf(route) === -1 && pageIds.indexOf(route) === -1) route = currentRoute();
         var isHome = route === "news";
         document.getElementById("news").hidden = !isHome;
         var dir = document.getElementById("league-directory");
@@ -714,6 +1006,10 @@
           var s = document.getElementById(lg.id);
           if (s) s.hidden = lg.id !== route;
         });
+        pageIds.forEach(function(pid){
+          var p = document.getElementById(pid);
+          if (p) p.hidden = pid !== route;
+        });
         navLinks.forEach(function(a){
           var on = a.getAttribute("href") === "#" + route;
           a.classList.toggle("active", on);
@@ -721,7 +1017,8 @@
         });
         var lgName = null;
         LEAGUES.forEach(function(l){ if (l.id === route) lgName = l.name; });
-        document.title = lgName ? lgName + " Franchise Ledger — Pay to Play Politics" : "Pay to Play Politics — Sports Business × Public Power";
+        document.title = lgName ? lgName + " Franchise Ledger — Pay to Play Politics"
+          : (pageTitles[route] || "Pay to Play Politics — Sports Business × Public Power");
         var root = document.documentElement;
         var prevBehavior = root.style.scrollBehavior;
         root.style.scrollBehavior = "auto";
@@ -746,7 +1043,7 @@
         var a = t && t.closest ? t.closest('a[href^="#"]') : null;
         if (!a) return;
         var id = (a.getAttribute("href") || "").replace(/^#\/?/, "");
-        if (id !== "news" && leagueIds.indexOf(id) === -1) return;
+        if (id !== "news" && leagueIds.indexOf(id) === -1 && pageIds.indexOf(id) === -1) return;
         e.preventDefault();
         goTo(id);
       });
