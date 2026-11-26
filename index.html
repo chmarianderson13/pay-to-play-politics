@@ -145,6 +145,9 @@
       .table-tools .hint{ font-size:.82rem; color:var(--ink-faint); }
       .tbl-wrap{ border:1px solid var(--rule); border-radius:8px; overflow-x:auto; background:var(--surface); box-shadow:var(--shadow); }
       table{ width:100%; border-collapse:collapse; font-size:.88rem; }
+      table.fit{ table-layout:fixed; }
+      table.fit thead th{ white-space:normal; }
+      table.fit td, table.fit th{ overflow-wrap:break-word; }
       thead th{
         font-family:"Archivo Narrow",sans-serif; text-transform:uppercase; letter-spacing:.07em; font-size:.74rem;
         text-align:left; padding:11px 10px; background:var(--chip); color:var(--ink);
@@ -173,6 +176,7 @@
         .tbl-wrap{ border:none; background:transparent; box-shadow:none; overflow:visible; }
         table, tbody, tr, td{ display:block; width:100%; }
         thead{ display:none; }
+        colgroup{ display:none; }
         tbody tr{
           background:var(--surface); border:1px solid var(--rule); border-radius:8px;
           margin-bottom:12px; padding:8px 14px 12px; box-shadow:var(--shadow);
@@ -312,29 +316,29 @@
         <p class="sec-sub">Pay to Play Politics pulls the day's sports-business story into one place — from <strong>Sportico, Front Office Sports, Sports Business Journal, ESPN, Bloomberg, The Athletic</strong> and statehouse reporting — and sorts it by the five beats where money and public power collide. Every headline links to the original publisher. This edition is a curated snapshot pulled <strong>Thursday, November 26, 2026</strong>; The Wire refreshes every morning; check the source for live updates.</p>
 
         <div class="agg-bar" aria-label="Aggregator at a glance">
-          <div class="agg-stat"><div class="n" id="agg-total">57</div><div class="l">Stories in this edition</div></div>
+          <div class="agg-stat"><div class="n" id="agg-total">62</div><div class="l">Stories in this edition</div></div>
           <div class="agg-stat"><div class="n">5</div><div class="l">Beats tracked</div></div>
           <div class="agg-stat"><div class="n">Nov 26, 2026</div><div class="l">Snapshot date</div></div>
         </div>
 
         <div class="beat-grid" aria-label="Browse by beat">
-          <button type="button" class="beat-card" data-beat-jump="valuations"><span class="cnt">9 stories</span><b>Franchise Valuations</b><span>What teams are worth, who is buying, and at what multiple.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="valuations"><span class="cnt">10 stories</span><b>Franchise Valuations</b><span>What teams are worth, who is buying, and at what multiple.</span></button>
           <button type="button" class="beat-card" data-beat-jump="stadiums"><span class="cnt">16 stories</span><b>Stadium Deals &amp; Public Funding</b><span>Taxes, bonds and votes behind new buildings.</span></button>
-          <button type="button" class="beat-card" data-beat-jump="labor"><span class="cnt">10 stories</span><b>Labor</b><span>CBAs, caps, unions and the NIL fight.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="labor"><span class="cnt">14 stories</span><b>Labor</b><span>CBAs, caps, unions and the NIL fight.</span></button>
           <button type="button" class="beat-card" data-beat-jump="betting"><span class="cnt">14 stories</span><b>Betting Regulation</b><span>State law, prop bets and prediction markets.</span></button>
           <button type="button" class="beat-card" data-beat-jump="media"><span class="cnt">8 stories</span><b>Media Rights</b><span>The TV &amp; streaming deals that fund everything else.</span></button>
         </div>
 
         <div class="agg-tools">
           <input type="search" id="news-search" placeholder="Search The Wire — try “Bears”, “WNBA”, “salary cap”, “Kalshi”…" aria-label="Search news stories" />
-          <span class="result-count" id="news-count">Showing 57 stories</span>
+          <span class="result-count" id="news-count">Showing 62 stories</span>
         </div>
 
         <div class="filters" role="group" aria-label="Filter news by topic">
-          <button type="button" data-filter="all" aria-pressed="true">All topics · 57</button>
-          <button type="button" data-filter="valuations" aria-pressed="false">Franchise Valuations · 9</button>
+          <button type="button" data-filter="all" aria-pressed="true">All topics · 62</button>
+          <button type="button" data-filter="valuations" aria-pressed="false">Franchise Valuations · 10</button>
           <button type="button" data-filter="stadiums" aria-pressed="false">Stadium Deals &amp; Public Funding · 16</button>
-          <button type="button" data-filter="labor" aria-pressed="false">Labor · 10</button>
+          <button type="button" data-filter="labor" aria-pressed="false">Labor · 14</button>
           <button type="button" data-filter="betting" aria-pressed="false">Betting Regulation · 14</button>
           <button type="button" data-filter="media" aria-pressed="false">Media Rights · 8</button>
         </div>
@@ -350,17 +354,17 @@
             <p class="meta"><span class="source-pill">Front Office Sports</span> · Nov 26, 2026</p>
           </article>
           <div>
+            <article class="story" data-topic="valuations">
+            <span class="topic">Franchise Valuations</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOZUNKUU82NHdhdTh2dnc3MVBVRjlBTEI5UGVZZmlwTTRDSkVDOEVKdFVPTTRBQW5TYklNd0l5N1lzbk5mRFVjS1hDYzZFb2pwOXNnZ2wyekZVeEhodTJTSS0weXJ3ZWZQeVZCdlRFcmdkUE00ZDRxajNZSTBtWHd1MXkxdHU3YXZPSDhHMWJLT1gwMy1a?oc=5" target="_blank" rel="noopener">In 1997, the Seattle Seahawks sold for $194 million; this year, the Khosla family agreed to buy the team for an NFL-record $9.612 billion</a></h3>
+            <p>Read the full story at Athlon Sports.</p>
+            <p class="meta"><span class="source-pill">Athlon Sports</span> · Nov 26, 2026</p>
+          </article>
             <article class="story" data-topic="betting">
             <span class="topic">Betting Regulation</span>
             <h3><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxOVUdlZXl1TkVZanVjcGpfaUpMZ1Y0Y0w3bHlmZlhha2R2dDdZbXhTY2dQMlRpOWNjbjZjb01aU0dWZFhxREFfc2dHRGFzSExlU3lUdUVoQVBCemdCdUZqRWhEcVN0WFJmd3BIckNtRXJ1NUhuZHBINzZkM0lmSWVIcVJ4LUt2VEtva0tzMTVEcDJxTW9DMUdwMG5kMkpVWEc0cUJ3V1ViV2c?oc=5" target="_blank" rel="noopener">Opinion | Kalshi’s sports bets are everywhere. They’re also likely illegal.</a></h3>
             <p>Read the full story at The Washington Post.</p>
             <p class="meta"><span class="source-pill">The Washington Post</span> · Nov 26, 2026</p>
-          </article>
-            <article class="story" data-topic="stadiums">
-            <span class="topic">Stadium Deals &amp; Public Funding</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxPc0I2Z2lSUWJEMGk1eWN4U3lQODNYSVN6Z3F0MDhvR2N2TXB6MnFuLUhPMk5DbktFV20yMHE2MEsyUE5EdkVNa3hzVEFuczZONllKVEJRNURrNmR1RE5MWms5RFd0SHdQYnBFQ2hmYjZZLWt2clVpVUtyVEw0aXZNRDFHc0EyeUxZaFUwRDF1bWZhRWNHNXdNS1gtLU8xZkcwa1kwbmpKcWh3b2VqU0FzN0s0dGl2WEFOTUp1eTdkeGxteEEzZmNyOXNEVzcyMjN6LXNIbE1WejVXUDVBYUxF?oc=5" target="_blank" rel="noopener">How much did the Bills&#x27; new stadium cost and who paid for it?</a></h3>
-            <p>Read the full story at Democrat and Chronicle.</p>
-            <p class="meta"><span class="source-pill">Democrat and Chronicle</span> · Nov 26, 2026</p>
           </article>
           </div>
         </div>
@@ -369,7 +373,7 @@
           <!-- VALUATIONS -->
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxPN3Z2RHFrX3RlYUxGdG8yRE02eUpnU3F0ak02VmtWemc4Ylk4cHFubEVDdXJsWGViYkJKLXZYTDZDeXBDVjV6amtOUjk3TzZVdG1QNjZOUkJERFl0UVpMTDJ0QWxNMjJWSS01N092ek96cHZ6RkVEQ01BTFZQZ09pbkpTMFMtWTFmWnBvVjNVbENtcmtlOXdXRlhZeFVSZw?oc=5" target="_blank" rel="noopener">This Historic NBA Franchise Is Now Worth 75 Times Its 1993 Sale Price</a></h3>
+            <h3><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxOR3Zlal9EejZKMzBBRzJnRHM5d0hUWkNYcVNRcExvc2pxQWZyMTFHZkQyc0Utdmd0SVRtOS1mOXFza05HYm5nT09pdktvdGtuVUQ4c1ZEbEpodDNLVXZBdjB5anNYTlZRSDZtWTlONEFPeDgxQUwtWldSX2pEblJfd1Brd1Zta1BrVmhvblRTWjVoSEpyUlR4Tm91bjI?oc=5" target="_blank" rel="noopener">The Winnipeg Jets Are Worth Eight Times Their Original 2011 Purchase Price</a></h3>
             <p>Read the full story at Yahoo Sports.</p>
             <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 25, 2026</p>
           </article>
@@ -381,9 +385,9 @@
           </article>
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMinAJBVV95cUxQVTR6TGdMQ0lzLVh0QzlEZmxmQjZXc3FzVmNhZVNwaG96d3ZxZUpHYXUtVUJObkJLUnZyQkN3UUFYcnlHczNhN0t3UWRScFhYcXNrR3RtcFFTRzE4Q2NyT1J2TnRkdnpZcWx0LW84UXc1YVpUUGx5SEVrNTQ4MXBTaHZSd0I3RGdMNUxRbUl4QmNiUjlNWk9VSFVfNTF3STNkc3dkNnloaUFSak9ZYjBtNjdyZDdMMkNWSmhZMVoxNDd2UFNmME1KZXZhMjhHYk5MUGx0QXk5WVNrRzdCVWpnMEVGZ3p6UGdlTEhfMkE2UVAtWmZLR1ZVTElncDdRd0hPbXNUQnRmaXprN3JIUmc4bFRMNEtWZTM3Mk5mVA?oc=5" target="_blank" rel="noopener">Diamond Certified Resource Publishes New Article About How Earning Diamond Certified for Consecutive Years Increases a Company&#x27;s Valuation</a></h3>
-            <p>Read the full story at StreetInsider.</p>
-            <p class="meta"><span class="source-pill">StreetInsider</span> · Nov 25, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxObWlITnVEbnM3emRXRFctN0pkUVhGOWdQTGtRX3JTdFI4dkF2ZDh1bjNNY1BROXJ4SGhTY3lienZHTldLMmdLeHRTd3FhS0RkRnZHN0xhYnVEcS1QVEp0M2E2N2o1MUVhaW1seEVaQlpfbWtpRi1BVFdJMmtIazhjVzVaS0xObHRYWUp0M2xFMzlNQQ?oc=5" target="_blank" rel="noopener">The Cavaliers Are Now Worth $4.8 Billion, a 1,180% Return for Dan Gilbert</a></h3>
+            <p>Read the full story at Yahoo Sports.</p>
+            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 25, 2026</p>
           </article>
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
@@ -425,6 +429,12 @@
             <p class="meta"><span class="source-pill">Lyndy&#x27;s Sports Annuals</span> · Nov 20, 2026</p>
           </article>
           <!-- STADIUMS -->
+          <article class="story" data-topic="stadiums">
+            <span class="topic">Stadium Deals &amp; Public Funding</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxPc0I2Z2lSUWJEMGk1eWN4U3lQODNYSVN6Z3F0MDhvR2N2TXB6MnFuLUhPMk5DbktFV20yMHE2MEsyUE5EdkVNa3hzVEFuczZONllKVEJRNURrNmR1RE5MWms5RFd0SHdQYnBFQ2hmYjZZLWt2clVpVUtyVEw0aXZNRDFHc0EyeUxZaFUwRDF1bWZhRWNHNXdNS1gtLU8xZkcwa1kwbmpKcWh3b2VqU0FzN0s0dGl2WEFOTUp1eTdkeGxteEEzZmNyOXNEVzcyMjN6LXNIbE1WejVXUDVBYUxF?oc=5" target="_blank" rel="noopener">How much did the Bills&#x27; new stadium cost and who paid for it?</a></h3>
+            <p>Read the full story at Democrat and Chronicle.</p>
+            <p class="meta"><span class="source-pill">Democrat and Chronicle</span> · Nov 26, 2026</p>
+          </article>
           <article class="story" data-topic="stadiums">
             <span class="topic">Stadium Deals &amp; Public Funding</span>
             <h3><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNMHJKYUt2ejhaN21TNzc0enVRcnlxSGR0N05kVUM3dnhlbWU2aExJM3VSa0ZhZjh0eTJXb1BQd2h3Z2tPUmFMRVBkX2ZnU09Uak1CYWVLSEtYMUw4NnpTWDJTWU1JMDV2UFJLUk1HQVpxMk1aUnp5QnBQSEwydXI5bTJOYnFqVTVMc1A4S2x0eTJtd2xJWDA0cG5TZGgyTEFBN3RST3lINnNqMmRKR2VEdUI0U2U?oc=5" target="_blank" rel="noopener">Former Romford assistant market manager spared jail after defrauding taxpayers of £200k</a></h3>
@@ -515,6 +525,12 @@
           <!-- LABOR -->
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxQZ2JxMVFScFhwd2hYcnJORmdMdHM1el9iX0FsUFZSVkQyZGE1dWFPemxrTUN0TXYxYzJqMDFmNkN3aXNna1c5RkZZcW50Z21xc3djUTFJakI2RjNfVFdsZUVXSWdQQnlWMkdZYV85eFQzLXl5WElCZ3k0MUd4eS12bUtRdURzLUh5eTBNQzRicV9LbjlSeVcydjYxTF9iRVdKTXppaDdTcmZ6YVpTV2VnOTd0Y09pOVl6Vk5MVw?oc=5" target="_blank" rel="noopener">MLB Lockout Countdown: What Dec. 1 Means for the Phillies, Five Days Out</a></h3>
+            <p>Read the full story at Northeast Times.</p>
+            <p class="meta"><span class="source-pill">Northeast Times</span> · Nov 26, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
             <h3><a href="https://news.google.com/rss/articles/CBMi4AFBVV95cUxOS1k2amczNlRHemZfRzdJb1dPOWZMYkxQc1poT3JJc2NxMWJFQWJwUnExQzRSRmVIOTNENXlLU3lybUt5VjNJRGtKbVhaWXo0Wk8tX0k4cGJUQ29TaG5zSm9zdHB0Smc3TW8wRUZuOW8zMHZwaWRoVGNhWTZBbGxlei16UkE4SXVsMC1FVWl5bG1uYk5XVUNtSXMxODRaWGZpRUt4WTBvbERNZnVlYWo5VE1UeGdHdmNyU3VGUHRBeE1ZWDVQNmVpUXJVRTd3aG1BQU9YUWxNOG11SW4xVjA0Xw?oc=5" target="_blank" rel="noopener">MLB lockout watch: With less than 1 week before a shutdown, here&#x27;s what baseball fans need to know</a></h3>
             <p>Read the full story at Yahoo Sports.</p>
             <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 26, 2026</p>
@@ -530,6 +546,12 @@
             <h3><a href="https://www.sportico.com/law/analysis/2026/mlb-mlbpa-lockout-lawsuit-1234959551/" target="_blank" rel="noopener">MLB Sues MLBPA as Lockout Legal Fallout Begins</a></h3>
             <p>What could become a long winter—and perhaps a long spring and summer—of legal wrangling in baseball began on Wednesday when Major League Baseball sued the Major League Baseball Players Association in hopes of obtaining declarations that the anticipated lockout, set to begin next Wednesday, is…</p>
             <p class="meta"><span class="source-pill">Sportico</span> · Nov 25, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQbTBiRURhZV9xWWxkSVlIWUhra25aTDdmanF6ekJ1RW83QlBCNkdvYWJXYVFfT3J5SUk3bXpPN3J0SUZzV0x5Y3BpT3VvdmN2QkxhWWZ4d1pZRFVYTXRCOXF1aTRlSFJVdDNCWVJrc2hoZ1RrZ3dxbDZzLVVaaHJZb0ZmUm5LVC03bEhYVHJXbE4?oc=5" target="_blank" rel="noopener">Bleacher Report Proposes One Trade to Help Astros Save Money If There Is a Salary Cap</a></h3>
+            <p>Read the full story at Yahoo Sports.</p>
+            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 24, 2026</p>
           </article>
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
@@ -554,9 +576,21 @@
           </article>
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxPdlllSWxMSVVHM3JHekVKcFlpenBTZGFJRlNDVTdXUzFIOEpiUTZWeTNqSm9mYndzUXRNY0d3UDhobmV2dDd1TjFfVWpNc0NGWjVoRVFhUlB3cG5UWTR4UThLN01MMDVaMlktMDhDdE5ubmFiUDlIR3NoT1NGYmczRXFsOEhLNGh2UlE?oc=5" target="_blank" rel="noopener">The Tarik Skubal domino effect: What record-breaking Mets contract means for pending MLB lockout</a></h3>
-            <p>Read the full story at Yahoo Sports.</p>
-            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 23, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOckl1YmFUdXAxY3AzRXd0amZYUlM5cFViVk4xeEpqWE9ybTBxbXFBSm9nVjU1NnFfZU1nQkJxWVJLUFY5WHBvN3ViNlhVOTF1UUtvYmtLM0xKaVBXS3dSWnJZWVQ0Zkg5TmR6VlM1VE1KTXZocFQ5cTUwYURkZG9SdEdWa3k5OE4zV2l4MmlXNA?oc=5" target="_blank" rel="noopener">MLBPA, Owners Reach a Key Agreement in CBA Negotiations, But There’s a Major Caveat</a></h3>
+            <p>Read the full story at Sports Illustrated.</p>
+            <p class="meta"><span class="source-pill">Sports Illustrated</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOU3VReGVVV2J0Y0YwVmFkQmlxdFJhQkM1N0xuQVI5VjQ0VklfWWNNS2xjTXBkQzJmMW9RSFNuZnA1NUlXcUY0V05JR0N4U1BtQ0VkNnQzTUZhc2Z5akdMWlNFbXQ2WV9makJudURVd0pLMmYwek5SWTFxWjhyQjdSb20zSUI1elJHQ0p0WDdnaWJ1dmV6OVJNM2l4d1E0VHdfaFk4NGNCd2hCbGlGeG1F?oc=5" target="_blank" rel="noopener">Skubal’s Mets contract sets the stage for CBA battle</a></h3>
+            <p>Read the full story at Sports Business Journal.</p>
+            <p class="meta"><span class="source-pill">Sports Business Journal</span> · Nov 23, 2026</p>
+          </article>
+          <article class="story" data-topic="labor">
+            <span class="topic">Labor</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQeV84ZHBZMXc1cGdwSEFlVDRWdE42TWlyaC02VzVGN2R2bVZGZ1hsUk9EQ3YyMXBzaGRweHJOd2dlMDNpU1J4dnc3RXZueEFIRjRmd252WkFObmZZU3RGSGVVVkJlMGlwdkhjSTJ6UVhuZHFMZ0FfNG9XRFYtNV9NbktaMzZJZERPVVk0a0NHcFlOMGVjdnZpMXpEYXM3elVy?oc=5" target="_blank" rel="noopener">Don&#x27;t Expect Another A&#x27;s Extension Before the New CBA</a></h3>
+            <p>Read the full story at roundtable.io.</p>
+            <p class="meta"><span class="source-pill">roundtable.io</span> · Nov 23, 2026</p>
           </article>
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
@@ -566,13 +600,13 @@
           </article>
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPZm1kT0MydmVvX1NWYTNZLXVYZ3JETmJtR0kyTlkwRHUxcW1PVHAyZm05NU1Xa3U1aEhzd2xGMnJnWTQ1YjJ2TlhOLXd5aFBDVWc4bWZoaWNVS0U0eDZSVzRpdDJIZ3JtajVvLVB6U24tM1dNeXM4dDZpN1FyVG5kYmFzd1o1YVVyZ1RuRFMwLXkzVW5famc?oc=5" target="_blank" rel="noopener">MLBPA rejects international draft proposal in latest volley in CBA fight</a></h3>
-            <p>Read the full story at Yahoo Sports.</p>
-            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 21, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxQNXYwWTVXWGlqT3E0Vm9vTDMzZzBUZi0tcWtjZFEweVNkNElodmdFdFg5OVJrdTdZdUYtTTNoVmh2M25KeFR5dGxNVW1OVkgweDRPaDZETjk0aWZ3NnlnOHFLSFRXZHo5ZFR5TW9nSUdiT21WYkF4OU9PWkt6bk80a3FzWWliVk9oaHoweFk1OXc5UHJ0dHJQQmlWTG1JYnJMNlBzLWZsaGJmaFU3NUhV?oc=5" target="_blank" rel="noopener">MLBPA rejects international draft proposal in latest volley in CBA fight</a></h3>
+            <p>Read the full story at New York Post.</p>
+            <p class="meta"><span class="source-pill">New York Post</span> · Nov 21, 2026</p>
           </article>
           <article class="story" data-topic="labor">
             <span class="topic">Labor</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxOYm9QU1BjWTE3elducWhMblF5dzBTQlNzVjNUemdWUzF1bk1kblJSNTJxeERlR0F5MzhvZGpNYVpXWDNtZkRYcERHUmgzbktoU1NZcHNvOTlaUnZVUnFlX3NWQmtDZmpRRDFnTmVtWlQ5WnpNNmhPTEZNaVU2VnRtNlRVOWpjcGFqT3lSdUV0UGRxOUs5VHU3R195d01GQ1BfV3NRbzVVTTZOUFhiUDRQRzZoNlJpc1E1UDB2Xy12WWlNOHE3MGRnZg?oc=5" target="_blank" rel="noopener">Takeaways from Rob Manfred on MLB’s need for a salary cap &amp; floor to solve CBA issues</a></h3>
+            <h3><a href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxNMVo0NjNudjhRa2c1c3B3Wk5kTHl4Y3dJMklVUGl3SzdjTE85WjVWS3NCU2UyU2lBUUZRVVI0Qnl5SGpBMDQxeExzdjNqbTRtMng2QkZKdFNnY1pnRl9UUkFCbFh0czNtQmVVQmgycERZMnZkM01RUWlDc050MU9VUWJEczZNaDVnYmdDMW0wSGtHdG9vbHFuUFFxNFVlNzN0a05mank2QVM0MzVoSUNfajRGSkhsNmdsaXZ3bzF1bWtNZEx5TFJnNlJKVWJOcjZYY3M3cGpFNXhnOGpETnlTMGhXQ3QxOFk?oc=5" target="_blank" rel="noopener">What Rob Manfred&#x27;s comments about salary cap mean for MLB talks, and what&#x27;s he got against Thanksgiving?</a></h3>
             <p>Read the full story at Yahoo Sports.</p>
             <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 20, 2026</p>
           </article>
@@ -805,7 +839,8 @@
         <div class="page-body">
           <p><strong>Read this before comparing:</strong> the figures cover different periods. Most are from the 2026 midterm cycle; a few are multi-decade cumulative totals or earlier cycles. They are not comparable across owners, so do not rank owners by these totals. Where no reliable federal total has been published, the row says so.</p>
           <div class="tbl-wrap">
-            <table>
+            <table class="fit">
+              <colgroup><col style="width:13%"><col style="width:21%"><col style="width:13%"><col style="width:10%"><col style="width:27%"><col style="width:16%"></colgroup>
               <thead>
                 <tr><th>Owner</th><th>Team</th><th>Federal giving</th><th>Period</th><th>Lean / top recipients</th><th>Source</th></tr>
               </thead>
@@ -850,7 +885,8 @@
         <p class="sec-sub">The biggest public-money stadium deals in American pro sports &mdash; what taxpayers put in, how it was raised, and where each deal stands. &ldquo;Public dollars&rdquo; is the direct public contribution to construction or renovation, as approved. A few totals grew after approval, and those overruns are noted.</p>
         <div class="page-body">
           <div class="tbl-wrap">
-            <table>
+            <table class="fit">
+              <colgroup><col style="width:11%"><col style="width:16%"><col style="width:11%"><col style="width:10%"><col style="width:11%"><col style="width:41%"></colgroup>
               <thead>
                 <tr><th>Team</th><th>Stadium</th><th>Year / status</th><th>Total cost</th><th>Public dollars</th><th>How the public money was raised</th></tr>
               </thead>
@@ -893,7 +929,8 @@
         <p class="sec-sub">The national TV and streaming contracts that fund the leagues &mdash; who holds the rights, what the deals are worth, and when they expire. Values are the widely reported totals; leagues rarely publish their own figures.</p>
         <div class="page-body">
           <div class="tbl-wrap">
-            <table>
+            <table class="fit">
+              <colgroup><col style="width:8%"><col style="width:25%"><col style="width:14%"><col style="width:13%"><col style="width:12%"><col style="width:13%"><col style="width:15%"></colgroup>
               <thead>
                 <tr><th>League</th><th>Rights holder(s)</th><th>Term</th><th>Total value</th><th>Annual value</th><th>Expires</th><th>Source</th></tr>
               </thead>
@@ -1172,6 +1209,18 @@
         goTo(id);
       });
       showView();
+
+      /* Mobile card labels for the static section tables: copy each column
+         heading into the cells' data-label so the stacked-card view shows
+         a label next to every value. */
+      document.querySelectorAll(".page-body .tbl-wrap table").forEach(function(tbl){
+        var heads = Array.prototype.map.call(tbl.querySelectorAll("thead th"), function(th){ return th.textContent.trim(); });
+        tbl.querySelectorAll("tbody tr").forEach(function(tr){
+          Array.prototype.forEach.call(tr.children, function(td, i){
+            if (heads[i]) td.setAttribute("data-label", heads[i]);
+          });
+        });
+      });
 
       /* News aggregator: topic filter + search + beat cards */
       var buttons = document.querySelectorAll(".filters button");
