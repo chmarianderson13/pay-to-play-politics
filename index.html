@@ -283,6 +283,8 @@
       .page-body ul{ margin:0 0 14px; padding-left:22px; }
       .page-body li{ margin:0 0 6px; }
       .page-body a{ color:var(--accent); }
+      /* The three data sections use the full wrap width, like the franchise ledgers */
+      #owners-politics .page-body, #stadium-tracker .page-body, #media-rights .page-body{ max-width:none; }
       @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
     </style>
   </head>
@@ -321,7 +323,7 @@
         <p class="sec-sub">Pay to Play Politics pulls the day's sports-business story into one place — from <strong>Sportico, Front Office Sports, Sports Business Journal, ESPN, Bloomberg, The Athletic</strong> and statehouse reporting — and sorts it by the five beats where money and public power collide. Every headline links to the original publisher. This edition is a curated snapshot pulled <strong>Friday, November 27, 2026</strong>; The Wire refreshes every morning; check the source for live updates.</p>
 
         <div class="agg-bar" aria-label="Aggregator at a glance">
-          <div class="agg-stat"><div class="n" id="agg-total">50</div><div class="l">Stories in this edition</div></div>
+          <div class="agg-stat"><div class="n" id="agg-total">55</div><div class="l">Stories in this edition</div></div>
           <div class="agg-stat"><div class="n">5</div><div class="l">Beats tracked</div></div>
           <div class="agg-stat"><div class="n">Nov 27, 2026</div><div class="l">Snapshot date</div></div>
         </div>
@@ -331,21 +333,21 @@
           <button type="button" class="beat-card" data-beat-jump="stadiums"><span class="cnt">12 stories</span><b>Stadium Deals &amp; Public Funding</b><span>Taxes, bonds and votes behind new buildings.</span></button>
           <button type="button" class="beat-card" data-beat-jump="labor"><span class="cnt">12 stories</span><b>Labor</b><span>CBAs, caps, unions and the NIL fight.</span></button>
           <button type="button" class="beat-card" data-beat-jump="betting"><span class="cnt">14 stories</span><b>Betting Regulation</b><span>State law, prop bets and prediction markets.</span></button>
-          <button type="button" class="beat-card" data-beat-jump="media"><span class="cnt">2 stories</span><b>Media Rights</b><span>The TV &amp; streaming deals that fund everything else.</span></button>
+          <button type="button" class="beat-card" data-beat-jump="media"><span class="cnt">7 stories</span><b>Media Rights</b><span>The TV &amp; streaming deals that fund everything else.</span></button>
         </div>
 
         <div class="agg-tools">
           <input type="search" id="news-search" placeholder="Search The Wire — try “Bears”, “WNBA”, “salary cap”, “Kalshi”…" aria-label="Search news stories" />
-          <span class="result-count" id="news-count">Showing 50 stories</span>
+          <span class="result-count" id="news-count">Showing 55 stories</span>
         </div>
 
         <div class="filters" role="group" aria-label="Filter news by topic">
-          <button type="button" data-filter="all" aria-pressed="true">All topics · 50</button>
+          <button type="button" data-filter="all" aria-pressed="true">All topics · 55</button>
           <button type="button" data-filter="valuations" aria-pressed="false">Franchise Valuations · 10</button>
           <button type="button" data-filter="stadiums" aria-pressed="false">Stadium Deals &amp; Public Funding · 12</button>
           <button type="button" data-filter="labor" aria-pressed="false">Labor · 12</button>
           <button type="button" data-filter="betting" aria-pressed="false">Betting Regulation · 14</button>
-          <button type="button" data-filter="media" aria-pressed="false">Media Rights · 2</button>
+          <button type="button" data-filter="media" aria-pressed="false">Media Rights · 7</button>
         </div>
 
                 <div class="lead-grid">
@@ -378,9 +380,9 @@
           <!-- VALUATIONS -->
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
-            <h3><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxNbmtxeUVpZm5jV1g4cHVWS0JXY3FiTUM3d0hCTUFLOUlsVElFdHA1UzBGRDhTUXBaYzJibW13YU8zbEVaNE81YW0xTy1ibFlKak5RWGMwczJNNDYyTXN3a3RBZTk2UktfMjQ2WVlsdVZYa0FPREJTZGFKZFNYUDFTb2RvZUwxNTZtQWdWWlpNWXJZVWZ6MkJaUnZVNA?oc=5" target="_blank" rel="noopener">In 1997, the Seattle Seahawks sold for $194 million; this year, the Khosla family agreed to buy the team for an NFL-record $9.612 billion</a></h3>
-            <p>Read the full story at Yahoo Sports.</p>
-            <p class="meta"><span class="source-pill">Yahoo Sports</span> · Nov 26, 2026</p>
+            <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOZUNKUU82NHdhdTh2dnc3MVBVRjlBTEI5UGVZZmlwTTRDSkVDOEVKdFVPTTRBQW5TYklNd0l5N1lzbk5mRFVjS1hDYzZFb2pwOXNnZ2wyekZVeEhodTJTSS0weXJ3ZWZQeVZCdlRFcmdkUE00ZDRxajNZSTBtWHd1MXkxdHU3YXZPSDhHMWJLT1gwMy1a?oc=5" target="_blank" rel="noopener">In 1997, the Seattle Seahawks sold for $194 million; this year, the Khosla family agreed to buy the team for an NFL-record $9.612 billion</a></h3>
+            <p>Read the full story at Athlon Sports.</p>
+            <p class="meta"><span class="source-pill">Athlon Sports</span> · Nov 26, 2026</p>
           </article>
           <article class="story" data-topic="valuations">
             <span class="topic">Franchise Valuations</span>
@@ -676,9 +678,39 @@
           <!-- MEDIA -->
           <article class="story" data-topic="media">
             <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNUnBrQTlYY3pXampQOFdTNzgxbkxnaGZGMGZ1eEQ1SWpGSmYxemYtOVAySUNJbFAwZnV2ajNLVl8tLTZFLUlqVUp6dzlielRGT0pzMmJDQ09ad2MxY0VuWnhiX0JrQ1AwczdQd0dLMGU1cDh6QW1vSFpKUVVDUHRKWUw1eXhvYURBRktaZXBIRlViWEF3MmJrYWJB?oc=5" target="_blank" rel="noopener">News: Duke-Michigan, Peacock, NFL Network and more</a></h3>
+            <p>Read the full story at Sports Media Watch.</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 27, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNM1pWclJYVHZaeF8yNzRWNUR5UWNycjRkUDVHM1ZTVWRvNk5tYzl6dkx3VTI1Tm5BeFBVZUwtX01NcmR5aHVRZFZIMExrMTE2Q2NFMHppV2xyNWdEVHJLYzkyZmNPd2Vvb0xNcndVQ3c3bFZsTDZZUGZNT3V4V3V5XzZyTW1wN0JFdG01M3RFLVpwc2c?oc=5" target="_blank" rel="noopener">What is Fox really after with the NFL and streaming?</a></h3>
+            <p>Read the full story at Sports Media Watch.</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 26, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
             <h3><a href="https://www.sportico.com/business/media/2026/2030-world-cup-rights-netflix-prime-hispanic-soccer-fans-1234959562/" target="_blank" rel="noopener">Soccer’s Most Loyal Fans May Lose Out in a Streaming 2030 World Cup</a></h3>
             <p>As streamers continue to outbid traditional TV networks for the rights to distribute top-tier sporting events, fans have grown accustomed to footing the bill. But in the wake of a record-smashing 2026 FIFA World Cup, the quadrennial soccer tourney’s seemingly inevitable shift away from linear TV…</p>
             <p class="meta"><span class="source-pill">Sportico</span> · Nov 25, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxPeDdZNmlJTnp3dWVkWTVEWElZb0s4bHpBNWNnX3JkMlYzckl4c01tVG1aSVhmeTZHb0huMl8xZFR0Nmd1VkM3TngtN3pCSnV1OGdXdUcwSXN3UENkX3JJQUtvV2gxeXNJUi15MEdBX2J0T0RUcnhvSjVvaThLcy15Sy05NFVXVm5FV19leGg3UEF2WkYxT00yNmp3WmJ4Z0M3Smc?oc=5" target="_blank" rel="noopener">News: Paramount-WBD, ESPN, TNT Sports and more</a></h3>
+            <p>Read the full story at Sports Media Watch.</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 25, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxORVpubmtpMDluRjQ1S1psRHNwUHR6eXVtd0JqNFAzVmRJOVNXMk9mRUdQQVBkc1hucVRfOWlQT0E4SmVTNWhDeTJFQThyLWF4XzF1aVZGdEhyWUZKM2VWU21ndDluMWhGbW9Vd3dZYTlHZTFwdW9sSEV3VmNkOUdYTElXU1A?oc=5" target="_blank" rel="noopener">Big Ten ahead on field, but catching SEC in TV ratings will be more difficult</a></h3>
+            <p>Read the full story at Sports Media Watch.</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 24, 2026</p>
+          </article>
+          <article class="story" data-topic="media">
+            <span class="topic">Media Rights</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxORDUwbGlRNVl3Zk50cjZSOHJkZ05tNFp5YVNwUzhnOHpDY2ZDV2R4UTZxcjhwdGR0MjZybVpHU2tJeHNSdURLV3czZUg0RVZXa093YmVKeGxmYzd3b05CcDFha19maFFHRmtMU0hGaUJVc09EeUhMRDRUcXBHNmpDTC1vb2xSYjVLQmdDQ21YZVRiUnRRZTljLVNPNHVXVUIwcjRkUHBxY0k5QzhOQW9SempGNA?oc=5" target="_blank" rel="noopener">NBA adds more broadcast TV games in second year of rights deal</a></h3>
+            <p>Read the full story at Sports Media Watch.</p>
+            <p class="meta"><span class="source-pill">Sports Media Watch</span> · Nov 24, 2026</p>
           </article>
           <article class="story" data-topic="media">
             <div class="story-thumb">
